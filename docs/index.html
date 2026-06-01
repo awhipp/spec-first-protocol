@@ -76,10 +76,10 @@
         Spec-First Protocol
       </h1>
       <p class="hero__tagline">
-        A precursor to Specification-Driven Development.
+        An informal precursor to Specification-Driven Development.
       </p>
       <p class="hero__quote">
-        "Prompting code generators without a specification is the most expensive shortcut in software development."
+        "Starting execution without a specification is the most expensive shortcut in any project."
       </p>
 
       <div class="hero__actions">
@@ -96,12 +96,12 @@
     <section class="section what-is-sfp" id="about-sfp">
       <div class="section__header">
         <h2 class="section__title">What is the Spec-First Protocol?</h2>
-        <p class="section__subtitle"> Shifting the cognitive load of specification writing to an automated, iterative
-          pipeline before execution begins.</p>
+        <p class="section__subtitle">An automated, iterative pipeline that shifts the cognitive load of specification
+          writing from the project owner to a structured discovery process.</p>
       </div>
       <div class="sfp-pop-section">
         <p class="sfp-pop-text">
-          The Spec-First Protocol (SFP) operates upstream of coding (before SDD or otherwise). It acts as an adversarial
+          The Spec-First Protocol (SFP) operates upstream of any execution framework. It acts as an adversarial
           validation layer, ensuring requirements are captured, audited, and locked before execution begins.
         </p>
       </div>
@@ -112,7 +112,7 @@
       <div class="section__header">
         <h2 class="section__title">Why Specs Matter</h2>
         <p class="section__subtitle">Starting execution without a specification is the most expensive shortcut in
-          software development.</p>
+          any project.</p>
       </div>
 
       <!-- Comparison Table -->
@@ -128,20 +128,20 @@
             <tr>
               <td>
                 <strong>Invisible Scope Creep</strong><br>
-                <span class="text-secondary">Prompting code changes directly without a base specification causes silent
+                <span class="text-secondary">Starting execution without a base specification causes silent
                   requirement expansion and makes change tracking impossible.</span>
               </td>
               <td>
                 <strong class="color-success">Structured Interview</strong><br>
-                <span class="text-secondary">The discover skill captures and boundaries requirements before writing
-                  code, forcing alignment on scope boundaries.</span>
+                <span class="text-secondary">The discover skill captures and boundaries requirements before execution
+                  begins, forcing alignment on scope boundaries.</span>
               </td>
             </tr>
             <tr>
               <td>
                 <strong>Compounding Rework</strong><br>
-                <span class="text-secondary">Starting code generation with undefined requirements forces messy
-                  refactoring, structural breakages, and endless stop-and-ask prompts.</span>
+                <span class="text-secondary">Starting execution with undefined requirements forces costly
+                  rework, structural breakages, and endless stop-and-ask cycles.</span>
               </td>
               <td>
                 <strong class="color-success">Adversarial Audit</strong><br>
@@ -152,8 +152,8 @@
             <tr>
               <td>
                 <strong>Drift From Intent</strong><br>
-                <span class="text-secondary">Instructing execution agents based on fragmented chat threads forces LLMs
-                  to guess, producing code that misses the project owner's real needs.</span>
+                <span class="text-secondary">Executing from fragmented chat threads forces agents
+                  to guess, producing deliverables that miss the project owner's real needs.</span>
               </td>
               <td>
                 <strong class="color-success">Zero Placeholder Invariant</strong><br>
@@ -164,12 +164,12 @@
             <tr>
               <td>
                 <strong>AI Context Drift</strong><br>
-                <span class="text-secondary">Feeding entire raw chat histories to code builders wastes token budgets and
-                  triggers code hallucination or structural collapse.</span>
+                <span class="text-secondary">Feeding entire raw chat histories to execution agents wastes token budgets and
+                  amplifies hallucination risk with every turn.</span>
               </td>
               <td>
                 <strong class="color-success">Decoupled Lifecycle</strong><br>
-                <span class="text-secondary">Locks a dense, structured markdown spec. Downstream executors get exactly
+                <span class="text-secondary">Locks a dense, structured specification. Downstream executors get exactly
                   what they need, minimizing token bloat.</span>
               </td>
             </tr>
@@ -182,8 +182,7 @@
     <section class="section funnel-section" id="flow">
       <div class="section__header">
         <h2 class="section__title">The Protocol Flow</h2>
-        <p class="section__subtitle">An interactive, cyclic pipeline designed to shape ideas into locked execution
-          plans.</p>
+        <p class="section__subtitle">An interactive, cyclic pipeline that shapes ideas into locked specifications.</p>
       </div>
 
       <!-- Flowchart container (Grid Cyclic Layout - Top) -->
@@ -262,9 +261,8 @@
             <h3 class="funnel-details__title" id="funnel-detail-title">discover</h3>
           </div>
           <p class="funnel-details__desc" id="funnel-detail-desc">
-            Initiates the protocol by conducting an interactive, requirements-gathering interview with the project
-            owner.
-            It compiles raw responses into a formal spec skeleton.
+            Conducts an interactive, requirements-gathering interview with the project
+            owner, then compiles validated responses into a structured specification draft.
           </p>
           <div class="funnel-details__meta">
             <div class="funnel-details__meta-item">
@@ -1293,14 +1291,13 @@
             <tr>
               <td><strong><code>SKILL.md</code> Length</strong></td>
               <td><span class="badge badge--cyan">≤ 500 lines</span> (~5k tokens)</td>
-              <td>Ensures execution agents can ingest core skill workflows inside compact reasoning loops without
+              <td>Ensures agents can ingest core skill instructions within compact reasoning loops without
                 saturating context limits.</td>
             </tr>
             <tr>
               <td><strong>YAML Description</strong></td>
               <td><span class="badge badge--cyan">≤ 200 characters</span></td>
-              <td>Strict boundary for reliable matching and dynamic skill routing engines (e.g. Claude's custom skill
-                selector).</td>
+              <td>Strict boundary for reliable skill matching and dynamic routing across agent platforms.</td>
             </tr>
             <tr>
               <td><strong>Reference Document Size</strong></td>
@@ -1311,8 +1308,8 @@
             <tr>
               <td><strong>Zero Placeholder Invariant</strong></td>
               <td><span class="badge badge--purple">100% strict</span></td>
-              <td>Prevents stale stubs, "TBD", or TODO items from surviving compilation gates, ensuring all code
-                generators receive actionable instructions.</td>
+              <td>Prevents stale stubs, "TBD", or TODO items from surviving compilation gates, ensuring all
+                downstream executors receive actionable instructions.</td>
             </tr>
           </tbody>
         </table>
