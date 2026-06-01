@@ -1,6 +1,7 @@
 # Skills Directory
 
-This directory includes the core Agent Skills of the Spec-First Protocol (SFP).
+This directory includes the core [Agent Skills](https://agentskills.io/home) of
+the Spec-First Protocol (SFP).
 
 | Skill | Description |
 | :--- | :--- |
