@@ -108,42 +108,59 @@ culminating in a finalization gate:
 
 ## Running the Protocol
 
-### Step-by-Step Workflow
+SFP supports two execution modes. The protocol flow is the same
+regardless of which mode you choose.
 
-1. **Initialize** — Invoke the **discover** skill to start a new
+### Multi-Context Mode (Core Flow)
+
+Invoke each skill individually, clearing context between phases. This is
+the recommended approach for large specifications or constrained context
+windows.
+
+1. **Initialize** — Invoke the **Spec Discover** skill to start a new
    specification. This creates the `.sfp/` working directory and a
    spec-specific subdirectory, then begins the structured interview. When the
    scope is clear, discover compiles the specification with your approval,
    producing a `_SPEC_DRAFT.md` file.
-2. **Audit** — Invoke the **audit** skill to review the draft specification
-   for contradictions, gaps, and risks. The audit produces a full report.
-3. **Refine** — If issues are found, invoke the **refine** skill. It walks
-   through each finding one at a time, records your decisions, offers a
-   chance to expand scope, and recompiles the specification with your
-   approval.
-4. **Iterate** — Continue the audit → refine cycle until the specification is
-   clean and approved.
+2. **Audit** — Clear your context, then invoke the **Spec Audit** skill to
+   review the draft specification for contradictions, gaps, and risks. The
+   audit produces a full report.
+3. **Refine** — If issues are found, clear your context and invoke the
+   **Spec Refine** skill. It walks through each finding one at a time,
+   records your decisions, offers a chance to expand scope, and recompiles
+   the specification with your approval.
+4. **Iterate** — Continue the audit → refine cycle (clearing context between
+   each) until the specification is clean and approved.
 5. **Finalize** — When the audit passes and you approve, the specification is
    locked, the `_DRAFT` suffix is removed from the filename, and the `.sfp/`
    subdirectory is cleaned up.
 
-> **Tip:** Each skill suggests clearing your context and starting a fresh
-> session when transitioning to the next skill. This prevents context drift
-> between phases of the protocol.
+### Single-Context Mode
+
+Invoke the **Spec Orchestrate** skill to run the full pipeline in one
+continuous conversation. The orchestrator delegates to each individual
+skill automatically, without context clearing between phases.
+
+This mode is best when your model's context window is large enough to
+hold the entire conversation across discovery, audit, and refinement.
+For very large specifications or constrained context windows, use the
+multi-context mode above instead.
 
 ### Directory Structure
 
-SFP is implemented as three
+SFP is implemented as
 [Agent Skills](https://github.com/anthropics/agent-skills), lightweight open
 formats for extending AI agent capabilities.
 
 ```text
 skills/
-├── discover/
+├── sfp-orchestrate/
+│   └── SKILL.md            # Full pipeline orchestrator (single-context)
+├── sfp-discover/
 │   └── SKILL.md            # Structured interview + specification compiler
-├── audit/
+├── sfp-audit/
 │   └── SKILL.md            # Adversarial review + finalization gate
-└── refine/
+└── sfp-refine/
     └── SKILL.md            # Incremental finding resolution + recompiler
 ```
 
