@@ -69,7 +69,7 @@ The user copies a single-line command from the `README.md` and runs it to bootst
   - *With arguments* (wrapping download in a scriptblock invocation to forward parameters):
 
     ```powershell
-    powershell -ExecutionPolicy Bypass -Command "& { [scriptblock]::Create((irm https://raw.githubusercontent.com/awhipp/spec-first-protocol/main/scripts/install.ps1)) -i claude -s global }"
+    powershell -ExecutionPolicy Bypass -Command "& ([scriptblock]::Create((irm https://raw.githubusercontent.com/awhipp/spec-first-protocol/main/scripts/install.ps1))) -i claude -s global"
     ```
 
 ### 3.3. Script Execution Workflow

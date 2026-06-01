@@ -186,31 +186,31 @@ Run the appropriate command in your terminal from your local project root.
 
 #### macOS/Linux (Bash)
 
-- **Default (Local directory)**:
+**Default (Local directory)**:
 
-  ```bash
-  curl -fsSL https://raw.githubusercontent.com/awhipp/spec-first-protocol/main/scripts/install.sh | bash
-  ```
+```bash
+curl -fsSL https://raw.githubusercontent.com/awhipp/spec-first-protocol/main/scripts/install.sh | bash
+```
 
-- **With Arguments** (e.g., install Claude skills globally):
+**With Arguments** (e.g., install Claude skills globally):
 
-  ```bash
-  curl -fsSL https://raw.githubusercontent.com/awhipp/spec-first-protocol/main/scripts/install.sh | bash -s -- -i claude -s global
-  ```
+```bash
+curl -fsSL https://raw.githubusercontent.com/awhipp/spec-first-protocol/main/scripts/install.sh | bash -s -- -i claude -s global
+```
 
 #### Windows (PowerShell)
 
-- **Default (Local directory)**:
+**Default (Local directory)**:
 
-  ```powershell
-  powershell -ExecutionPolicy Bypass -Command "irm https://raw.githubusercontent.com/awhipp/spec-first-protocol/main/scripts/install.ps1 | iex"
-  ```
+```powershell
+powershell -ExecutionPolicy Bypass -Command "irm https://raw.githubusercontent.com/awhipp/spec-first-protocol/main/scripts/install.ps1 | iex"
+```
 
-- **With Arguments** (e.g., install Claude skills globally):
+**With Arguments** (e.g., install Claude skills globally):
 
-  ```powershell
-  powershell -ExecutionPolicy Bypass -Command "& { [scriptblock]::Create((irm https://raw.githubusercontent.com/awhipp/spec-first-protocol/main/scripts/install.ps1)) -i claude -s global }"
-  ```
+```powershell
+powershell -ExecutionPolicy Bypass -Command "& ([scriptblock]::Create((irm https://raw.githubusercontent.com/awhipp/spec-first-protocol/main/scripts/install.ps1))) -i claude -s global"
+```
 
 ### Manual Installation
 
