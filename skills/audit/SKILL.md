@@ -1,10 +1,9 @@
 ---
 name: Spec Audit
 description: >
-  Perform an adversarial review of a draft specification against the original
-  requirements. Identify contradictions, gaps, and risks. Produce a
-  severity-classified audit report. When the spec is clean and the owner
-  approves, lock it as final.
+  Adversarial review of a specification against original requirements.
+  Surface contradictions, gaps, and risks in a severity-classified report.
+  When clean and approved, lock the spec as final.
 ---
 
 # Spec Audit
@@ -23,10 +22,12 @@ integrity and surface problems.
 
 ## Inputs
 
-- **Specification file**: The current draft specification in the project root,
-  named using the `YYYY-MM-DD_<SLUG>_SPEC.md` convention.
-- **Discovery Notes**: The validated requirements from the discover or refine
-  skill, located at `.sfp/discovery_notes.md`.
+- **Specification file**: A draft specification in the project root, named
+  using the `YYYY-MM-DD_<SLUG>_SPEC_DRAFT.md` convention. If multiple draft
+  specifications exist, ask the project owner which one to audit.
+- **Discovery Notes**: The validated requirements from the discover skill or
+  a prior refinement cycle, located at
+  `.sfp/YYYY-MM-DD_<SLUG>/discovery_notes.md`.
 - **Conversation context**: The full discussion history, to verify that the
   spec faithfully represents the project owner's intent.
 
@@ -44,7 +45,8 @@ integrity and surface problems.
    - Identify risks such as gaps in failure handling, undefined edge cases,
    or missing constraints.
 4. Classify each finding by severity.
-5. Output the structured **Audit Report** to `.sfp/audit_report.md`.
+5. Output the structured **Audit Report** to
+   `.sfp/YYYY-MM-DD_<SLUG>/audit_report.md`.
 
 ## Severity Classification
 
@@ -76,8 +78,6 @@ completing the audit:
 - Ask the project owner for explicit approval to lock the spec.
 - If the owner approves: mark the specification as **final and locked**. The
   protocol is complete.
-- If the owner wants to expand scope: suggest returning to the **discover**
-  skill for a new discovery cycle.
 
 ### Gate Criteria
 
@@ -91,14 +91,20 @@ Before the specification can be locked:
 
 ### Immutability and Cleanup
 
-Once the spec is locked, it should not be modified during the downstream
-execution phase. If new requirements emerge during execution, a new protocol
-cycle should be initiated, starting with the discover skill, to produce an
-updated specification.
+Once the spec is locked:
 
-On finalization, delete the `.sfp/` working directory and all of its contents.
-The locked specification file remains in the project root as the single
-deliverable of the protocol.
+1. **Rename the specification file** to remove the `_DRAFT` suffix (e.g.,
+   `2026-05-31_TASK-MANAGEMENT_SPEC_DRAFT.md` becomes
+   `2026-05-31_TASK-MANAGEMENT_SPEC.md`).
+2. **Delete** the corresponding `.sfp/YYYY-MM-DD_<SLUG>/` subdirectory. If
+   `.sfp/` is now empty, delete `.sfp/` itself.
+3. The locked specification file remains in the project root as the single
+   deliverable of the protocol.
+
+The specification should not be modified during the downstream execution
+phase. If new requirements emerge during execution, a new protocol cycle
+should be initiated, starting with the discover skill, to produce a new
+specification.
 
 ## Guardrails
 
@@ -115,17 +121,16 @@ deliverable of the protocol.
 
 Based on the audit outcome:
 
-> **Issues found -> Spec Refine**: Resolve the blockers and warnings through
-> targeted iteration with the project owner.
+> **Issues found -> Spec Refine**: Walk through the findings incrementally
+> with the project owner to resolve blockers and warnings, then recompile the
+> specification.
 >
 > **Clean + approved -> Protocol complete.** The locked specification is ready
-> for downstream execution. The `.sfp/` directory has been cleaned up.
->
-> **Clean + owner wants more -> Spec Discover**: Return to broad discovery to
-> expand the specification scope.
+> for downstream execution. The `.sfp/` working directory has been cleaned up.
 >
 > Consider clearing your current context and starting a fresh session for the
-> next skill, providing `.sfp/audit_report.md`, the specification file, and
-> `.sfp/discovery_notes.md` as input.
+> next skill, providing `.sfp/YYYY-MM-DD_<SLUG>/audit_report.md`, the
+> specification file, and `.sfp/YYYY-MM-DD_<SLUG>/discovery_notes.md` as
+> input.
 
 [audit-format]: references/audit-report-format.md

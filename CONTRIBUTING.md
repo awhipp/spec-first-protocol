@@ -10,7 +10,9 @@
    [.markdownlint.json][markdownlint-config] configuration. Skill definitions
    must adhere to the Agent Skills standard, with each skill directory
    containing a `SKILL.md` file with a YAML front matter block specifying
-   `name` and `description` fields.
+   `name` and `description` fields. All skills must also meet the size
+   constraints documented in the [Skill Authoring Standards][standards]
+   section of the README.
 4. **Submit a Pull Request**: Open a pull request against `main` containing a
    description of the changes.
 
@@ -35,3 +37,4 @@ accepted.
 
 [markdownlint-config]: .markdownlint.json
 [readme]: README.md
+[standards]: README.md#skill-authoring-standards

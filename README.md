@@ -73,32 +73,33 @@ broad-to-specific funnel:
 
 ```mermaid
 flowchart LR
-    A["1. discover"] -->|"Discovery Notes"| B["2. draft"]
-    B -->|"Spec File"| C["3. audit"]
-    C -->|"Issues found"| D["4. refine"]
-    D -->|"Updated notes"| B
-    C -->|"Clean + approved"| E["Locked Spec"]
+    A["1. discover"] -->|"Spec File"| B["2. audit"]
+    B -->|"Audit Report"| C["3. refine"]
+    C -->|"Updated Spec"| B
+    B -->|"Clean + approved"| D["Locked Spec"]
 ```
 
-The protocol implements this funnel using four specialized Agent Skills,
+The protocol implements this funnel using three specialized Agent Skills,
 culminating in a finalization gate:
 
 1. **Discover** (`skills/discover/`): Conducts a structured interview to
    extract requirements, goals, constraints, and edge cases, producing
-   **Discovery Notes** and a **project slug** for the specification filename.
-2. **Draft** (`skills/draft/`): Compiles the Discovery Notes into a structured
-   specification file (`YYYY-MM-DD_<SLUG>_SPEC.md`) without placeholders,
-   stubs, or invented details.
-3. **Audit** (`skills/audit/`): Performs an adversarial review of the draft
+   **Discovery Notes** and a **project slug**. When the scope is clear and the
+   owner approves, compiles the notes into a draft specification file
+   (`YYYY-MM-DD_<SLUG>_SPEC_DRAFT.md`).
+2. **Audit** (`skills/audit/`): Performs an adversarial review of the
    specification to surface contradictions, gaps, and risks, generating a
-   severity-classified report.
-4. **Refine** (`skills/refine/`): Focuses on resolving specific audit findings
-   (blockers and warnings), updating the Discovery Notes for recompilation.
-5. **Lock** (Finalization Gate): Once the audit contains no blockers, all
+   severity-classified **Audit Report**.
+3. **Refine** (`skills/refine/`): Walks through audit findings **one at a
+   time** with the project owner, resolving each incrementally. Offers an
+   opportunity to expand scope after findings are resolved. After all
+   decisions are made, presents a summary for approval and recompiles the
+   specification from updated Discovery Notes.
+4. **Lock** (Finalization Gate): Once the audit contains no blockers, all
    requirements from the Discovery Notes are represented, and the project
-   owner explicitly approves, the specification is locked and becomes
-   immutable. The `.sfp/` working directory is cleaned up, leaving only the
-   locked specification file in the project root.
+   owner explicitly approves, the specification is locked. The `_DRAFT`
+   suffix is removed from the filename, the `.sfp/` working directory is
+   cleaned up, and the locked specification file remains in the project root.
 
 ### Key Benefits
 
@@ -116,17 +117,15 @@ culminating in a finalization gate:
 
 ## How to Use
 
-SFP is implemented as four [Agent Skills][agent-skills], which are lightweight,
-open formats for extending AI agent capabilities.
+SFP is implemented as three [Agent Skills][agent-skills], which are
+lightweight, open formats for extending AI agent capabilities.
 
 ### Directory Structure
 
 ```text
 skills/
 ├── discover/
-│   └── SKILL.md            # Structured interview to extract requirements
-├── draft/
-│   ├── SKILL.md            # Compile notes into specification file
+│   ├── SKILL.md            # Structured interview + specification compiler
 │   └── references/
 │       └── spec-schema.md  # Generic specification skeleton
 ├── audit/
@@ -134,33 +133,43 @@ skills/
 │   └── references/
 │       └── audit-report-format.md
 └── refine/
-    └── SKILL.md            # Targeted iteration on audit findings
+    ├── SKILL.md            # Incremental finding resolution + recompiler
+    └── references/
+        └── spec-schema.md  # Generic specification skeleton
 ```
 
 At runtime, the protocol creates a `.sfp/` working directory in the project
-root to hold temporary files:
+root with per-specification subdirectories:
 
 ```text
-.sfp/                       # Created by discover, deleted on lock
-├── discovery_notes.md      # Running requirements summary
-└── audit_report.md         # Findings from the most recent audit
+.sfp/                                   # Created by discover
+└── YYYY-MM-DD_<SLUG>/                  # One subdirectory per spec
+    ├── discovery_notes.md              # Running requirements summary
+    └── audit_report.md                 # Findings from the most recent audit
 ```
 
-The specification file itself is always written to the project root using
-the `YYYY-MM-DD_<SLUG>_SPEC.md` naming convention.
+Draft specifications are written to the project root using the
+`YYYY-MM-DD_<SLUG>_SPEC_DRAFT.md` naming convention. The `_DRAFT` suffix is
+removed when the specification is finalized and locked.
 
 ### Running the Protocol
 
 1. **Initialize**: Invoke the **discover** skill to start a new specification.
-   This creates the `.sfp/` working directory and begins the structured
-   interview.
-2. **Execute the Chain**: Follow the suggested next steps at the end of each
-   skill's output (e.g., draft -> audit -> refine). Each skill reads its
-   inputs from `.sfp/` and the project root.
-3. **Iterate**: Continue the cycle until the specification is clean and
-   approved.
-4. **Finalize**: When the audit passes and the project owner approves, the
-   specification is locked and the `.sfp/` directory is cleaned up.
+   This creates the `.sfp/` working directory and a spec-specific
+   subdirectory, then begins the structured interview. When the scope is
+   clear, discover compiles the specification with your approval, producing
+   a `_SPEC_DRAFT.md` file.
+2. **Audit**: Invoke the **audit** skill to review the draft specification
+   for contradictions, gaps, and risks. The audit produces a full report.
+3. **Refine**: If issues are found, invoke the **refine** skill. It walks
+   through each finding one at a time, records your decisions, offers a
+   chance to expand scope, and recompiles the specification with your
+   approval.
+4. **Iterate**: Continue the audit-refine cycle until the specification is
+   clean and approved.
+5. **Finalize**: When the audit passes and you approve, the specification is
+   locked, the `_DRAFT` suffix is removed from the filename, and the
+   `.sfp/` subdirectory is cleaned up.
 
 Each skill suggests clearing your context and starting a fresh session when
 transitioning to the next skill. This helps prevent context drift between
@@ -186,39 +195,54 @@ A condensed example showing one cycle through the protocol:
    existing context, and expected outcomes. It also establishes a project slug
    (`TASK-MANAGEMENT`). Over several turns, it extracts entities (Task, User),
    a state machine (open -> in-progress -> done), assignment rules, and edge
-   cases (e.g., what happens when a user is deleted). It then outputs
-   Discovery Notes to `.sfp/discovery_notes.md` summarizing locked
-   requirements and open questions.
-2. **Draft**: The `draft` skill compiles the Discovery Notes into
-   `2026-05-31_TASK-MANAGEMENT_SPEC.md` in the project root, containing
-   sections for Overview, Domain Model, Workflows and Processes, Interfaces
-   and Contracts, Constraints and Rules, Failure Modes and Edge Cases, and
-   Open Questions.
-3. **Audit**: The `audit` skill reviews the draft and identifies a blocker
-   (undefined behavior when an in-progress task loses its assignee), a warning
-   (any user can complete any user's task), and a suggestion (authentication
-   mechanism unspecified). It outputs an Audit Report to
-   `.sfp/audit_report.md` with a gate status of "Not Ready".
-4. **Refine**: The `refine` skill presents the blocker and warning to the
-   project owner, who decides that tasks should revert to "open" when their
-   assignee is removed, and state transitions should be restricted to the
-   assignee. The `refine` skill updates `.sfp/discovery_notes.md` and suggests
-   re-drafting.
-5. **Finalization**: The `draft` skill recompiles the specification. The
-   `audit` skill verifies that there are zero blockers, the project owner
-   signs off, and the specification is locked. The `.sfp/` directory is
-   deleted, leaving `2026-05-31_TASK-MANAGEMENT_SPEC.md` as the final
-   deliverable.
+   cases (e.g., what happens when a user is deleted). It outputs Discovery
+   Notes to `.sfp/2026-05-31_TASK-MANAGEMENT/discovery_notes.md`, presents a
+   summary, and on approval compiles the specification into
+   `2026-05-31_TASK-MANAGEMENT_SPEC_DRAFT.md`.
+2. **Audit**: The `audit` skill reviews the draft specification and identifies
+   a blocker (undefined behavior when an in-progress task loses its
+   assignee), a warning (any user can complete any user's task), and a
+   suggestion (authentication mechanism unspecified). It outputs an Audit
+   Report to `.sfp/2026-05-31_TASK-MANAGEMENT/audit_report.md` with a gate
+   status of "Not Ready."
+3. **Refine**: The `refine` skill presents findings one at a time. First, it
+   presents the blocker: "What should happen when an in-progress task loses
+   its assignee?" The owner decides tasks should revert to "open." Next, it
+   presents the warning: "Any user can complete any user's task—is this
+   intended?" The owner decides state transitions should be restricted to the
+   assignee. Refine then asks if there are any scope additions; the owner has
+   none. Refine presents a summary of decisions, and on approval recompiles
+   the specification.
+4. **Finalization**: The `audit` skill re-audits the updated specification,
+   verifies zero blockers, the project owner signs off, and the specification
+   is locked. The `_DRAFT` suffix is removed, producing
+   `2026-05-31_TASK-MANAGEMENT_SPEC.md`. The
+   `.sfp/2026-05-31_TASK-MANAGEMENT/` directory is deleted, leaving the
+   locked specification as the final deliverable.
+
+## Skill Authoring Standards
+
+All skills in this repository adhere to the following constraints to ensure
+reliable agent processing across platforms:
+
+| Constraint | Limit | Rationale |
+| :--- | :--- | :--- |
+| `SKILL.md` length | ≤ 500 lines (~5,000 tokens) | Ensures the agent processes core instructions within context limits |
+| Description (YAML `description`) | ≤ 200 characters | Maximum length for reliable skill routing across agents (e.g., Claude) |
+| Reference document length | ≤ 300 lines (~6 KB) per file | Keeps supplementary material absorbable; include a TOC for longer files |
+
+Contributors should verify these constraints before submitting changes.
 
 ## Terminology
 
 | Term | Definition |
 | :--- | :--- |
-| **Discovery Notes** | A running, cumulative summary of locked requirements and open questions, organized by topic. Stored at `.sfp/discovery_notes.md`. |
-| **Specification File** | The compiled specification document, named `YYYY-MM-DD_<SLUG>_SPEC.md`, that becomes immutable after sign-off. Written to the project root. |
-| **Audit Report** | A structured report listing findings classified by severity (Blocker, Warning, Suggestion) and the overall gate status. Stored at `.sfp/audit_report.md`. |
-| **Project Slug** | An uppercase, hyphen-separated identifier derived from the project name (e.g., `TASK-MANAGEMENT`), used in the specification filename. |
-| **`.sfp/` Directory** | A temporary working directory in the project root that holds Discovery Notes and Audit Reports during the protocol. Deleted when the specification is locked. |
+| **Discovery Notes** | A running, cumulative summary of locked requirements and open questions, organized by topic. Stored at `.sfp/YYYY-MM-DD_<SLUG>/discovery_notes.md`. |
+| **Specification File** | The compiled specification document, named `YYYY-MM-DD_<SLUG>_SPEC_DRAFT.md` while in progress and `YYYY-MM-DD_<SLUG>_SPEC.md` when finalized. Written to the project root. |
+| **Audit Report** | A structured report listing findings classified by severity (Blocker, Warning, Suggestion) and the overall gate status. Stored at `.sfp/YYYY-MM-DD_<SLUG>/audit_report.md`. |
+| **Project Slug** | An uppercase, hyphen-separated identifier derived from the project name (e.g., `TASK-MANAGEMENT`), used in the specification filename and `.sfp/` subdirectory name. |
+| **`.sfp/` Directory** | A working directory in the project root containing per-specification subdirectories (`.sfp/YYYY-MM-DD_<SLUG>/`). Each subdirectory holds Discovery Notes and Audit Reports for one specification. Cleaned up when specifications are finalized. |
+| **DRAFT Status** | The `_DRAFT` suffix in the specification filename indicating the spec is in progress. Removed by the audit skill when the specification is finalized and locked. |
 | **Zero Placeholder Invariant** | The requirement that all specification sections must be fully written or omitted entirely. No placeholder text, TODOs, or stubs are permitted. |
 | **Finalization Gate** | The checkpoint where the project owner signs off on the audited specification. Requires zero blockers, representation of all requirements from Discovery Notes, and explicit approval. |
 | **Contradiction Blocker** | The guardrail that halts the pipeline immediately if a project owner's input contradicts a previously locked requirement. |
@@ -227,6 +251,7 @@ A condensed example showing one cycle through the protocol:
 | **No Silent Passes** | The requirement that the audit report must explicitly state if the specification is consistent and ready for sign-off, rather than being empty. |
 | **Context Preservation** | The rule that the compiler must not alter already locked specification sections unless incoming inputs explicitly override them. |
 | **Structural Invariance** | The requirement that the compiler must always output the complete, updated specification, rather than partial snippets or diffs. |
+| **Compilation Gate** | The confirmation checkpoint where the project owner approves a summary of requirements or decisions before the specification file is written or rewritten. |
 
 ## License
 
