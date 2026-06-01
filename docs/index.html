@@ -1,0 +1,1348 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- SEO Metadata -->
+  <title>Spec-First Protocol (SFP) — Precursor to Specification-Driven Development</title>
+  <meta name="description"
+    content="Build reliable software with AI agents using SFP: an interactive, adversarial specification protocol flow that locks requirements before execution.">
+  <link rel="canonical" href="https://awhipp.github.io/spec-first-protocol/">
+
+  <!-- Open Graph Tags -->
+  <meta property="og:title" content="Spec-First Protocol (SFP)">
+  <meta property="og:description"
+    content="An interactive, adversarial specification protocol flow that locks requirements before execution.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://awhipp.github.io/spec-first-protocol/">
+
+  <!-- Typography & Icons -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@300;400;600;700;800&family=Fira+Code:wght@400;500&display=swap"
+    rel="stylesheet">
+
+  <!-- Prism.js for code block highlights -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css">
+
+  <!-- Core Stylesheet -->
+  <link rel="stylesheet" href="styles.css">
+</head>
+
+<body class="theme-light">
+
+  <!-- Header Navigation -->
+  <header class="header">
+    <div class="header__container">
+      <a href="#" class="header__logo">
+        <svg class="header__logo-icon" viewBox="0 0 24 24" width="24" height="24">
+          <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" fill="none" stroke="currentColor"
+            stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+        </svg>
+        <span class="header__logo-text">SFP</span>
+      </a>
+
+      <nav class="header__nav">
+        <a href="#why-specs" class="header__link">Why Specs</a>
+        <a href="#flow" class="header__link">Protocol Flow</a>
+        <a href="#install" class="header__link">Installation</a>
+        <a href="#explorer" class="header__link">Spec Explorer</a>
+        <a href="#standards" class="header__link">Standards</a>
+      </nav>
+
+      <div class="header__actions">
+        <a href="https://github.com/awhipp/spec-first-protocol" target="_blank" rel="noopener"
+          class="btn btn--secondary btn--small header__github">
+          <span>GitHub</span>
+          <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round">
+            <path
+              d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22">
+            </path>
+          </svg>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <main class="content-wrapper">
+    <!-- Hero Section -->
+    <section class="hero" id="hero">
+      <h1 class="hero__title gradient-text">
+        Spec-First Protocol
+      </h1>
+      <p class="hero__tagline">
+        A precursor to Specification-Driven Development.
+      </p>
+      <p class="hero__quote">
+        "Prompting code generators without a specification is the most expensive shortcut in software development."
+      </p>
+
+      <div class="hero__actions">
+        <a href="#install" class="btn btn--primary" id="hero-cta-install">Install Now</a>
+        <a href="https://github.com/awhipp/spec-first-protocol" target="_blank" rel="noopener"
+          class="btn btn--secondary">
+          <span>View on GitHub</span>
+        </a>
+      </div>
+    </section>
+
+
+    <!-- What is SFP Section -->
+    <section class="section what-is-sfp" id="about-sfp">
+      <div class="section__header">
+        <h2 class="section__title">What is the Spec-First Protocol?</h2>
+        <p class="section__subtitle"> Shifting the cognitive load of specification writing to an automated, iterative
+          pipeline before execution begins.</p>
+      </div>
+      <div class="sfp-pop-section">
+        <p class="sfp-pop-text">
+          The Spec-First Protocol (SFP) operates upstream of coding (before SDD or otherwise). It acts as an adversarial
+          validation layer, ensuring requirements are captured, audited, and locked before execution begins.
+        </p>
+      </div>
+    </section>
+
+    <!-- Why Specs Matter Section -->
+    <section class="section specs-why" id="why-specs">
+      <div class="section__header">
+        <h2 class="section__title">Why Specs Matter</h2>
+        <p class="section__subtitle">Starting execution without a specification is the most expensive shortcut in
+          software development.</p>
+      </div>
+
+      <!-- Comparison Table -->
+      <div class="table-container card">
+        <table class="comparison-table">
+          <thead>
+            <tr>
+              <th class="comparison-table__th-problem">Traditional Problems</th>
+              <th class="comparison-table__th-solution">SFP Solutions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>
+                <strong>Invisible Scope Creep</strong><br>
+                <span class="text-secondary">Prompting code changes directly without a base specification causes silent
+                  requirement expansion and makes change tracking impossible.</span>
+              </td>
+              <td>
+                <strong class="color-success">Structured Interview</strong><br>
+                <span class="text-secondary">The discover skill captures and boundaries requirements before writing
+                  code, forcing alignment on scope boundaries.</span>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <strong>Compounding Rework</strong><br>
+                <span class="text-secondary">Starting code generation with undefined requirements forces messy
+                  refactoring, structural breakages, and endless stop-and-ask prompts.</span>
+              </td>
+              <td>
+                <strong class="color-success">Adversarial Audit</strong><br>
+                <span class="text-secondary">The audit skill reviews specifications for gaps and contradictions before
+                  execution starts, catching issues early.</span>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <strong>Drift From Intent</strong><br>
+                <span class="text-secondary">Instructing execution agents based on fragmented chat threads forces LLMs
+                  to guess, producing code that misses the project owner's real needs.</span>
+              </td>
+              <td>
+                <strong class="color-success">Zero Placeholder Invariant</strong><br>
+                <span class="text-secondary">Guarantees that every section is either fully written or omitted. No stubs,
+                  TODOs, or empty headings survive.</span>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <strong>AI Context Drift</strong><br>
+                <span class="text-secondary">Feeding entire raw chat histories to code builders wastes token budgets and
+                  triggers code hallucination or structural collapse.</span>
+              </td>
+              <td>
+                <strong class="color-success">Decoupled Lifecycle</strong><br>
+                <span class="text-secondary">Locks a dense, structured markdown spec. Downstream executors get exactly
+                  what they need, minimizing token bloat.</span>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- The Protocol Flow Section -->
+    <section class="section funnel-section" id="flow">
+      <div class="section__header">
+        <h2 class="section__title">The Protocol Flow</h2>
+        <p class="section__subtitle">An interactive, cyclic pipeline designed to shape ideas into locked execution
+          plans.</p>
+      </div>
+
+      <!-- Flowchart container (Grid Cyclic Layout - Top) -->
+      <div class="funnel-flow-container">
+        <div class="funnel-flow">
+          <!-- Discover Node -->
+          <button class="funnel-node is-active" id="funnel-node-discover" data-step="discover"
+            style="grid-area: node-discover;">
+            <div class="funnel-node__num">1</div>
+            <div class="funnel-node__name">discover</div>
+            <div class="funnel-node__desc">Structured Interview</div>
+          </button>
+
+          <!-- Connector Discover -> Audit -->
+          <div class="funnel-arrow funnel-arrow--right" style="grid-area: arrow-da;">
+            <span class="funnel-arrow__label">Spec Draft</span>
+            <svg class="funnel-arrow__icon" viewBox="0 0 24 24" width="24" height="24">
+              <path d="M5 12h14M12 5l7 7-7 7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                stroke-linejoin="round" />
+            </svg>
+          </div>
+
+          <!-- Audit Node -->
+          <button class="funnel-node" id="funnel-node-audit" data-step="audit" style="grid-area: node-audit;">
+            <div class="funnel-node__num">2</div>
+            <div class="funnel-node__name">audit</div>
+            <div class="funnel-node__desc">Adversarial Review</div>
+          </button>
+
+          <!-- Vertical Loop Connector: Audit <-> Refine -->
+          <div class="funnel-arrow-loop" style="grid-area: arrow-loop-ar;">
+            <div class="funnel-arrow-loop__half">
+              <span class="funnel-arrow-loop__label">Findings</span>
+              <svg class="funnel-arrow-loop__icon" viewBox="0 0 24 24" width="16" height="16">
+                <path d="M12 5v14M5 12l7 7 7-7" fill="none" stroke="currentColor" stroke-width="2"
+                  stroke-linecap="round" stroke-linejoin="round" />
+              </svg>
+            </div>
+            <div class="funnel-arrow-loop__half">
+              <svg class="funnel-arrow-loop__icon" viewBox="0 0 24 24" width="16" height="16">
+                <path d="M12 19V5M5 12l7-7 7 7" fill="none" stroke="currentColor" stroke-width="2"
+                  stroke-linecap="round" stroke-linejoin="round" />
+              </svg>
+              <span class="funnel-arrow-loop__label">Recompile</span>
+            </div>
+          </div>
+
+          <!-- Refine Node -->
+          <button class="funnel-node" id="funnel-node-refine" data-step="refine" style="grid-area: node-refine;">
+            <div class="funnel-node__num">3</div>
+            <div class="funnel-node__name">refine</div>
+            <div class="funnel-node__desc">Resolution Loop</div>
+          </button>
+
+          <!-- Connector Audit -> Lock -->
+          <div class="funnel-arrow funnel-arrow--right" style="grid-area: arrow-al;">
+            <span class="funnel-arrow__label">Clean Spec</span>
+            <svg class="funnel-arrow__icon" viewBox="0 0 24 24" width="24" height="24">
+              <path d="M5 12h14M12 5l7 7-7 7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                stroke-linejoin="round" />
+            </svg>
+          </div>
+
+          <!-- Lock Node -->
+          <button class="funnel-node" id="funnel-node-lock" data-step="lock" style="grid-area: node-lock;">
+            <div class="funnel-node__num">4</div>
+            <div class="funnel-node__name">lock</div>
+            <div class="funnel-node__desc">Finalization Gate</div>
+          </button>
+        </div>
+        <br>
+        <!-- Funnel Detail Card (Bottom) -->
+        <div class="funnel-details card" id="funnel-details-card">
+          <div class="funnel-details__header">
+            <div class="funnel-details__badge" id="funnel-detail-step-num">Step 1</div>
+            <h3 class="funnel-details__title" id="funnel-detail-title">discover</h3>
+          </div>
+          <p class="funnel-details__desc" id="funnel-detail-desc">
+            Initiates the protocol by conducting an interactive, requirements-gathering interview with the project
+            owner.
+            It compiles raw responses into a formal spec skeleton.
+          </p>
+          <div class="funnel-details__meta">
+            <div class="funnel-details__meta-item">
+              <span class="funnel-details__meta-label">Primary Output:</span>
+              <code class="funnel-details__meta-value"
+                id="funnel-detail-output">.sfp/discovery_notes.md, YYYY-MM-DD_<SLUG>_SPEC_DRAFT.md</code>
+            </div>
+            <div class="funnel-details__meta-item">
+              <span class="funnel-details__meta-label">Required Gate:</span>
+              <span class="funnel-details__meta-value" id="funnel-detail-gate">Explicit approval of initial scope from
+                the
+                project owner.</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- Onboarding / Tabbed Installation Section -->
+    <section class="section onboarding" id="install">
+      <div class="section__header">
+        <h2 class="section__title">Installation & Setup</h2>
+        <p class="section__subtitle">Set up SFP skills in your development environment or AI agent config in seconds.
+        </p>
+      </div>
+
+      <!-- Installation Container -->
+      <div class="onboarding__layout">
+        <!-- OS Horizontal Selector Tabs -->
+        <div class="os-tabs" role="tablist">
+          <button class="os-tab is-active" id="os-tab-mac" role="tab" aria-selected="true" data-os="mac">macOS /
+            Linux</button>
+          <button class="os-tab" id="os-tab-win" role="tab" aria-selected="false" data-os="win">Windows</button>
+        </div>
+
+        <!-- Scope and Integration Selectors (Desktop layout selectors) -->
+        <div class="setup-controls">
+          <div class="setup-controls__group">
+            <span class="setup-controls__label">Installation Scope:</span>
+            <div class="scope-toggle">
+              <button class="scope-btn is-active" id="scope-btn-local" data-scope="local">
+                <span class="scope-btn__title">Local Project</span>
+                <span class="scope-btn__desc" id="scope-desc-local">installs to current directory</span>
+              </button>
+              <button class="scope-btn" id="scope-btn-global" data-scope="global">
+                <span class="scope-btn__title">Global Agent</span>
+                <span class="scope-btn__desc" id="scope-desc-global">installs to global home folder</span>
+              </button>
+            </div>
+          </div>
+
+          <div class="setup-controls__group">
+            <span class="setup-controls__label">Select AI Agent / Editor:</span>
+            <div class="agent-tabs" role="tablist">
+              <button class="agent-tab is-active" id="agent-tab-none" role="tab" aria-selected="true"
+                data-agent="none">None (Default)</button>
+              <button class="agent-tab" id="agent-tab-claude" role="tab" aria-selected="false"
+                data-agent="claude">Claude</button>
+              <button class="agent-tab" id="agent-tab-antigravity" role="tab" aria-selected="false"
+                data-agent="antigravity">Antigravity</button>
+              <button class="agent-tab" id="agent-tab-cursor" role="tab" aria-selected="false"
+                data-agent="cursor">Cursor</button>
+              <button class="agent-tab" id="agent-tab-windsurf" role="tab" aria-selected="false"
+                data-agent="windsurf">Windsurf</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Static Desktop Panels (Toggled in app.js) -->
+        <div class="desktop-panels">
+
+          <!-- None / Raw Files Panels -->
+          <!-- None Mac -->
+          <div class="install-panel is-active" data-os="mac" data-agent="none">
+            <!-- Local -->
+            <div class="install-scope-block is-active" data-scope="local">
+              <div class="terminal">
+                <div class="terminal__header">
+                  <span class="terminal__title">bash - local install</span>
+                  <button class="terminal__copy" data-copy-target="mac-none-local-cmd" aria-label="Copy command">
+                    <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"
+                      stroke-linecap="round" stroke-linejoin="round">
+                      <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                      <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                    </svg>
+                    <span class="terminal__copy-feedback">Copied!</span>
+                  </button>
+                </div>
+                <div class="terminal__body">
+                  <span class="terminal__prompt">$</span>
+                  <code class="terminal__code"
+                    id="mac-none-local-cmd">curl -fsSL https://raw.githubusercontent.com/awhipp/spec-first-protocol/main/scripts/install.sh | bash -s -- -i none -s local</code>
+                </div>
+              </div>
+            </div>
+            <!-- Global -->
+            <div class="install-scope-block" data-scope="global">
+              <div class="card error-box" style="margin: 0;">
+                <h4 class="error-box__title">
+                  <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z">
+                    </path>
+                    <line x1="12" y1="9" x2="12" y2="13"></line>
+                    <line x1="12" y1="17" x2="12.01" y2="17"></line>
+                  </svg>
+                  <span>Global Scope Unsupported</span>
+                </h4>
+                <p class="error-box__desc">Global scope is not supported for raw file installation. Please select a
+                  specific agent integration above to install globally.</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- None Windows -->
+          <div class="install-panel" data-os="win" data-agent="none">
+            <!-- Local -->
+            <div class="install-scope-block is-active" data-scope="local">
+              <div class="terminal">
+                <div class="terminal__header">
+                  <span class="terminal__title">powershell - local install</span>
+                  <button class="terminal__copy" data-copy-target="win-none-local-cmd" aria-label="Copy command">
+                    <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"
+                      stroke-linecap="round" stroke-linejoin="round">
+                      <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                      <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                    </svg>
+                    <span class="terminal__copy-feedback">Copied!</span>
+                  </button>
+                </div>
+                <div class="terminal__body">
+                  <span class="terminal__prompt">PS ></span>
+                  <code class="terminal__code"
+                    id="win-none-local-cmd">powershell -ExecutionPolicy Bypass -Command "& ([scriptblock]::Create((irm https://raw.githubusercontent.com/awhipp/spec-first-protocol/main/scripts/install.ps1))) -i none -s local"</code>
+                </div>
+              </div>
+            </div>
+            <!-- Global -->
+            <div class="install-scope-block" data-scope="global">
+              <div class="card error-box" style="margin: 0;">
+                <h4 class="error-box__title">
+                  <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z">
+                    </path>
+                    <line x1="12" y1="9" x2="12" y2="13"></line>
+                    <line x1="12" y1="17" x2="12.01" y2="17"></line>
+                  </svg>
+                  <span>Global Scope Unsupported</span>
+                </h4>
+                <p class="error-box__desc">Global scope is not supported for raw file installation. Please select a
+                  specific agent integration above to install globally.</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- MAC / BASH PANELS -->
+          <!-- Claude Mac -->
+          <div class="install-panel" data-os="mac" data-agent="claude">
+            <!-- Local -->
+            <div class="install-scope-block is-active" data-scope="local">
+              <div class="terminal">
+                <div class="terminal__header">
+                  <span class="terminal__title">bash - local install</span>
+                  <button class="terminal__copy" data-copy-target="mac-claude-local-cmd" aria-label="Copy command">
+                    <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"
+                      stroke-linecap="round" stroke-linejoin="round">
+                      <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                      <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                    </svg>
+                    <span class="terminal__copy-feedback">Copied!</span>
+                  </button>
+                </div>
+                <div class="terminal__body">
+                  <span class="terminal__prompt">$</span>
+                  <code class="terminal__code"
+                    id="mac-claude-local-cmd">curl -fsSL https://raw.githubusercontent.com/awhipp/spec-first-protocol/main/scripts/install.sh | bash -s -- -i claude -s local</code>
+                </div>
+              </div>
+            </div>
+            <!-- Global -->
+            <div class="install-scope-block" data-scope="global">
+              <div class="terminal">
+                <div class="terminal__header">
+                  <span class="terminal__title">bash - global install</span>
+                  <button class="terminal__copy" data-copy-target="mac-claude-global-cmd" aria-label="Copy command">
+                    <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"
+                      stroke-linecap="round" stroke-linejoin="round">
+                      <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                      <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                    </svg>
+                    <span class="terminal__copy-feedback">Copied!</span>
+                  </button>
+                </div>
+                <div class="terminal__body">
+                  <span class="terminal__prompt">$</span>
+                  <code class="terminal__code"
+                    id="mac-claude-global-cmd">curl -fsSL https://raw.githubusercontent.com/awhipp/spec-first-protocol/main/scripts/install.sh | bash -s -- -i claude -s global</code>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Antigravity Mac -->
+          <div class="install-panel" data-os="mac" data-agent="antigravity">
+            <!-- Local -->
+            <div class="install-scope-block is-active" data-scope="local">
+              <div class="terminal">
+                <div class="terminal__header">
+                  <span class="terminal__title">bash - local install</span>
+                  <button class="terminal__copy" data-copy-target="mac-anti-local-cmd" aria-label="Copy command">
+                    <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"
+                      stroke-linecap="round" stroke-linejoin="round">
+                      <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                      <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                    </svg>
+                    <span class="terminal__copy-feedback">Copied!</span>
+                  </button>
+                </div>
+                <div class="terminal__body">
+                  <span class="terminal__prompt">$</span>
+                  <code class="terminal__code"
+                    id="mac-anti-local-cmd">curl -fsSL https://raw.githubusercontent.com/awhipp/spec-first-protocol/main/scripts/install.sh | bash -s -- -i antigravity -s local</code>
+                </div>
+              </div>
+            </div>
+            <!-- Global -->
+            <div class="install-scope-block" data-scope="global">
+              <div class="terminal">
+                <div class="terminal__header">
+                  <span class="terminal__title">bash - global install</span>
+                  <button class="terminal__copy" data-copy-target="mac-anti-global-cmd" aria-label="Copy command">
+                    <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"
+                      stroke-linecap="round" stroke-linejoin="round">
+                      <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                      <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                    </svg>
+                    <span class="terminal__copy-feedback">Copied!</span>
+                  </button>
+                </div>
+                <div class="terminal__body">
+                  <span class="terminal__prompt">$</span>
+                  <code class="terminal__code"
+                    id="mac-anti-global-cmd">curl -fsSL https://raw.githubusercontent.com/awhipp/spec-first-protocol/main/scripts/install.sh | bash -s -- -i antigravity -s global</code>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Cursor Mac -->
+          <div class="install-panel" data-os="mac" data-agent="cursor">
+            <!-- Local -->
+            <div class="install-scope-block is-active" data-scope="local">
+              <div class="terminal">
+                <div class="terminal__header">
+                  <span class="terminal__title">bash - local install</span>
+                  <button class="terminal__copy" data-copy-target="mac-cursor-local-cmd" aria-label="Copy command">
+                    <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"
+                      stroke-linecap="round" stroke-linejoin="round">
+                      <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                      <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                    </svg>
+                    <span class="terminal__copy-feedback">Copied!</span>
+                  </button>
+                </div>
+                <div class="terminal__body">
+                  <span class="terminal__prompt">$</span>
+                  <code class="terminal__code"
+                    id="mac-cursor-local-cmd">curl -fsSL https://raw.githubusercontent.com/awhipp/spec-first-protocol/main/scripts/install.sh | bash -s -- -i cursor -s local</code>
+                </div>
+              </div>
+            </div>
+            <!-- Global -->
+            <div class="install-scope-block" data-scope="global">
+              <div class="terminal">
+                <div class="terminal__header">
+                  <span class="terminal__title">bash - global install</span>
+                  <button class="terminal__copy" data-copy-target="mac-cursor-global-cmd" aria-label="Copy command">
+                    <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"
+                      stroke-linecap="round" stroke-linejoin="round">
+                      <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                      <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                    </svg>
+                    <span class="terminal__copy-feedback">Copied!</span>
+                  </button>
+                </div>
+                <div class="terminal__body">
+                  <span class="terminal__prompt">$</span>
+                  <code class="terminal__code"
+                    id="mac-cursor-global-cmd">curl -fsSL https://raw.githubusercontent.com/awhipp/spec-first-protocol/main/scripts/install.sh | bash -s -- -i cursor -s global</code>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Windsurf Mac -->
+          <div class="install-panel" data-os="mac" data-agent="windsurf">
+            <!-- Local -->
+            <div class="install-scope-block is-active" data-scope="local">
+              <div class="terminal">
+                <div class="terminal__header">
+                  <span class="terminal__title">bash - local install</span>
+                  <button class="terminal__copy" data-copy-target="mac-windsurf-local-cmd" aria-label="Copy command">
+                    <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"
+                      stroke-linecap="round" stroke-linejoin="round">
+                      <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                      <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                    </svg>
+                    <span class="terminal__copy-feedback">Copied!</span>
+                  </button>
+                </div>
+                <div class="terminal__body">
+                  <span class="terminal__prompt">$</span>
+                  <code class="terminal__code"
+                    id="mac-windsurf-local-cmd">curl -fsSL https://raw.githubusercontent.com/awhipp/spec-first-protocol/main/scripts/install.sh | bash -s -- -i windsurf -s local</code>
+                </div>
+              </div>
+            </div>
+            <!-- Global -->
+            <div class="install-scope-block" data-scope="global">
+              <div class="terminal">
+                <div class="terminal__header">
+                  <span class="terminal__title">bash - global install</span>
+                  <button class="terminal__copy" data-copy-target="mac-windsurf-global-cmd" aria-label="Copy command">
+                    <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"
+                      stroke-linecap="round" stroke-linejoin="round">
+                      <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                      <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                    </svg>
+                    <span class="terminal__copy-feedback">Copied!</span>
+                  </button>
+                </div>
+                <div class="terminal__body">
+                  <span class="terminal__prompt">$</span>
+                  <code class="terminal__code"
+                    id="mac-windsurf-global-cmd">curl -fsSL https://raw.githubusercontent.com/awhipp/spec-first-protocol/main/scripts/install.sh | bash -s -- -i windsurf -s global</code>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- WINDOWS / POWERSHELL PANELS -->
+          <!-- Claude Windows -->
+          <div class="install-panel" data-os="win" data-agent="claude">
+            <!-- Local -->
+            <div class="install-scope-block is-active" data-scope="local">
+              <div class="terminal">
+                <div class="terminal__header">
+                  <span class="terminal__title">powershell - local install</span>
+                  <button class="terminal__copy" data-copy-target="win-claude-local-cmd" aria-label="Copy command">
+                    <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"
+                      stroke-linecap="round" stroke-linejoin="round">
+                      <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                      <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                    </svg>
+                    <span class="terminal__copy-feedback">Copied!</span>
+                  </button>
+                </div>
+                <div class="terminal__body">
+                  <span class="terminal__prompt">PS ></span>
+                  <code class="terminal__code"
+                    id="win-claude-local-cmd">powershell -ExecutionPolicy Bypass -Command "&amp; ([scriptblock]::Create((irm https://raw.githubusercontent.com/awhipp/spec-first-protocol/main/scripts/install.ps1))) -i claude -s local"</code>
+                </div>
+              </div>
+            </div>
+            <!-- Global -->
+            <div class="install-scope-block" data-scope="global">
+              <div class="terminal">
+                <div class="terminal__header">
+                  <span class="terminal__title">powershell - global install</span>
+                  <button class="terminal__copy" data-copy-target="win-claude-global-cmd" aria-label="Copy command">
+                    <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"
+                      stroke-linecap="round" stroke-linejoin="round">
+                      <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                      <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                    </svg>
+                    <span class="terminal__copy-feedback">Copied!</span>
+                  </button>
+                </div>
+                <div class="terminal__body">
+                  <span class="terminal__prompt">PS ></span>
+                  <code class="terminal__code"
+                    id="win-claude-global-cmd">powershell -ExecutionPolicy Bypass -Command "&amp; ([scriptblock]::Create((irm https://raw.githubusercontent.com/awhipp/spec-first-protocol/main/scripts/install.ps1))) -i claude -s global"</code>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Antigravity Windows -->
+          <div class="install-panel" data-os="win" data-agent="antigravity">
+            <!-- Local -->
+            <div class="install-scope-block is-active" data-scope="local">
+              <div class="terminal">
+                <div class="terminal__header">
+                  <span class="terminal__title">powershell - local install</span>
+                  <button class="terminal__copy" data-copy-target="win-anti-local-cmd" aria-label="Copy command">
+                    <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"
+                      stroke-linecap="round" stroke-linejoin="round">
+                      <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                      <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                    </svg>
+                    <span class="terminal__copy-feedback">Copied!</span>
+                  </button>
+                </div>
+                <div class="terminal__body">
+                  <span class="terminal__prompt">PS ></span>
+                  <code class="terminal__code"
+                    id="win-anti-local-cmd">powershell -ExecutionPolicy Bypass -Command "&amp; ([scriptblock]::Create((irm https://raw.githubusercontent.com/awhipp/spec-first-protocol/main/scripts/install.ps1))) -i antigravity -s local"</code>
+                </div>
+              </div>
+            </div>
+            <!-- Global -->
+            <div class="install-scope-block" data-scope="global">
+              <div class="terminal">
+                <div class="terminal__header">
+                  <span class="terminal__title">powershell - global install</span>
+                  <button class="terminal__copy" data-copy-target="win-anti-global-cmd" aria-label="Copy command">
+                    <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"
+                      stroke-linecap="round" stroke-linejoin="round">
+                      <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                      <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                    </svg>
+                    <span class="terminal__copy-feedback">Copied!</span>
+                  </button>
+                </div>
+                <div class="terminal__body">
+                  <span class="terminal__prompt">PS ></span>
+                  <code class="terminal__code"
+                    id="win-anti-global-cmd">powershell -ExecutionPolicy Bypass -Command "&amp; ([scriptblock]::Create((irm https://raw.githubusercontent.com/awhipp/spec-first-protocol/main/scripts/install.ps1))) -i antigravity -s global"</code>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Cursor Windows -->
+          <div class="install-panel" data-os="win" data-agent="cursor">
+            <!-- Local -->
+            <div class="install-scope-block is-active" data-scope="local">
+              <div class="terminal">
+                <div class="terminal__header">
+                  <span class="terminal__title">powershell - local install</span>
+                  <button class="terminal__copy" data-copy-target="win-cursor-local-cmd" aria-label="Copy command">
+                    <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"
+                      stroke-linecap="round" stroke-linejoin="round">
+                      <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                      <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                    </svg>
+                    <span class="terminal__copy-feedback">Copied!</span>
+                  </button>
+                </div>
+                <div class="terminal__body">
+                  <span class="terminal__prompt">PS ></span>
+                  <code class="terminal__code"
+                    id="win-cursor-local-cmd">powershell -ExecutionPolicy Bypass -Command "&amp; ([scriptblock]::Create((irm https://raw.githubusercontent.com/awhipp/spec-first-protocol/main/scripts/install.ps1))) -i cursor -s local"</code>
+                </div>
+              </div>
+            </div>
+            <!-- Global -->
+            <div class="install-scope-block" data-scope="global">
+              <div class="terminal">
+                <div class="terminal__header">
+                  <span class="terminal__title">powershell - global install</span>
+                  <button class="terminal__copy" data-copy-target="win-cursor-global-cmd" aria-label="Copy command">
+                    <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"
+                      stroke-linecap="round" stroke-linejoin="round">
+                      <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                      <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                    </svg>
+                    <span class="terminal__copy-feedback">Copied!</span>
+                  </button>
+                </div>
+                <div class="terminal__body">
+                  <span class="terminal__prompt">PS ></span>
+                  <code class="terminal__code"
+                    id="win-cursor-global-cmd">powershell -ExecutionPolicy Bypass -Command "&amp; ([scriptblock]::Create((irm https://raw.githubusercontent.com/awhipp/spec-first-protocol/main/scripts/install.ps1))) -i cursor -s global"</code>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Windsurf Windows -->
+          <div class="install-panel" data-os="win" data-agent="windsurf">
+            <!-- Local -->
+            <div class="install-scope-block is-active" data-scope="local">
+              <div class="terminal">
+                <div class="terminal__header">
+                  <span class="terminal__title">powershell - local install</span>
+                  <button class="terminal__copy" data-copy-target="win-windsurf-local-cmd" aria-label="Copy command">
+                    <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"
+                      stroke-linecap="round" stroke-linejoin="round">
+                      <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                      <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                    </svg>
+                    <span class="terminal__copy-feedback">Copied!</span>
+                  </button>
+                </div>
+                <div class="terminal__body">
+                  <span class="terminal__prompt">PS ></span>
+                  <code class="terminal__code"
+                    id="win-windsurf-local-cmd">powershell -ExecutionPolicy Bypass -Command "&amp; ([scriptblock]::Create((irm https://raw.githubusercontent.com/awhipp/spec-first-protocol/main/scripts/install.ps1))) -i windsurf -s local"</code>
+                </div>
+              </div>
+            </div>
+            <!-- Global -->
+            <div class="install-scope-block" data-scope="global">
+              <div class="terminal">
+                <div class="terminal__header">
+                  <span class="terminal__title">powershell - global install</span>
+                  <button class="terminal__copy" data-copy-target="win-windsurf-global-cmd" aria-label="Copy command">
+                    <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"
+                      stroke-linecap="round" stroke-linejoin="round">
+                      <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                      <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                    </svg>
+                    <span class="terminal__copy-feedback">Copied!</span>
+                  </button>
+                </div>
+                <div class="terminal__body">
+                  <span class="terminal__prompt">PS ></span>
+                  <code class="terminal__code"
+                    id="win-windsurf-global-cmd">powershell -ExecutionPolicy Bypass -Command "&amp; ([scriptblock]::Create((irm https://raw.githubusercontent.com/awhipp/spec-first-protocol/main/scripts/install.ps1))) -i windsurf -s global"</code>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Static Mobile Accordions (Visible on mobile query, toggled in app.js) -->
+        <div class="mobile-accordions" id="mobile-accordions">
+
+          <!-- MAC / BASH ACCORDIONS -->
+          <div class="mobile-accordion-group is-active" data-mobile-os="mac">
+            <!-- None Mac Accordion -->
+            <div class="accordion">
+              <button class="accordion__header">
+                <span>None (Default)</span>
+                <svg class="accordion__icon" viewBox="0 0 24 24" width="20" height="20" fill="none"
+                  stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="6 9 12 15 18 9"></polyline>
+                </svg>
+              </button>
+              <div class="accordion__content">
+                <div class="accordion__body">
+                  <span class="accordion__sub-header">Local Scope</span>
+                  <div class="terminal">
+                    <div class="terminal__header">
+                      <span class="terminal__title">bash - local</span>
+                    </div>
+                    <div class="terminal__body">
+                      <span class="terminal__prompt">$</span>
+                      <code
+                        class="terminal__code">curl -fsSL https://raw.githubusercontent.com/awhipp/spec-first-protocol/main/scripts/install.sh | bash</code>
+                    </div>
+                  </div>
+                  <span class="accordion__sub-header" style="margin-top: 16px;">Global Scope</span>
+                  <div class="card error-box" style="margin: 0; padding: 16px;">
+                    <h4 class="error-box__title" style="font-size: 0.95rem;">Global Scope Unsupported</h4>
+                    <p class="error-box__desc" style="font-size: 0.85rem;">Global scope is not supported for raw file
+                      installation. Please select a specific agent integration above to install globally.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Claude Mac Accordion -->
+            <div class="accordion">
+              <button class="accordion__header">
+                <span>Claude</span>
+                <svg class="accordion__icon" viewBox="0 0 24 24" width="20" height="20" fill="none"
+                  stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="6 9 12 15 18 9"></polyline>
+                </svg>
+              </button>
+              <div class="accordion__content">
+                <div class="accordion__body">
+                  <span class="accordion__sub-header">Local Scope</span>
+                  <div class="terminal">
+                    <div class="terminal__header">
+                      <span class="terminal__title">bash - local</span>
+                    </div>
+                    <div class="terminal__body">
+                      <span class="terminal__prompt">$</span>
+                      <code
+                        class="terminal__code">curl -fsSL https://raw.githubusercontent.com/awhipp/spec-first-protocol/main/scripts/install.sh | bash -s -- -i claude -s local</code>
+                    </div>
+                  </div>
+                  <span class="accordion__sub-header" style="margin-top: 16px;">Global Scope</span>
+                  <div class="terminal">
+                    <div class="terminal__header">
+                      <span class="terminal__title">bash - global</span>
+                    </div>
+                    <div class="terminal__body">
+                      <span class="terminal__prompt">$</span>
+                      <code
+                        class="terminal__code">curl -fsSL https://raw.githubusercontent.com/awhipp/spec-first-protocol/main/scripts/install.sh | bash -s -- -i claude -s global</code>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Antigravity Mac Accordion -->
+            <div class="accordion">
+              <button class="accordion__header">
+                <span>Antigravity</span>
+                <svg class="accordion__icon" viewBox="0 0 24 24" width="20" height="20" fill="none"
+                  stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="6 9 12 15 18 9"></polyline>
+                </svg>
+              </button>
+              <div class="accordion__content">
+                <div class="accordion__body">
+                  <span class="accordion__sub-header">Local Scope</span>
+                  <div class="terminal">
+                    <div class="terminal__header">
+                      <span class="terminal__title">bash - local</span>
+                    </div>
+                    <div class="terminal__body">
+                      <span class="terminal__prompt">$</span>
+                      <code
+                        class="terminal__code">curl -fsSL https://raw.githubusercontent.com/awhipp/spec-first-protocol/main/scripts/install.sh | bash -s -- -i antigravity -s local</code>
+                    </div>
+                  </div>
+                  <span class="accordion__sub-header" style="margin-top: 16px;">Global Scope</span>
+                  <div class="terminal">
+                    <div class="terminal__header">
+                      <span class="terminal__title">bash - global</span>
+                    </div>
+                    <div class="terminal__body">
+                      <span class="terminal__prompt">$</span>
+                      <code
+                        class="terminal__code">curl -fsSL https://raw.githubusercontent.com/awhipp/spec-first-protocol/main/scripts/install.sh | bash -s -- -i antigravity -s global</code>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Cursor Mac Accordion -->
+            <div class="accordion">
+              <button class="accordion__header">
+                <span>Cursor</span>
+                <svg class="accordion__icon" viewBox="0 0 24 24" width="20" height="20" fill="none"
+                  stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="6 9 12 15 18 9"></polyline>
+                </svg>
+              </button>
+              <div class="accordion__content">
+                <div class="accordion__body">
+                  <span class="accordion__sub-header">Local Scope</span>
+                  <div class="terminal">
+                    <div class="terminal__header">
+                      <span class="terminal__title">bash - local</span>
+                    </div>
+                    <div class="terminal__body">
+                      <span class="terminal__prompt">$</span>
+                      <code
+                        class="terminal__code">curl -fsSL https://raw.githubusercontent.com/awhipp/spec-first-protocol/main/scripts/install.sh | bash -s -- -i cursor -s local</code>
+                    </div>
+                  </div>
+                  <span class="accordion__sub-header" style="margin-top: 16px;">Global Scope</span>
+                  <div class="terminal">
+                    <div class="terminal__header">
+                      <span class="terminal__title">bash - global</span>
+                    </div>
+                    <div class="terminal__body">
+                      <span class="terminal__prompt">$</span>
+                      <code
+                        class="terminal__code">curl -fsSL https://raw.githubusercontent.com/awhipp/spec-first-protocol/main/scripts/install.sh | bash -s -- -i cursor -s global</code>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Windsurf Mac Accordion -->
+            <div class="accordion">
+              <button class="accordion__header">
+                <span>Windsurf</span>
+                <svg class="accordion__icon" viewBox="0 0 24 24" width="20" height="20" fill="none"
+                  stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="6 9 12 15 18 9"></polyline>
+                </svg>
+              </button>
+              <div class="accordion__content">
+                <div class="accordion__body">
+                  <span class="accordion__sub-header">Local Scope</span>
+                  <div class="terminal">
+                    <div class="terminal__header">
+                      <span class="terminal__title">bash - local</span>
+                    </div>
+                    <div class="terminal__body">
+                      <span class="terminal__prompt">$</span>
+                      <code
+                        class="terminal__code">curl -fsSL https://raw.githubusercontent.com/awhipp/spec-first-protocol/main/scripts/install.sh | bash -s -- -i windsurf -s local</code>
+                    </div>
+                  </div>
+                  <span class="accordion__sub-header" style="margin-top: 16px;">Global Scope</span>
+                  <div class="terminal">
+                    <div class="terminal__header">
+                      <span class="terminal__title">bash - global</span>
+                    </div>
+                    <div class="terminal__body">
+                      <span class="terminal__prompt">$</span>
+                      <code
+                        class="terminal__code">curl -fsSL https://raw.githubusercontent.com/awhipp/spec-first-protocol/main/scripts/install.sh | bash -s -- -i windsurf -s global</code>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- WINDOWS ACCORDIONS -->
+          <div class="mobile-accordion-group" data-mobile-os="win">
+            <!-- None Windows Accordion -->
+            <div class="accordion">
+              <button class="accordion__header">
+                <span>None (Default)</span>
+                <svg class="accordion__icon" viewBox="0 0 24 24" width="20" height="20" fill="none"
+                  stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="6 9 12 15 18 9"></polyline>
+                </svg>
+              </button>
+              <div class="accordion__content">
+                <div class="accordion__body">
+                  <span class="accordion__sub-header">Local Scope</span>
+                  <div class="terminal">
+                    <div class="terminal__header">
+                      <span class="terminal__title">powershell - local</span>
+                    </div>
+                    <div class="terminal__body">
+                      <span class="terminal__prompt">PS &gt;</span>
+                      <code
+                        class="terminal__code">powershell -ExecutionPolicy Bypass -Command "irm https://raw.githubusercontent.com/awhipp/spec-first-protocol/main/scripts/install.ps1 | iex"</code>
+                    </div>
+                  </div>
+                  <span class="accordion__sub-header" style="margin-top: 16px;">Global Scope</span>
+                  <div class="card error-box" style="margin: 0; padding: 16px;">
+                    <h4 class="error-box__title" style="font-size: 0.95rem;">Global Scope Unsupported</h4>
+                    <p class="error-box__desc" style="font-size: 0.85rem;">Global scope is not supported for raw file
+                      installation. Please select a specific agent integration above to install globally.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Claude Windows Accordion -->
+            <div class="accordion">
+              <button class="accordion__header">
+                <span>Claude</span>
+                <svg class="accordion__icon" viewBox="0 0 24 24" width="20" height="20" fill="none"
+                  stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="6 9 12 15 18 9"></polyline>
+                </svg>
+              </button>
+              <div class="accordion__content">
+                <div class="accordion__body">
+                  <span class="accordion__sub-header">Local Scope</span>
+                  <div class="terminal">
+                    <div class="terminal__header">
+                      <span class="terminal__title">powershell - local</span>
+                    </div>
+                    <div class="terminal__body">
+                      <span class="terminal__prompt">PS &gt;</span>
+                      <code
+                        class="terminal__code">powershell -ExecutionPolicy Bypass -Command "&amp; ([scriptblock]::Create((irm https://raw.githubusercontent.com/awhipp/spec-first-protocol/main/scripts/install.ps1))) -i claude -s local"</code>
+                    </div>
+                  </div>
+                  <span class="accordion__sub-header" style="margin-top: 16px;">Global Scope</span>
+                  <div class="terminal">
+                    <div class="terminal__header">
+                      <span class="terminal__title">powershell - global</span>
+                    </div>
+                    <div class="terminal__body">
+                      <span class="terminal__prompt">PS &gt;</span>
+                      <code
+                        class="terminal__code">powershell -ExecutionPolicy Bypass -Command "&amp; ([scriptblock]::Create((irm https://raw.githubusercontent.com/awhipp/spec-first-protocol/main/scripts/install.ps1))) -i claude -s global"</code>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Antigravity Windows Accordion -->
+            <div class="accordion">
+              <button class="accordion__header">
+                <span>Antigravity</span>
+                <svg class="accordion__icon" viewBox="0 0 24 24" width="20" height="20" fill="none"
+                  stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="6 9 12 15 18 9"></polyline>
+                </svg>
+              </button>
+              <div class="accordion__content">
+                <div class="accordion__body">
+                  <span class="accordion__sub-header">Local Scope</span>
+                  <div class="terminal">
+                    <div class="terminal__header">
+                      <span class="terminal__title">powershell - local</span>
+                    </div>
+                    <div class="terminal__body">
+                      <span class="terminal__prompt">PS &gt;</span>
+                      <code
+                        class="terminal__code">powershell -ExecutionPolicy Bypass -Command "&amp; ([scriptblock]::Create((irm https://raw.githubusercontent.com/awhipp/spec-first-protocol/main/scripts/install.ps1))) -i antigravity -s local"</code>
+                    </div>
+                  </div>
+                  <span class="accordion__sub-header" style="margin-top: 16px;">Global Scope</span>
+                  <div class="terminal">
+                    <div class="terminal__header">
+                      <span class="terminal__title">powershell - global</span>
+                    </div>
+                    <div class="terminal__body">
+                      <span class="terminal__prompt">PS &gt;</span>
+                      <code
+                        class="terminal__code">powershell -ExecutionPolicy Bypass -Command "&amp; ([scriptblock]::Create((irm https://raw.githubusercontent.com/awhipp/spec-first-protocol/main/scripts/install.ps1))) -i antigravity -s global"</code>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Cursor Windows Accordion -->
+            <div class="accordion">
+              <button class="accordion__header">
+                <span>Cursor</span>
+                <svg class="accordion__icon" viewBox="0 0 24 24" width="20" height="20" fill="none"
+                  stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="6 9 12 15 18 9"></polyline>
+                </svg>
+              </button>
+              <div class="accordion__content">
+                <div class="accordion__body">
+                  <span class="accordion__sub-header">Local Scope</span>
+                  <div class="terminal">
+                    <div class="terminal__header">
+                      <span class="terminal__title">powershell - local</span>
+                    </div>
+                    <div class="terminal__body">
+                      <span class="terminal__prompt">PS &gt;</span>
+                      <code
+                        class="terminal__code">powershell -ExecutionPolicy Bypass -Command "&amp; ([scriptblock]::Create((irm https://raw.githubusercontent.com/awhipp/spec-first-protocol/main/scripts/install.ps1))) -i cursor -s local"</code>
+                    </div>
+                  </div>
+                  <span class="accordion__sub-header" style="margin-top: 16px;">Global Scope</span>
+                  <div class="terminal">
+                    <div class="terminal__header">
+                      <span class="terminal__title">powershell - global</span>
+                    </div>
+                    <div class="terminal__body">
+                      <span class="terminal__prompt">PS &gt;</span>
+                      <code
+                        class="terminal__code">powershell -ExecutionPolicy Bypass -Command "&amp; ([scriptblock]::Create((irm https://raw.githubusercontent.com/awhipp/spec-first-protocol/main/scripts/install.ps1))) -i cursor -s global"</code>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Windsurf Windows Accordion -->
+            <div class="accordion">
+              <button class="accordion__header">
+                <span>Windsurf</span>
+                <svg class="accordion__icon" viewBox="0 0 24 24" width="20" height="20" fill="none"
+                  stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="6 9 12 15 18 9"></polyline>
+                </svg>
+              </button>
+              <div class="accordion__content">
+                <div class="accordion__body">
+                  <span class="accordion__sub-header">Local Scope</span>
+                  <div class="terminal">
+                    <div class="terminal__header">
+                      <span class="terminal__title">powershell - local</span>
+                    </div>
+                    <div class="terminal__body">
+                      <span class="terminal__prompt">PS &gt;</span>
+                      <code
+                        class="terminal__code">powershell -ExecutionPolicy Bypass -Command "&amp; ([scriptblock]::Create((irm https://raw.githubusercontent.com/awhipp/spec-first-protocol/main/scripts/install.ps1))) -i windsurf -s local"</code>
+                    </div>
+                  </div>
+                  <span class="accordion__sub-header" style="margin-top: 16px;">Global Scope</span>
+                  <div class="terminal">
+                    <div class="terminal__header">
+                      <span class="terminal__title">powershell - global</span>
+                    </div>
+                    <div class="terminal__body">
+                      <span class="terminal__prompt">PS &gt;</span>
+                      <code
+                        class="terminal__code">powershell -ExecutionPolicy Bypass -Command "&amp; ([scriptblock]::Create((irm https://raw.githubusercontent.com/awhipp/spec-first-protocol/main/scripts/install.ps1))) -i windsurf -s global"</code>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- Spec Explorer Section -->
+    <section class="section explorer-section" id="explorer">
+      <div class="section__header">
+        <h2 class="section__title">Spec Explorer</h2>
+        <p class="section__subtitle">Browse locked protocol artifacts. Inspect SFP's own implementation specifications.
+        </p>
+      </div>
+
+      <!-- Collapsible Spec Explorer Box 1: Skill Distribution -->
+      <div class="explorer">
+        <!-- Specification preview metadata summary -->
+        <div class="explorer-meta">
+          <div class="explorer-meta__item">
+            <span class="explorer-meta__label">Vague Starting Prompt</span>
+            <p class="explorer-meta__value">"I need a way to distribute and install these agentic skills with one
+              click."</p>
+          </div>
+          <div class="explorer-meta__item">
+            <span class="explorer-meta__label">Final Spec Deliverables</span>
+            <p class="explorer-meta__value">Dependency-free installer scripts (install.sh / install.ps1) and release
+              packaging workflows that distribute SFP skills to local project roots or user global directories.</p>
+          </div>
+        </div>
+
+        <button class="explorer__toggle" id="explorer-toggle-btn-dist" aria-expanded="false"
+          aria-controls="explorer-content-dist">
+          <span class="explorer__toggle-title">
+            <svg class="explorer__toggle-icon-file" viewBox="0 0 24 24" width="20" height="20" fill="none"
+              stroke="currentColor" stroke-width="2">
+              <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+              <polyline points="14 2 14 8 20 8"></polyline>
+            </svg>
+            <span>examples/2026-06-01_SKILL-DISTRIBUTION_SPEC.md</span>
+          </span>
+          <span class="explorer__toggle-action">
+            <span class="explorer__toggle-text">Load Specification</span>
+            <svg class="explorer__toggle-arrow" viewBox="0 0 24 24" width="20" height="20" fill="none"
+              stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="6 9 12 15 18 9"></polyline>
+            </svg>
+          </span>
+        </button>
+
+        <div class="explorer__content collapsed" id="explorer-content-dist" aria-hidden="true">
+          <!-- Mock Code Editor Layout -->
+          <div class="mock-editor">
+            <div class="mock-editor__body" id="spec-viewer-container-dist">
+              <!-- Content loaded via Fetch is parsed and injected here -->
+              <div class="mock-editor__loading">
+                <div class="spinner"></div>
+                <span>Fetching specification from local repository...</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Collapsible Spec Explorer Box 2: SFP UI -->
+      <div class="explorer" style="margin-top: 24px;">
+        <!-- Specification preview metadata summary -->
+        <div class="explorer-meta">
+          <div class="explorer-meta__item">
+            <span class="explorer-meta__label">Vague Starting Prompt</span>
+            <p class="explorer-meta__value">"I need a flashy, easy-to-update static marketing website under /docs to
+              showcase Spec-First Protocol."</p>
+          </div>
+          <div class="explorer-meta__item">
+            <span class="explorer-meta__label">Final Spec Deliverables</span>
+            <p class="explorer-meta__value">A responsive single-page marketing site under docs/ (HTML/CSS/JS) styled in
+              unified Light Mode, demonstrating SFP concepts, setup guides, and standard reference guides.</p>
+          </div>
+        </div>
+
+        <button class="explorer__toggle" id="explorer-toggle-btn-ui" aria-expanded="false"
+          aria-controls="explorer-content-ui">
+          <span class="explorer__toggle-title">
+            <svg class="explorer__toggle-icon-file" viewBox="0 0 24 24" width="20" height="20" fill="none"
+              stroke="currentColor" stroke-width="2">
+              <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+              <polyline points="14 2 14 8 20 8"></polyline>
+            </svg>
+            <span>examples/2026-06-01_SFP-UI_SPEC.md</span>
+          </span>
+          <span class="explorer__toggle-action">
+            <span class="explorer__toggle-text">Load Specification</span>
+            <svg class="explorer__toggle-arrow" viewBox="0 0 24 24" width="20" height="20" fill="none"
+              stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="6 9 12 15 18 9"></polyline>
+            </svg>
+          </span>
+        </button>
+
+        <div class="explorer__content collapsed" id="explorer-content-ui" aria-hidden="true">
+          <!-- Mock Code Editor Layout -->
+          <div class="mock-editor">
+            <div class="mock-editor__body" id="spec-viewer-container-ui">
+              <!-- Content loaded via Fetch is parsed and injected here -->
+              <div class="mock-editor__loading">
+                <div class="spinner"></div>
+                <span>Fetching specification from local repository...</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Reference Standards Table Section -->
+    <section class="section standards-section" id="standards">
+      <div class="section__header">
+        <h2 class="section__title">Skill Authoring Standards</h2>
+        <p class="section__subtitle">Constraints and invariants enforced across the SFP ecosystem to guarantee token
+          efficiency and processing reliability.</p>
+      </div>
+
+      <div class="standards-table-wrapper card">
+        <table class="standards-table">
+          <thead>
+            <tr>
+              <th>Constraint Name</th>
+              <th>Limit / Threshold</th>
+              <th>Technical Rationale</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong><code>SKILL.md</code> Length</strong></td>
+              <td><span class="badge badge--cyan">≤ 500 lines</span> (~5k tokens)</td>
+              <td>Ensures execution agents can ingest core skill workflows inside compact reasoning loops without
+                saturating context limits.</td>
+            </tr>
+            <tr>
+              <td><strong>YAML Description</strong></td>
+              <td><span class="badge badge--cyan">≤ 200 characters</span></td>
+              <td>Strict boundary for reliable matching and dynamic skill routing engines (e.g. Claude's custom skill
+                selector).</td>
+            </tr>
+            <tr>
+              <td><strong>Reference Document Size</strong></td>
+              <td><span class="badge badge--cyan">≤ 300 lines</span> (~6 KB) per file</td>
+              <td>Limits supplementary material to immediately absorbable lengths, preventing agent attention
+                fragmentation.</td>
+            </tr>
+            <tr>
+              <td><strong>Zero Placeholder Invariant</strong></td>
+              <td><span class="badge badge--purple">100% strict</span></td>
+              <td>Prevents stale stubs, "TBD", or TODO items from surviving compilation gates, ensuring all code
+                generators receive actionable instructions.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer Section -->
+  <footer class="footer">
+    <div class="footer__container">
+      <p class="footer__copyright">&copy; 2026 Spec-First Protocol. Released under the MIT License.</p>
+      <div class="footer__links">
+        <a href="https://github.com/awhipp/spec-first-protocol" target="_blank" rel="noopener">GitHub Repository</a>
+        <a href="https://github.com/awhipp/spec-first-protocol/blob/main/LICENSE" target="_blank" rel="noopener">License
+          Details</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- CDN scripts for Markdown parsing and Syntax highlighting -->
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+
+  <!-- Load syntax extensions -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-bash.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-powershell.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-yaml.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-markdown.min.js"></script>
+
+  <!-- Application Logic -->
+  <script src="app.js"></script>
+</body>
+
+</html>

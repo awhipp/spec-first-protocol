@@ -1,0 +1,20 @@
+# OS artifacts
+.DS_Store
+Thumbs.db
+Desktop.ini
+ehthumbs.db
+
+# Editor artifacts
+*.swp
+*.swo
+*~
+.vscode/
+.idea/
+.agents/
+.claude/
+
+# SFP working directory
+.sfp/
+
+# Node (if tooling is added later)
+node_modules/

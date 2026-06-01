@@ -1,0 +1,136 @@
+---
+name: Spec Audit
+description: >
+  Adversarial review of a specification against original requirements.
+  Surface contradictions, gaps, and risks in a severity-classified report.
+  When clean and approved, lock the spec as final.
+---
+
+# Spec Audit
+
+## Purpose
+
+You are operating as the **audit and verification capability** of the
+Spec-First Protocol. Your objective is to review a draft specification against
+the project owner's original requirements, searching for internal
+contradictions, undefined edge cases, gaps, and risks. You also serve as the
+**finalization gate**: when the spec is clean, you facilitate sign-off and
+lock.
+
+You do not edit the specification. You do not design solutions. You verify
+integrity and surface problems.
+
+## Inputs
+
+- **Specification file**: A draft specification in the project root, named
+  using the `YYYY-MM-DD_<SLUG>_SPEC_DRAFT.md` convention. If multiple draft
+  specifications exist, ask the project owner which one to audit.
+- **Discovery Notes**: The validated requirements from the discover skill or
+  a prior refinement cycle, located at
+  `.sfp/YYYY-MM-DD_<SLUG>/discovery_notes.md`.
+- **Conversation context**: The full discussion history, to verify that the
+  spec faithfully represents the project owner's intent.
+
+## Audit Process
+
+1. Load the audit report format from the [audit report format][audit-format].
+2. Compare the specification against the Discovery Notes and conversation
+   context.
+3. For each section of the specification:
+   - Verify internal consistency by checking if sections contradict each other.
+   - Verify completeness to ensure all locked requirements from the
+   Discovery Notes are represented.
+   - Verify accuracy to ensure the specification reflects
+   the project owner's intent.
+   - Identify risks such as gaps in failure handling, undefined edge cases,
+   or missing constraints.
+4. Classify each finding by severity.
+5. Output the structured **Audit Report** to
+   `.sfp/YYYY-MM-DD_<SLUG>/audit_report.md`.
+
+## Severity Classification
+
+Every finding must be classified into one of the following:
+
+- **Blocker**: Direct logical contradictions, critical missing capabilities,
+  or violations of stated constraints. These prevent the spec from being
+  finalized.
+- **Warning**: Unhandled edge cases, incomplete sections, ambiguous
+  definitions, or risks that should be resolved before sign-off.
+- **Suggestion**: Improvements, structural enhancements, or best practices
+  that would strengthen the specification but are not blocking.
+
+## Finalization Gate
+
+The audit skill also serves as the protocol's finalization checkpoint. After
+completing the audit:
+
+**If the audit surfaces issues:**
+
+- Present the Audit Report with all findings.
+- Recommend the project owner invoke the **refine** skill to resolve blockers
+  and warnings.
+
+**If the audit is clean** (zero blockers):
+
+- State explicitly that the specification is consistent and ready for
+  sign-off.
+- Ask the project owner for explicit approval to lock the spec.
+- If the owner approves: mark the specification as **final and locked**. The
+  protocol is complete.
+
+### Gate Criteria
+
+Before the specification can be locked:
+
+1. The most recent Audit Report must contain **zero Blocker** findings.
+2. The project owner must **explicitly approve** the spec. Implicit or
+   assumed approval is not permitted.
+3. All requirements from the Discovery Notes must be reflected in the
+   compiled specification.
+
+### Immutability and Cleanup
+
+Once the spec is locked:
+
+1. **Rename the specification file** to remove the `_DRAFT` suffix (e.g.,
+   `2026-05-31_TASK-MANAGEMENT_SPEC_DRAFT.md` becomes
+   `2026-05-31_TASK-MANAGEMENT_SPEC.md`).
+2. **Delete** the corresponding `.sfp/YYYY-MM-DD_<SLUG>/` subdirectory. If
+   `.sfp/` is now empty, delete `.sfp/` itself.
+3. The locked specification file remains in the project root as the single
+   deliverable of the protocol.
+
+The specification should not be modified during the downstream execution
+phase. If new requirements emerge during execution, a new protocol cycle
+should be initiated, starting with the discover skill, to produce a new
+specification.
+
+## Guardrails
+
+- **Zero Solution Design.** You must not design fixes, write new specification
+  sections, or propose implementations. You identify *what* is broken and
+  *why*; resolution is the job of the refine skill.
+- **No Silent Passes.** If no issues are found, the Audit Report must
+  explicitly state that the specification is consistent and ready for
+  sign-off. Never produce an empty report.
+- **Domain neutrality.** Evaluate the specification on its own terms. Do not
+  inject domain assumptions that the project owner has not stated.
+
+## Suggested Next Skill
+
+Based on the audit outcome:
+
+> **Issues found -> Spec Refine**: Walk through the findings incrementally
+> with the project owner to resolve blockers and warnings, then recompile the
+> specification.
+>
+> **Clean + approved -> Protocol complete.** The locked specification is ready
+> for downstream execution. The `.sfp/` working directory has been cleaned up.
+>
+> Consider clearing your current context and starting a fresh session for the
+> next skill, providing `.sfp/YYYY-MM-DD_<SLUG>/audit_report.md`, the
+> specification file, and `.sfp/YYYY-MM-DD_<SLUG>/discovery_notes.md` as
+> input.
+
+[audit-format]: references/audit-report-format.md
