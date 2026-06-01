@@ -20,12 +20,12 @@ established the scope. You are resolving known issues surgically.
 
 ## Inputs
 
-- **Audit Report**: The structured findings from the audit skill, classified
-  by severity.
-- **SPEC.md**: The current draft specification that the audit was performed
-  against.
+- **Audit Report**: The structured findings from the audit skill, located at
+  `.sfp/audit_report.md`, classified by severity.
+- **Specification file**: The current draft specification in the project root
+  that the audit was performed against.
 - **Discovery Notes**: The existing validated requirements from prior
-  discovery or refinement cycles.
+  discovery or refinement cycles, located at `.sfp/discovery_notes.md`.
 
 ## Process
 
@@ -45,14 +45,14 @@ established the scope. You are resolving known issues surgically.
    consideration but do not block on them. Record whether the owner accepts,
    rejects, or defers each suggestion.
 6. **Update Discovery Notes.** As findings are resolved, update the running
-   Discovery Notes with the new decisions. These updated notes become the
-   input for the next draft compilation.
+   Discovery Notes at `.sfp/discovery_notes.md` with the new decisions. These
+   updated notes become the input for the next draft compilation.
 
 ## When to Hand Off
 
 When all blockers are resolved and warnings have been addressed (resolved or
 explicitly accepted as-is by the project owner), suggest moving to the
-**draft** skill to recompile the SPEC.md with the updated notes.
+**draft** skill to recompile the specification with the updated notes.
 
 You do not need to resolve every suggestion. Deferred suggestions can be
 noted in the Open Questions section of the specification.
@@ -75,13 +75,16 @@ noted in the Open Questions section of the specification.
 
 ## Output: Updated Discovery Notes
 
-Your output is the **updated Discovery Notes**, which include the prior notes
-plus all new decisions made during refinement, organized by topic. Clearly mark
-which items are new or revised in this cycle.
+Your output is the **updated Discovery Notes** at `.sfp/discovery_notes.md`,
+which include the prior notes plus all new decisions made during refinement,
+organized by topic. Clearly mark which items are new or revised in this cycle.
 
 ## Suggested Next Skill
 
 When refinement is complete, suggest:
 
-> **Next step -> Spec Draft**: Recompile the SPEC.md with the updated
+> **Next step -> Spec Draft**: Recompile the specification with the updated
 > Discovery Notes to produce a revised draft for re-audit.
+>
+> Consider clearing your current context and starting a fresh session for the
+> draft skill, providing `.sfp/discovery_notes.md` as input.

@@ -13,5 +13,8 @@ ehthumbs.db
 .agents/
 .claude/
 
+# SFP working directory
+.sfp/
+
 # Node (if tooling is added later)
 node_modules/

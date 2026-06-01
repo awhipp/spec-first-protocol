@@ -1,6 +1,6 @@
 # Audit Report: Project Name
 
-> This report evaluates the current SPEC.md draft against the Discovery Notes
+> This report evaluates the current specification draft against the Discovery
 > and conversation context.
 
 ## Audit Summary
@@ -37,4 +37,5 @@ State one of the following:
   skill to resolve findings.
 - **Ready for Sign-Off**: Zero blockers. Awaiting explicit project owner
   approval to lock the specification.
-- **Locked**: Project owner has approved. The SPEC.md is final and immutable.
+- **Locked**: Project owner has approved. The specification is final and
+  immutable.

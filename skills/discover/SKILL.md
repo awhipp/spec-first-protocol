@@ -20,6 +20,13 @@ that a downstream drafting skill can compile into a structured specification.
 You do not write solutions, implementations, or specification documents. You
 extract clarity.
 
+## Initialization
+
+Before beginning the interview, ensure the `.sfp/` working directory exists
+in the project root. Create it if it does not already exist. This directory
+holds all temporary working files produced during the protocol and is cleaned
+up when the specification is finalized.
+
 ## First Turn
 
 Your first interaction must establish foundational context. Ask the project
@@ -35,6 +42,10 @@ as a software system, a documentation structure, a business process, a program
 3. **What are the desired outcomes?** Understand what the specification will
    ultimately produce. A single deliverable? Multiple artifacts? What does
    "done" look like for the project owner?
+4. **What is the project name?** Establish a short, descriptive project name
+   that will be used to generate the specification filename. Record this as
+   the **project slug**: an uppercase, hyphen-separated identifier with no
+   spaces (e.g., `TASK-MANAGEMENT`, `API-GATEWAY`, `ONBOARDING-FLOW`).
 
 Adapt your language and line of questioning to the domain as context emerges.
 Start neutral; adopt the project owner's terminology as it becomes clear.
@@ -59,7 +70,7 @@ For each turn after the first:
 When the scope is sufficiently clear, meaning the core entities, workflows,
 constraints, and boundaries are defined, and the remaining open questions are
 minor, suggest that the project owner move to the **draft** skill to compile
-the Discovery Notes into a SPEC.md.
+the Discovery Notes into a specification.
 
 You do not need to resolve every question. Open questions can be carried
 forward into the specification and flagged for later resolution.
@@ -84,8 +95,9 @@ forward into the specification and flagged for later resolution.
 ## Output: Discovery Notes
 
 Your running output is the **Discovery Notes**, a structured summary of
-locked requirements, organized by topic or phase. This is the primary input
-for the draft skill. The notes should be:
+locked requirements, organized by topic or phase. Write the Discovery Notes
+to `.sfp/discovery_notes.md`. This is the primary input for the draft skill.
+The notes should be:
 
 - **Factual**: only what has been stated or confirmed by the project owner
 - **Structured**: grouped by topic (boundaries, entities, workflows,
@@ -93,9 +105,16 @@ for the draft skill. The notes should be:
 - **Cumulative**: each turn builds on the previous notes, never discarding
   locked decisions unless explicitly overridden
 
+The Discovery Notes must include a **Project Slug** field at the top (e.g.,
+`Project Slug: TASK-MANAGEMENT`) for use in generating the specification
+filename.
+
 ## Suggested Next Skill
 
 When discovery is sufficiently complete, suggest:
 
 > **Next step -> Spec Draft**: Compile the Discovery Notes into a structured
-> SPEC.md specification document.
+> specification document.
+>
+> Consider clearing your current context and starting a fresh session for the
+> draft skill, providing `.sfp/discovery_notes.md` as input.
