@@ -102,10 +102,13 @@ project owner):
 1. **Present a summary of all decisions** made during this refinement cycle,
    organized by finding.
 2. **Determine if confirmation is needed**:
-   - If the project owner already gave clear consent to compile/proceed (e.g., by stating they have no scope additions and want to proceed, or by confirming after scope additions are finalized), proceed directly to recompilation.
+   - If the project owner already gave clear consent to compile/proceed
+     (e.g., by stating they have no scope additions and want to proceed, or
+     by confirming after scope additions are finalized), proceed directly to
+     recompilation.
    - Otherwise, ask: "Ready to recompile the specification with these changes?"
-3. **If proceeding (or approved)**: recompile the specification from the updated Discovery
-   Notes following the process described below.
+3. **If proceeding (or approved)**: recompile the specification from the
+   updated Discovery Notes following the process described below.
 4. **If declined**: allow the owner to revisit specific decisions before
    presenting the summary again.
 
@@ -113,8 +116,9 @@ project owner):
 
 After the owner approves recompilation:
 
-1. Load the specification schema from the [specification schema][spec-schema]
-   as your starting scaffold.
+1. Load the specification schema from the
+   [specification schema](#specification-schema-template) below as your
+   starting scaffold.
 2. Read the updated Discovery Notes from
    `.sfp/YYYY-MM-DD_<SLUG>/discovery_notes.md` and the conversation context.
 3. Extract resolved constraints, entities, workflows, rules, and open
@@ -184,4 +188,64 @@ After recompiling the specification, suggest:
 > audit skill, providing the specification file and
 > `.sfp/YYYY-MM-DD_<SLUG>/discovery_notes.md` as input.
 
-[spec-schema]: references/spec-schema.md
+## Specification Schema Template
+
+```markdown
+# Project Name Specification
+
+> This schema is a starting scaffold. Adapt it to the domain: add sections
+> that apply, omit sections that do not, and rename headings to match the
+> project owner's terminology. Every section that appears must be fully
+> populated from validated Discovery Notes without placeholders or stubs.
+
+## 1. Overview
+
+The purpose of this specification, its intended audience, primary
+stakeholders, and high-level scope.
+
+## 2. Domain Model
+
+Core entities, their attributes, relationships, and lifecycle states.
+Define the vocabulary of the domain, including the nouns and their connections.
+
+## 3. Workflows and Processes
+
+Sequences, state machines, decision logic, and procedural steps. Define
+how entities move through the system or process (the verbs).
+
+## 4. Interfaces and Contracts
+
+Integration points, handoff protocols, input/output schemas, or API
+contracts. Define how components or parties interact with each other.
+
+> Omit this section if the specification does not involve integrations or
+> programmatic interfaces.
+
+## 5. Constraints and Rules
+
+Business rules, invariants, guardrails, validation logic, and
+non-negotiable requirements. Define what must always be true.
+
+## 6. Failure Modes and Edge Cases
+
+Known failure scenarios, expected behavior for each, fallback mechanisms,
+and recovery strategies. Define what happens when things go wrong.
+
+## 7. Non-Functional Requirements
+
+Performance targets, scalability constraints, compliance requirements,
+availability expectations, and observability needs.
+
+> Omit this section if non-functional requirements are not applicable or
+> have not been discussed.
+
+## 8. Deliverables
+
+What the downstream process will produce from this specification. A single
+artifact or multiple outputs; enumerate each with its purpose and format.
+
+## 9. Open Questions
+
+Items surfaced during discovery that remain unresolved. Each entry should
+include the question, its origin, and its blocking impact.
+```
