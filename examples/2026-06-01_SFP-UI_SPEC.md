@@ -11,6 +11,7 @@ The website is a single-page application structured entirely from static files s
 - **Entry Point**: `docs/index.html` serves as the sole HTML document containing SEO metadata, semantic layout, and structural content.
 - **Design & Layout**: `docs/styles.css` houses style rules, grid positioning, and layout tokens.
 - **Logic & Interactions**: `docs/app.js` manages class toggles for interactive components, client-side Markdown fetching, and error checking.
+- **Branding Assets**: `docs/favicon.svg` provides a clean SVG favicon matching the `header__logo-icon` SVG path, supporting both light and dark browser themes.
 - **Dynamic Content**: Documentation assets (e.g., the `SKILL-DISTRIBUTION` and `SFP-UI` specs) are synced into the `docs/data/` folder and fetched at runtime.
 - **Theme State**: The site is styled in a single, highly readable Light Mode (slate aesthetic) optimized for code reading and clarity, eliminating dark mode toggle complexity.
 
@@ -110,5 +111,6 @@ The single-page site is organized into logical, visual sections:
 - **`docs/index.html`**: Entrypoint page containing the static HTML templates, SEO metadata, layout structures, and CDN scripts.
 - **`docs/styles.css`**: Design tokens, variables, typography, BEM layout rules, and media query overrides.
 - **`docs/app.js`**: Client-side logic for toggling component visibility, handling copy-to-clipboard, fetching examples, and rendering markdown.
+- **`docs/favicon.svg`**: SVG-based favicon representing the header logo, styled to adapt to prefers-color-scheme.
 - **`docs/data/`**: Subfolder to store synced Markdown content files.
 - **`scripts/build-docs.js`**: Node script that copies files to `docs/data/` for local updates.
