@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.0.1](https://github.com/awhipp/spec-first-protocol/compare/v1.0.0...v1.0.1) (2026-06-01)
+
+
+### Bug Fixes
+
+* add skill distribution specification and update README with installation workflows ([7770e95](https://github.com/awhipp/spec-first-protocol/commit/7770e953fc8f61507c08314b4269f6ba5a13dc29))
+
 ## 1.0.0 (2026-06-01)
 
 
