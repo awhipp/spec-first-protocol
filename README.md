@@ -117,7 +117,8 @@ culminating in a finalization gate:
 
 ## How to Use
 
-SFP is implemented as three [Agent Skills][agent-skills], which are
+SFP is implemented as three
+[Agent Skills](https://github.com/anthropics/agent-skills), which are
 lightweight, open formats for extending AI agent capabilities.
 
 ### Directory Structure
@@ -125,17 +126,11 @@ lightweight, open formats for extending AI agent capabilities.
 ```text
 skills/
 ├── discover/
-│   ├── SKILL.md            # Structured interview + specification compiler
-│   └── references/
-│       └── spec-schema.md  # Generic specification skeleton
+│   └── SKILL.md            # Structured interview + specification compiler
 ├── audit/
-│   ├── SKILL.md            # Adversarial review + finalization gate
-│   └── references/
-│       └── audit-report-format.md
+│   └── SKILL.md            # Adversarial review + finalization gate
 └── refine/
-    ├── SKILL.md            # Incremental finding resolution + recompiler
-    └── references/
-        └── spec-schema.md  # Generic specification skeleton
+    └── SKILL.md            # Incremental finding resolution + recompiler
 ```
 
 At runtime, the protocol creates a `.sfp/` working directory in the project
@@ -280,7 +275,4 @@ Contributors should verify these constraints before submitting changes.
 
 ## License
 
-This project is licensed under the MIT [License].
-
-[agent-skills]: https://github.com/anthropics/agent-skills
-[License]: LICENSE
+This project is licensed under the MIT [License](LICENSE).

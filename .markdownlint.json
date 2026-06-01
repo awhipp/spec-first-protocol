@@ -33,9 +33,11 @@
         "tables": false
     },
     "link-image-style": {
+        "inline": true,
+        "full": false,
         "collapsed": false,
         "shortcut": false,
-        "url_inline": false
+        "url_inline": true
     },
     "no-duplicate-heading": {
         "siblings_only": true
