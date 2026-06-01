@@ -78,17 +78,20 @@ owner accepts, rejects, or defers each suggestion.
 ## Scope Expansion
 
 After all findings have been addressed, ask the project owner whether they
-want to add any new requirements or expand the specification's scope. If the
-owner has additions:
+want to add any new requirements or expand the specification's scope.
 
-1. **Record each addition** in the Discovery Notes, clearly marked as new
-   scope from this refinement cycle.
-2. **Ask targeted clarifying questions** as needed to fully specify each
-   addition, following the same style as the discovery skill's interview.
-3. **Do not re-open resolved findings.** Scope expansion is additive; it does
-   not revisit prior decisions.
-
-If the owner has no additions, proceed directly to the Compilation Gate.
+- **If the owner has additions**:
+  1. **Record each addition** in the Discovery Notes, clearly marked as new
+     scope from this refinement cycle.
+  2. **Ask targeted clarifying questions** as needed to fully specify each
+     addition, following the same style as the discovery skill's interview.
+  3. **Do not re-open resolved findings.** Scope expansion is additive; it does
+     not revisit prior decisions.
+  4. Once additions are clarified, proceed to the Compilation Gate.
+- **If the owner has no additions and indicates readiness to proceed/compile**:
+  Proceed directly to compilation. Present the summary of all decisions and
+  recompile the specification in the same turn without asking for confirmation
+  a second time.
 
 ## Compilation Gate
 
@@ -98,9 +101,10 @@ project owner):
 
 1. **Present a summary of all decisions** made during this refinement cycle,
    organized by finding.
-2. **Ask for confirmation**: "Ready to recompile the specification with
-   these changes?"
-3. **If approved**: recompile the specification from the updated Discovery
+2. **Determine if confirmation is needed**:
+   - If the project owner already gave clear consent to compile/proceed (e.g., by stating they have no scope additions and want to proceed, or by confirming after scope additions are finalized), proceed directly to recompilation.
+   - Otherwise, ask: "Ready to recompile the specification with these changes?"
+3. **If proceeding (or approved)**: recompile the specification from the updated Discovery
    Notes following the process described below.
 4. **If declined**: allow the owner to revisit specific decisions before
    presenting the summary again.

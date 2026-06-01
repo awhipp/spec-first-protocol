@@ -177,7 +177,45 @@ phases of the protocol.
 
 ## Installation
 
-Copy or symlink the `skills/` directory into your framework's skills directory:
+You can install the protocol's skills automatically using our one-line
+bootstrap commands, or manually copy/symlink them.
+
+### Automated Installation
+
+Run the appropriate command in your terminal from your local project root.
+
+#### macOS/Linux (Bash)
+
+- **Default (Local directory)**:
+
+  ```bash
+  curl -fsSL https://raw.githubusercontent.com/awhipp/spec-first-protocol/main/scripts/install.sh | bash
+  ```
+
+- **With Arguments** (e.g., install Claude skills globally):
+
+  ```bash
+  curl -fsSL https://raw.githubusercontent.com/awhipp/spec-first-protocol/main/scripts/install.sh | bash -s -- -i claude -s global
+  ```
+
+#### Windows (PowerShell)
+
+- **Default (Local directory)**:
+
+  ```powershell
+  powershell -ExecutionPolicy Bypass -Command "irm https://raw.githubusercontent.com/awhipp/spec-first-protocol/main/scripts/install.ps1 | iex"
+  ```
+
+- **With Arguments** (e.g., install Claude skills globally):
+
+  ```powershell
+  powershell -ExecutionPolicy Bypass -Command "& { [scriptblock]::Create((irm https://raw.githubusercontent.com/awhipp/spec-first-protocol/main/scripts/install.ps1)) -i claude -s global }"
+  ```
+
+### Manual Installation
+
+Alternatively, manually copy or symlink the `skills/` directory into your
+framework's skills directory:
 
 | Agent / Editor | Target Directory | Command |
 | :--- | :--- | :--- |
@@ -188,37 +226,24 @@ Copy or symlink the `skills/` directory into your framework's skills directory:
 
 ## Example Walkthrough
 
-A condensed example showing one cycle through the protocol:
+To see SFP in action, review the locked specification generated for this
+repository's skill distribution utility:
+**[Skill Distribution Spec](examples/2026-06-01_SKILL-DISTRIBUTION_SPEC.md)**
 
-1. **Discover**: The project owner requests: "I want to build a task
-   management system." The `discover` skill asks about the system type,
-   existing context, and expected outcomes. It also establishes a project slug
-   (`TASK-MANAGEMENT`). Over several turns, it extracts entities (Task, User),
-   a state machine (open -> in-progress -> done), assignment rules, and edge
-   cases (e.g., what happens when a user is deleted). It outputs Discovery
-   Notes to `.sfp/2026-05-31_TASK-MANAGEMENT/discovery_notes.md`, presents a
-   summary, and on approval compiles the specification into
-   `2026-05-31_TASK-MANAGEMENT_SPEC_DRAFT.md`.
-2. **Audit**: The `audit` skill reviews the draft specification and identifies
-   a blocker (undefined behavior when an in-progress task loses its
-   assignee), a warning (any user can complete any user's task), and a
-   suggestion (authentication mechanism unspecified). It outputs an Audit
-   Report to `.sfp/2026-05-31_TASK-MANAGEMENT/audit_report.md` with a gate
-   status of "Not Ready."
-3. **Refine**: The `refine` skill presents findings one at a time. First, it
-   presents the blocker: "What should happen when an in-progress task loses
-   its assignee?" The owner decides tasks should revert to "open." Next, it
-   presents the warning: "Any user can complete any user's task—is this
-   intended?" The owner decides state transitions should be restricted to the
-   assignee. Refine then asks if there are any scope additions; the owner has
-   none. Refine presents a summary of decisions, and on approval recompiles
-   the specification.
-4. **Finalization**: The `audit` skill re-audits the updated specification,
-   verifies zero blockers, the project owner signs off, and the specification
-   is locked. The `_DRAFT` suffix is removed, producing
-   `2026-05-31_TASK-MANAGEMENT_SPEC.md`. The
-   `.sfp/2026-05-31_TASK-MANAGEMENT/` directory is deleted, leaving the
-   locked specification as the final deliverable.
+We started with very vague requirements:
+> "I need a way to distribute and install these agentic skills with one click."
+
+After 3 cycles through the interactive `discover` -> `audit` -> `refine` loop,
+we refined the design, resolved ambiguities around target directory mappings,
+parameter definitions, and failure modes, and generated a cohesive,
+production-ready implementation spec.
+
+When passed to another agent to implement, the resulting planning outcome was
+fully implemented in one shot. This produced:
+
+- Robust, dependency-minimal installer scripts
+(i.e. `scripts/install.sh` and `scripts/install.ps1`)
+- A release workflow (i.e. `.github/workflows/release-skills.yml`)
 
 ## Skill Authoring Standards
 
