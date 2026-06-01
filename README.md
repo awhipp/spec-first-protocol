@@ -220,7 +220,7 @@ framework's skills directory:
 | Agent / Editor | Target Directory | Command |
 | :--- | :--- | :--- |
 | **Claude** | `.claude/skills/` | `cp -r skills/ .claude/skills/` |
-| **Antigravity** | `.agents/skills/` | `cp -r skills/ .agents/skills/skills/` |
+| **Antigravity** | `.agents/skills/` | `cp -r skills/ .agents/skills/` |
 | **Windsurf** | `.windsurf/skills/` | `cp -r skills/ .windsurf/skills/` |
 | **Cursor** | `.cursor/skills/` | `cp -r skills/ .cursor/skills/` |
 
