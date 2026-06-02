@@ -161,13 +161,6 @@ spec all at once. SFP replaces this with a structured, iterative pipeline.
 | **Framework Coupling** | Tied to specific tool or CLI | 100% agnostic (standard Markdown) |
 | **Lifecycle Boundary** | Blurs design and execution | Hard line at locked specification |
 
-### Spec Kit as an Exemplar
-
-GitHub's Spec Kit is a prime exemplar. While `/speckit.specify` generates specs
-from a single prompt, SFP operates upstream. Feeding a locked SFP specification
-into `/speckit.plan` builds a far more robust foundation than starting from raw
-prompts alone. **SFP + execution agent > either alone.**
-
 ---
 
 ## Running the Protocol
