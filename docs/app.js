@@ -122,51 +122,41 @@ function initFlowchart() {
    -------------------------------------------------------------------------- */
 function initInstallationControls() {
   const osTabs = document.querySelectorAll('.os-tab');
-  const scopeBtns = document.querySelectorAll('.scope-btn');
   const agentTabs = document.querySelectorAll('.agent-tab');
 
   const panels = document.querySelectorAll('.install-panel');
   const mobileAccGroups = document.querySelectorAll('.mobile-accordion-group');
   const accordions = document.querySelectorAll('.accordion');
 
-  const scopeDescLocal = document.getElementById('scope-desc-local');
-  const scopeDescGlobal = document.getElementById('scope-desc-global');
+  const targetPathEl = document.getElementById('setup-target-path');
 
   let activeOS = 'mac';
-  let activeScope = 'local';
   let activeAgent = 'none';
 
-  // Map of target paths depending on OS, Agent and Scope
+  // Map of target paths depending on OS and Agent
   const scopePaths = {
     mac: {
-      none: { local: './skills/', global: 'Unsupported' },
-      claude: { local: './.claude/skills/', global: '~/.claude/skills/' },
-      antigravity: { local: './.agents/skills/', global: '~/.agents/skills/' },
-      cursor: { local: './.cursor/skills/', global: '~/.cursor/skills/' },
-      windsurf: { local: './.windsurf/skills/', global: '~/.windsurf/skills/' }
+      none: './skills/',
+      claude: './.claude/skills/',
+      antigravity: './.agents/skills/',
+      cursor: './.cursor/skills/',
+      windsurf: './.windsurf/skills/'
     },
     win: {
-      none: { local: '.\\skills\\', global: 'Unsupported' },
-      claude: { local: '.\\.claude\\skills\\', global: '$HOME\\.claude\\skills\\' },
-      antigravity: { local: '.\\.agents\\skills\\', global: '$HOME\\.agents\\skills\\' },
-      cursor: { local: '.\\.cursor\\skills\\', global: '$HOME\\.cursor\\skills\\' },
-      windsurf: { local: '.\\.windsurf\\skills\\', global: '$HOME\\.windsurf\\skills\\' }
+      none: '.\\skills\\',
+      claude: '.\\.claude\\skills\\',
+      antigravity: '.\\.agents\\skills\\',
+      cursor: '.\\.cursor\\skills\\',
+      windsurf: '.\\.windsurf\\skills\\'
     }
   };
 
   // Toggle active components based on states
   function updateSetupDisplay() {
-    // 1. Update scope sub-labels dynamically
-    const paths = scopePaths[activeOS][activeAgent];
-    if (scopeDescLocal) {
-      scopeDescLocal.textContent = `Target: ${paths.local}`;
-    }
-    if (scopeDescGlobal) {
-      if (paths.global === 'Unsupported') {
-        scopeDescGlobal.textContent = 'Unsupported for raw files';
-      } else {
-        scopeDescGlobal.textContent = `Target: ${paths.global}`;
-      }
+    // 1. Update target path dynamically
+    const targetPath = scopePaths[activeOS][activeAgent];
+    if (targetPathEl) {
+      targetPathEl.textContent = targetPath;
     }
 
     // 2. Update active Desktop panel
@@ -176,17 +166,6 @@ function initInstallationControls() {
 
       if (os === activeOS && agent === activeAgent) {
         panel.classList.add('is-active');
-        
-        // Update nested active Scope block within this panel
-        const scopeBlocks = panel.querySelectorAll('.install-scope-block');
-        scopeBlocks.forEach(block => {
-          const scope = block.getAttribute('data-scope');
-          if (scope === activeScope) {
-            block.classList.add('is-active');
-          } else {
-            block.classList.remove('is-active');
-          }
-        });
       } else {
         panel.classList.remove('is-active');
       }
@@ -213,7 +192,7 @@ function initInstallationControls() {
       tab.classList.add('is-active');
       tab.setAttribute('aria-selected', 'true');
       activeOS = tab.getAttribute('data-os');
-      
+
       updateSetupDisplay();
     });
   });
@@ -228,17 +207,6 @@ function initInstallationControls() {
       tab.classList.add('is-active');
       tab.setAttribute('aria-selected', 'true');
       activeAgent = tab.getAttribute('data-agent');
-
-      updateSetupDisplay();
-    });
-  });
-
-  // Scope Toggle Selection
-  scopeBtns.forEach(btn => {
-    btn.addEventListener('click', () => {
-      scopeBtns.forEach(b => b.classList.remove('is-active'));
-      btn.classList.add('is-active');
-      activeScope = btn.getAttribute('data-scope');
 
       updateSetupDisplay();
     });
@@ -299,7 +267,7 @@ function initSpecExplorer() {
 
     toggleBtn.addEventListener('click', () => {
       const isExpanded = toggleBtn.getAttribute('aria-expanded') === 'true';
-      
+
       if (isExpanded) {
         toggleBtn.setAttribute('aria-expanded', 'false');
         contentPanel.classList.add('collapsed');
@@ -342,7 +310,7 @@ function initSpecExplorer() {
         try {
           const html = marked.parse(markdownText);
           viewerContainer.innerHTML = `<div class="spec-viewer">${html}</div>`;
-          
+
           if (isPrismAvailable) {
             Prism.highlightAllUnder(viewerContainer);
           }

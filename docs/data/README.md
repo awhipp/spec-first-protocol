@@ -187,7 +187,7 @@ manually copy/symlink them into your project.
 
 ### Automated Installation
 
-Run the appropriate command from your local project root.
+Run the appropriate command from your local project root or global config directory (i.e. `~/.claude`). The script installs the skills relative to the directory where it is run.
 
 #### macOS / Linux (Bash)
 
@@ -197,10 +197,10 @@ Run the appropriate command from your local project root.
 curl -fsSL https://raw.githubusercontent.com/awhipp/spec-first-protocol/main/scripts/install.sh | bash
 ```
 
-**With arguments** (e.g., install Claude skills globally):
+**With integration choice** (e.g., install Claude skills in the current folder):
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/awhipp/spec-first-protocol/main/scripts/install.sh | bash -s -- -i claude -s global
+curl -fsSL https://raw.githubusercontent.com/awhipp/spec-first-protocol/main/scripts/install.sh | bash -s -- -i claude
 ```
 
 #### Windows (PowerShell)
@@ -211,10 +211,10 @@ curl -fsSL https://raw.githubusercontent.com/awhipp/spec-first-protocol/main/scr
 powershell -ExecutionPolicy Bypass -Command "irm https://raw.githubusercontent.com/awhipp/spec-first-protocol/main/scripts/install.ps1 | iex"
 ```
 
-**With arguments** (e.g., install Claude skills globally):
+**With integration choice** (e.g., install Claude skills in the current folder):
 
 ```powershell
-powershell -ExecutionPolicy Bypass -Command "& ([scriptblock]::Create((irm https://raw.githubusercontent.com/awhipp/spec-first-protocol/main/scripts/install.ps1))) -i claude -s global"
+powershell -ExecutionPolicy Bypass -Command "& ([scriptblock]::Create((irm https://raw.githubusercontent.com/awhipp/spec-first-protocol/main/scripts/install.ps1))) -i claude"
 ```
 
 ### Manual Installation

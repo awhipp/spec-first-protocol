@@ -5,11 +5,6 @@ param (
     [string]$integration = "none",
 
     [Parameter(Mandatory=$false)]
-    [Alias("s")]
-    [ValidateSet("local", "global")]
-    [string]$scope = "local",
-
-    [Parameter(Mandatory=$false)]
     [Alias("r")]
     [string]$repo = "awhipp/spec-first-protocol",
 
@@ -30,15 +25,14 @@ if ($help) {
     Write-Host ""
     Write-Host "Options:"
     Write-Host "  -i, -integration <val>  Target developer tool integration (claude, antigravity, cursor, windsurf, none) [default: none]"
-    Write-Host "  -s, -scope <val>        Target installation scope (local, global) [default: local]"
     Write-Host "  -r, -repo <val>         Target GitHub repository owner/name [default: awhipp/spec-first-protocol]"
     Write-Host "  -y, -yes                Bypass target confirmation prompt"
     Write-Host "  -h, -help               Show this help message"
     Write-Host ""
     Write-Host "Examples:"
     Write-Host "  .\install.ps1"
-    Write-Host "  .\install.ps1 -i claude -s global"
-    Write-Host "  .\install.ps1 -integration cursor -scope local -yes"
+    Write-Host "  .\install.ps1 -i claude"
+    Write-Host "  .\install.ps1 -integration cursor -yes"
     Write-Host "  .\install.ps1 -repo myfork/spec-first-protocol"
     exit 0
 }
@@ -50,18 +44,8 @@ if ($repo -notmatch '^[a-zA-Z0-9_.-]+/[a-zA-Z0-9_.-]+$') {
     exit 1
 }
 
-# Input validation: Global scope disallowed for 'none' integration
-if ($integration -eq "none" -and $scope -eq "global") {
-    Write-Host "Error: Global scope is disallowed for 'none' integration." -ForegroundColor Red
-    exit 1
-}
-
 # Resolve Target Directory
-if ($scope -eq "local") {
-    $baseDir = $PWD.Path
-} else {
-    $baseDir = $env:USERPROFILE
-}
+$baseDir = $PWD.Path
 
 # Map integrations
 switch ($integration) {

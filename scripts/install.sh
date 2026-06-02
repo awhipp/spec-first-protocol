@@ -5,7 +5,6 @@ set -eo pipefail
 
 # Default values
 INTEGRATION="none"
-SCOPE="local"
 REPO="awhipp/spec-first-protocol"
 YES=false
 HELP=false
@@ -18,15 +17,14 @@ show_help() {
   echo ""
   echo "Options:"
   echo "  -i, --integration <val>  Target developer tool integration (claude, antigravity, cursor, windsurf, none) [default: none]"
-  echo "  -s, --scope <val>        Target installation scope (local, global) [default: local]"
   echo "  -r, --repo <val>         Target GitHub repository owner/name [default: awhipp/spec-first-protocol]"
   echo "  -y, --yes                Bypass target confirmation prompt"
   echo "  -h, --help               Show this help message"
   echo ""
   echo "Examples:"
   echo "  install.sh"
-  echo "  install.sh -i claude -s global"
-  echo "  install.sh --integration cursor --scope local --yes"
+  echo "  install.sh -i claude"
+  echo "  install.sh --integration cursor --yes"
   echo "  install.sh --repo myfork/spec-first-protocol"
 }
 
@@ -40,15 +38,6 @@ while [[ $# -gt 0 ]]; do
       fi
       INTEGRATION="$2"
       shift 2
-      ;;
-    -s|--scope)
-      if [[ -z "$2" || "$2" == -* ]]; then
-        echo "Error: Argument for $1 is missing." >&2
-        exit 1
-      fi
-      SCOPE="$2"
-      shift 2
-      ;;
     -r|--repo)
       if [[ -z "$2" || "$2" == -* ]]; then
         echo "Error: Argument for $1 is missing." >&2
@@ -87,15 +76,6 @@ case "$INTEGRATION" in
     ;;
 esac
 
-# Input validation: Allowed scopes
-case "$SCOPE" in
-  local|global) ;;
-  *)
-    echo "Error: Invalid scope '$SCOPE'. Allowed values: local, global." >&2
-    exit 1
-    ;;
-esac
-
 # Input validation: Repo format (owner/repo)
 # Must match regex: ^[a-zA-Z0-9_.-]+/[a-zA-Z0-9_.-]+$
 if [[ ! "$REPO" =~ ^[a-zA-Z0-9_.-]+/[a-zA-Z0-9_.-]+$ ]]; then
@@ -103,17 +83,9 @@ if [[ ! "$REPO" =~ ^[a-zA-Z0-9_.-]+/[a-zA-Z0-9_.-]+$ ]]; then
   exit 1
 fi
 
-# Input validation: Global scope disallowed for 'none' integration
-if [[ "$INTEGRATION" == "none" && "$SCOPE" == "global" ]]; then
-  echo "Error: Global scope is disallowed for 'none' integration." >&2
-  exit 1
-fi
-
 # Target Directory Resolution
-if [ "$SCOPE" = "local" ]; then
+if [ -z "$BASE_DIR" ]; then
   BASE_DIR="$(pwd)"
-else
-  BASE_DIR="$HOME"
 fi
 
 case "$INTEGRATION" in
