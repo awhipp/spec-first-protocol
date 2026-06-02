@@ -31,6 +31,16 @@
 
   <!-- Core Stylesheet -->
   <link rel="stylesheet" href="styles.css">
+
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-SXPLF5GT7S"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+
+    gtag('config', 'G-SXPLF5GT7S');
+  </script>
 </head>
 
 <body class="theme-light">
@@ -300,7 +310,8 @@
     <section class="section sfp-fits" id="where-sfp-fits">
       <div class="section__header">
         <h2 class="section__title">Where SFP Fits</h2>
-        <p class="section__subtitle">SFP is the specification creation engine that runs before your execution framework begins.</p>
+        <p class="section__subtitle">SFP is the specification creation engine that runs before your execution framework
+          begins.</p>
       </div>
 
       <!-- Visual Pipeline -->
@@ -345,11 +356,16 @@
       <div class="additive-value card">
         <h3>Additive Value</h3>
         <ul class="additive-list">
-          <li><strong>Shift Cognitive Load:</strong> Extracts hidden requirements through structured, interactive discovery rather than expecting upfront user articulation.</li>
-          <li><strong>Enforce Verification:</strong> Mandates a severity-classified adversarial audit gate before final sign-off, catching critical gaps that ad-hoc reviews miss.</li>
-          <li><strong>Guarantee Completeness:</strong> Enforces the Zero Placeholder Invariant. Every section is fully written or completely omitted—no TODOs or stubs.</li>
-          <li><strong>Optimize Context:</strong> Compresses verbose discovery transcripts into a single, high-density specification, reducing token consumption and downstream hallucination.</li>
-          <li><strong>Stay Agnostic:</strong> Outputs standard Markdown with no proprietary formatting or CLI dependencies, compatible with any downstream tool or agent.</li>
+          <li><strong>Shift Cognitive Load:</strong> Extracts hidden requirements through structured, interactive
+            discovery rather than expecting upfront user articulation.</li>
+          <li><strong>Enforce Verification:</strong> Mandates a severity-classified adversarial audit gate before final
+            sign-off, catching critical gaps that ad-hoc reviews miss.</li>
+          <li><strong>Guarantee Completeness:</strong> Enforces the Zero Placeholder Invariant. Every section is fully
+            written or completely omitted—no TODOs or stubs.</li>
+          <li><strong>Optimize Context:</strong> Compresses verbose discovery transcripts into a single, high-density
+            specification, reducing token consumption and downstream hallucination.</li>
+          <li><strong>Stay Agnostic:</strong> Outputs standard Markdown with no proprietary formatting or CLI
+            dependencies, compatible with any downstream tool or agent.</li>
         </ul>
       </div>
 
@@ -361,7 +377,8 @@
           <li>SFP does <strong>not</strong> break specifications into tasks or work items.</li>
           <li>SFP does <strong>not</strong> execute implementations or generate code.</li>
           <li>SFP does <strong>not</strong> manage project scaffolding, CI/CD, or deployment.</li>
-          <li>SFP is <strong>not</strong> a replacement for execution frameworks — it produces the input they consume.</li>
+          <li>SFP is <strong>not</strong> a replacement for execution frameworks — it produces the input they consume.
+          </li>
         </ul>
       </div>
 
@@ -369,7 +386,8 @@
       <div class="comparison-cards-container">
         <h3 class="comparison-cards-header">Traditional Single-Prompt vs. SFP Pipeline</h3>
         <p class="comparison-cards-desc">
-          Most execution agents rely on a single-prompt approach, attempting to write the spec all at once. SFP replaces this with a structured, iterative pipeline.
+          Most execution agents rely on a single-prompt approach, attempting to write the spec all at once. SFP replaces
+          this with a structured, iterative pipeline.
         </p>
         <div class="table-container card">
           <table class="comparison-table comparison-table--three-cols">
