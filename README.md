@@ -311,6 +311,18 @@ fully implemented in one shot. This produced:
   (`scripts/install.sh` and `scripts/install.ps1`)
 - A release workflow (`.github/workflows/release-skills.yml`)
 
+### Not Just For Engineers
+
+SFP is fundamentally **domain-agnostic**. To see how it applies outside of
+software engineering, review the locked specification for planning a family
+vacation to Walt Disney World:
+**[Disney Vacation Spec](examples/non-software/2026-06-02_PERFECT-DISNEY-VACATION_SPEC.md)**
+
+This example demonstrates how SFP can extract requirements
+(budget, family constraints), audit the itinerary for logistical gaps, and
+generate comprehensive non-code artifacts like packing lists and booking
+checklists.
+
 ---
 
 ## Skill Authoring Standards

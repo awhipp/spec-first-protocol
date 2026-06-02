@@ -983,6 +983,8 @@
         </p>
       </div>
 
+      <h3 id="software-engineering" class="explorer-category">Software Engineering</h3>
+
       <!-- Collapsible Spec Explorer Box 1: Skill Distribution -->
       <div class="explorer">
         <!-- Specification preview metadata summary -->
@@ -1080,6 +1082,71 @@
           </div>
         </div>
       </div>
+
+      <h3 id="not-just-for-engineers" class="explorer-category">⚠️Not Just For Engineers</h3>
+      <p class="text-secondary" style="margin-bottom: 24px; font-size: 1.05rem;">SFP is fundamentally
+        domain-agnostic. It works for planning vacations, designing policies, timing multi-course holiday meals, or
+        writing books just as well as it does for software engineering.</p>
+
+      <!-- Collapsible Spec Explorer Box 3: Disney Vacation -->
+      <div class="explorer">
+        <!-- Specification preview metadata summary -->
+        <div class="explorer-meta">
+          <div class="explorer-meta__item">
+            <span class="explorer-meta__label">Vague Starting Prompt</span>
+            <p class="explorer-meta__value">"I am looking to plan out my perfect 4 day vacation to Walt Disney World
+              Florida with my family of 4."</p>
+          </div>
+          <div class="explorer-meta__item">
+            <span class="explorer-meta__label">Final Spec Deliverables</span>
+            <p class="explorer-meta__value">A locked specification detailing park itineraries, budgeting constraints,
+              logistical checklists, and packing lists.</p>
+          </div>
+        </div>
+
+        <button class="explorer__toggle" id="explorer-toggle-btn-disney" aria-expanded="false"
+          aria-controls="explorer-content-disney">
+          <span class="explorer__toggle-title">
+            <svg class="explorer__toggle-icon-file" viewBox="0 0 24 24" width="20" height="20" fill="none"
+              stroke="currentColor" stroke-width="2">
+              <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+              <polyline points="14 2 14 8 20 8"></polyline>
+            </svg>
+            <span
+              id="explorer-toggle-text-disney">examples/non-software/2026-06-02_PERFECT-DISNEY-VACATION_SPEC.md</span>
+          </span>
+          <span class="explorer__toggle-action">
+            <span class="explorer__toggle-text">Load Specification</span>
+            <svg class="explorer__toggle-arrow" viewBox="0 0 24 24" width="20" height="20" fill="none"
+              stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="6 9 12 15 18 9"></polyline>
+            </svg>
+          </span>
+        </button>
+
+        <div class="explorer__content collapsed" id="explorer-content-disney" aria-hidden="true">
+          <!-- Mock Code Editor Layout -->
+          <div class="mock-editor">
+            <div class="mock-editor__tabs">
+              <button class="mock-editor__tab is-active"
+                data-file="non-software/2026-06-02_PERFECT-DISNEY-VACATION_SPEC.md">Specification</button>
+              <button class="mock-editor__tab" data-file="non-software/Disney_Booking_Checklist.md">Booking
+                Checklist</button>
+              <button class="mock-editor__tab" data-file="non-software/Disney_Packing_List_Family4.md">Packing
+                List</button>
+              <button class="mock-editor__tab" data-file="non-software/discovery_notes.md">Discovery
+                Notes</button>
+            </div>
+            <div class="mock-editor__body" id="spec-viewer-container-disney">
+              <!-- Content loaded via Fetch is parsed and injected here -->
+              <div class="mock-editor__loading">
+                <div class="spinner"></div>
+                <span>Fetching specification from local repository...</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </section>
 
     <!-- Reference Standards Table Section -->
@@ -1150,6 +1217,13 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-powershell.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-yaml.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-markdown.min.js"></script>
+
+  <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+  <script>
+    if (typeof mermaid !== 'undefined') {
+      mermaid.initialize({ startOnLoad: false });
+    }
+  </script>
 
   <!-- Application Logic -->
   <script src="app.js"></script>

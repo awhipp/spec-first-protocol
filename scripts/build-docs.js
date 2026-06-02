@@ -40,26 +40,30 @@ function buildDocs() {
     process.exit(1);
   }
 
-  // 5. Copy all files from examples/ to docs/data/
+  // 5. Copy all files and subdirectories from examples/ to docs/data/
   try {
     const files = fs.readdirSync(examplesDir);
     let copyCount = 0;
     
     for (const file of files) {
       const srcPath = path.join(examplesDir, file);
+      const destPath = path.join(destDir, file);
       const stat = fs.statSync(srcPath);
       
       if (stat.isFile()) {
-        const destPath = path.join(destDir, file);
         fs.copyFileSync(srcPath, destPath);
-        console.log(`Successfully copied: examples/${file} -> docs/data/${file}`);
+        console.log(`Successfully copied file: examples/${file} -> docs/data/${file}`);
+        copyCount++;
+      } else if (stat.isDirectory()) {
+        fs.cpSync(srcPath, destPath, { recursive: true });
+        console.log(`Successfully copied directory: examples/${file}/ -> docs/data/${file}/`);
         copyCount++;
       }
     }
     
-    console.log(`Documentation synchronization completed successfully. Copied README.md and ${copyCount} example file(s).`);
+    console.log(`Documentation synchronization completed successfully. Copied README.md and ${copyCount} example item(s).`);
   } catch (err) {
-    console.error(`Error: Failed to copy examples directory files. Details: ${err.message}`);
+    console.error(`Error: Failed to copy examples directory items. Details: ${err.message}`);
     process.exit(1);
   }
 }

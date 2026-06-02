@@ -252,6 +252,12 @@ function initSpecExplorer() {
       contentId: 'explorer-content-ui',
       containerId: 'spec-viewer-container-ui',
       file: '2026-06-01_SFP-UI_SPEC.md'
+    },
+    {
+      btnId: 'explorer-toggle-btn-disney',
+      contentId: 'explorer-content-disney',
+      containerId: 'spec-viewer-container-disney',
+      file: 'non-software/2026-06-02_PERFECT-DISNEY-VACATION_SPEC.md'
     }
   ];
 
@@ -262,8 +268,35 @@ function initSpecExplorer() {
     if (!toggleBtn || !contentPanel || !viewerContainer) return;
 
     let isSpecLoaded = false;
-    const localSpecPath = `data/${spec.file}`;
-    const githubFallbackUrl = `https://github.com/awhipp/spec-first-protocol/blob/main/examples/${spec.file}`;
+    let localSpecPath = `data/${spec.file}`;
+    let githubFallbackUrl = `https://github.com/awhipp/spec-first-protocol/blob/main/examples/${spec.file}`;
+
+    const tabs = contentPanel.querySelectorAll('.mock-editor__tab');
+    if (tabs.length > 0) {
+      tabs.forEach(tab => {
+        tab.addEventListener('click', () => {
+          tabs.forEach(t => t.classList.remove('is-active'));
+          tab.classList.add('is-active');
+
+          const newFile = tab.getAttribute('data-file');
+          localSpecPath = `data/${newFile}`;
+          githubFallbackUrl = `https://github.com/awhipp/spec-first-protocol/blob/main/examples/${newFile}`;
+
+          const titleText = toggleBtn.querySelector('#explorer-toggle-text-disney');
+          if (titleText) {
+            titleText.textContent = `examples/${newFile}`;
+          }
+
+          viewerContainer.innerHTML = `
+            <div class="mock-editor__loading">
+              <div class="spinner"></div>
+              <span>Fetching ${tab.textContent.toLowerCase()} from local repository...</span>
+            </div>
+          `;
+          loadSpecificationData();
+        });
+      });
+    }
 
     toggleBtn.addEventListener('click', () => {
       const isExpanded = toggleBtn.getAttribute('aria-expanded') === 'true';
@@ -313,6 +346,23 @@ function initSpecExplorer() {
 
           if (isPrismAvailable) {
             Prism.highlightAllUnder(viewerContainer);
+          }
+
+          if (typeof mermaid !== 'undefined') {
+            const mermaidBlocks = viewerContainer.querySelectorAll('.language-mermaid');
+            mermaidBlocks.forEach(block => {
+              const pre = block.parentElement;
+              if (pre && pre.tagName.toLowerCase() === 'pre') {
+                const div = document.createElement('div');
+                div.className = 'mermaid';
+                div.textContent = block.textContent;
+                pre.parentNode.replaceChild(div, pre);
+              }
+            });
+            const mermaids = viewerContainer.querySelectorAll('.mermaid');
+            if (mermaids.length > 0) {
+              mermaid.init(undefined, mermaids);
+            }
           }
         } catch (err) {
           console.error('Markdown parser crashed, degrading to pre block:', err);

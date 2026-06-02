@@ -127,7 +127,7 @@ a:hover {
 .section {
   display: flex;
   flex-direction: column;
-  gap: 32px;
+  gap: 16px;
   scroll-margin-top: 80px;
 }
 
@@ -1025,6 +1025,49 @@ a:hover {
    9. Spec Explorer Panel
    -------------------------------------------------------------------------- */
 
+.explorer-category {
+  font-family: var(--font-header);
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-top: 16px;
+  margin-bottom: 8px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--border-color);
+  scroll-margin-top: 100px;
+}
+
+.mock-editor__tabs {
+  display: flex;
+  background-color: var(--bg-secondary);
+  border-bottom: 1px solid var(--border-color);
+  padding: 0 16px;
+  gap: 8px;
+}
+
+.mock-editor__tab {
+  background: transparent;
+  border: none;
+  border-bottom: 2px solid transparent;
+  padding: 12px 16px;
+  font-family: var(--font-header);
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: color var(--transition-speed) var(--transition-ease),
+    border-color var(--transition-speed) var(--transition-ease);
+}
+
+.mock-editor__tab:hover {
+  color: var(--text-primary);
+}
+
+.mock-editor__tab.is-active {
+  color: var(--accent);
+  border-bottom-color: var(--accent);
+}
+
 .explorer {
   border: 1px solid var(--border-color);
   border-radius: var(--border-radius-m);
@@ -1170,7 +1213,7 @@ a:hover {
 .mock-editor__tab {
   background-color: var(--bg-primary);
   border-right: 1px solid var(--border-color);
-  padding: 0 14px;
+  padding: 12px;
   height: 100%;
   display: flex;
   align-items: center;
@@ -1636,14 +1679,16 @@ a:hover {
 .comparison-table--three-cols th:nth-child(2),
 .comparison-table--three-cols td:nth-child(2) {
   width: 37.5%;
-  background-color: rgba(254, 242, 242, 0.2) !important; /* red tint for traditional */
+  background-color: rgba(254, 242, 242, 0.2) !important;
+  /* red tint for traditional */
   border-right: 1px solid var(--border-color);
 }
 
 .comparison-table--three-cols th:last-child,
 .comparison-table--three-cols td:last-child {
   width: 37.5%;
-  background-color: rgba(240, 253, 244, 0.25) !important; /* green tint for SFP */
+  background-color: rgba(240, 253, 244, 0.25) !important;
+  /* green tint for SFP */
 }
 
 @media (max-width: 900px) {
@@ -1652,9 +1697,11 @@ a:hover {
     align-items: center;
     gap: 16px;
   }
+
   .pipeline-arrow {
     transform: rotate(90deg);
   }
+
   .pipeline-step {
     width: 100%;
     max-width: 300px;
