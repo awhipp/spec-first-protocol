@@ -106,6 +106,70 @@ culminating in a finalization gate:
 
 ---
 
+## SFP in the SDD Ecosystem
+
+SFP operates upstream of Specification-Driven Development (SDD) execution
+frameworks. It acts as the "specification creation engine" that produces
+the locked, validated input that downstream frameworks assume they already have.
+
+### Pipeline Position
+
+```mermaid
+flowchart LR
+    A["Idea"] --> B["SFP Pipeline"]
+    B --> C["Locked Spec"]
+    C --> D["SDD Framework<br>plan → tasks → implement"]
+```
+
+SFP's scope ends exactly at the locked specification. Downstream execution,
+planning, and code generation are handled by separate tools.
+
+### What SFP Is Not
+
+SFP establishes a hard boundary at design and does **not**:
+
+- **Generate implementation plans** or task breakdowns.
+- **Scaffold projects**, manage CI/CD, or deploy code.
+- **Execute implementations** or generate source code.
+- **Replace execution frameworks**—it produces the input they consume.
+
+### Additive Value
+
+SFP brings unique, additive value to the SDD lifecycle:
+
+- **Shift Cognitive Load**: Extracts hidden requirements through structured,
+interactive discovery rather than expecting upfront user articulation.
+- **Enforce Verification**: Mandates a severity-classified adversarial audit
+gate before final sign-off, catching critical gaps that ad-hoc reviews miss.
+- **Guarantee Completeness**: Enforces the Zero Placeholder Invariant. Every
+section is fully written or completely omitted—no TODOs or stubs.
+- **Optimize Context**: Compresses verbose discovery into a single, high-density
+specification, reducing token consumption and downstream hallucination.
+- **Stay Agnostic**: Outputs standard Markdown with no proprietary formatting
+or CLI dependencies, compatible with any downstream tool or agent.
+
+### Traditional Single-Prompt vs. SFP Pipeline
+
+Most execution agents rely on a single-prompt approach, attempting to write the
+spec all at once. SFP replaces this with a structured, iterative pipeline.
+
+| Dimension | Single-Prompt | SFP Pipeline |
+| :--- | :--- | :--- |
+| **Requirements Extraction** | Single-prompt reliance | Structured, interactive interview |
+| **Verification** | Optional, ad-hoc clarification | Mandatory adversarial audit gate |
+| **Output Guarantees** | Variable, stubs, and placeholders | Zero placeholder invariant |
+| **Framework Coupling** | Tied to specific tool or CLI | 100% agnostic (standard Markdown) |
+| **Lifecycle Boundary** | Blurs design and execution | Hard line at locked specification |
+
+### Spec Kit as an Exemplar
+
+GitHub's Spec Kit is a prime exemplar. While `/speckit.specify` generates specs
+from a single prompt, SFP operates upstream. Feeding a locked SFP specification
+into `/speckit.plan` builds a far more robust foundation than starting from raw
+prompts alone. **SFP + execution agent > either alone.**
+
+---
+
 ## Running the Protocol
 
 SFP supports two execution modes. The protocol flow is the same
