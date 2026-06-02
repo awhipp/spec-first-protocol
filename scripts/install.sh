@@ -38,6 +38,7 @@ while [[ $# -gt 0 ]]; do
       fi
       INTEGRATION="$2"
       shift 2
+      ;;
     -r|--repo)
       if [[ -z "$2" || "$2" == -* ]]; then
         echo "Error: Argument for $1 is missing." >&2
