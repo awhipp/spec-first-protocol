@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.4.1](https://github.com/awhipp/spec-first-protocol/compare/v1.4.0...v1.4.1) (2026-06-04)
+
+
+### Bug Fixes
+
+* update scripts should only update `sfp` related skills ([308f8df](https://github.com/awhipp/spec-first-protocol/commit/308f8df99dc542da0c19d3bbd76f929eca87298f))
+* update scripts should only update `sfp` related skills ([1b0d594](https://github.com/awhipp/spec-first-protocol/commit/1b0d594e8fd1edf8a18b621d7e0be928b84965a4))
+
 ## [1.4.0](https://github.com/awhipp/spec-first-protocol/compare/v1.3.0...v1.4.0) (2026-06-04)
 
 
