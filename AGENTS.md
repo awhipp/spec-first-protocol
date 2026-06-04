@@ -14,8 +14,8 @@ center for SFP skills and hosts the protocol's onboarding website.
 
 - **Agent Skills**: Markdown (`SKILL.md`) utilizing standard Anthropic skill
   manifest structures and YAML frontmatter.
-- **Installer Scripts**: Shell scripting (`install.sh` for macOS/Linux and
-  `install.ps1` for Windows PowerShell).
+- **Installer & Updater Scripts**: Shell scripting (`install.sh` and `update.sh`
+  for macOS/Linux, and `install.ps1` and `update.ps1` for Windows PowerShell).
 - **Onboarding App & Tooling**: Static client-side JS (`docs/app.js`), CSS, and
   HTML. Node.js is leveraged for documentation builders
   (`scripts/build-docs.js`) and local Markdown linting tools.
@@ -30,9 +30,11 @@ spec-first-protocol/
 │   ├── app.js                  # Client interaction logic for site
 │   └── index.html              # Marketing page
 ├── examples/                   # Reference specifications (frozen)
-├── scripts/                    # Installer & documentation build helper scripts
+├── scripts/                    # Installer, updater & documentation build helper scripts
 │   ├── install.sh              # Unix bootstrap installer script
-│   └── install.ps1             # Windows bootstrap installer script
+│   ├── install.ps1             # Windows bootstrap installer script
+│   ├── update.sh               # Unix updater template
+│   └── update.ps1              # Windows updater template
 └── skills/                     # Core Spec-First Protocol Agent Skills
     ├── sfp-discover/           # Requirements discovery & compilation
     ├── sfp-audit/              # Adversarial review & finalization gate
@@ -150,6 +152,8 @@ constraints:
 ### Markdown Linting
 
 - All Markdown files must comply with the project's `.markdownlint.json` rules.
+- **Ignored Files**: The `markdownlint-cli2` configuration intentionally ignores transient, draft, and reference
+  directories/files (e.g., `.sfp/**` and `**_SPEC**.md`) because they are temporary protocol workspace assets.
 - **Local Verification Command**: Run the following command to lint Markdown
   files locally:
 
@@ -225,10 +229,14 @@ constraints:
   that affect their default paths, parameters, or configurations, those changes
   must be mirrored in the onboarding website client logic (`docs/app.js`) and
   the docs builder (`scripts/build-docs.js`).
-- **Shell Scripting Safe Mode**: When modifying `scripts/install.sh` or
-  `scripts/install.ps1`, agents must test the scripts using temporary,
-  non-system destination folders. Installer actions must not leave side effects
-  or modify configuration files outside designated directories.
+- **Shell Scripting Safe Mode**: When modifying `scripts/install.sh`,
+  `scripts/install.ps1`, `scripts/update.sh`, or `scripts/update.ps1`, agents
+  must test the scripts using temporary, non-system destination folders.
+  Installer and updater actions must not leave side effects or modify
+  configuration files outside designated directories.
+- **Agent Instructions Up-to-date**: If changes are made to the repository
+  architecture, tech stack, workflows, or installer/updater scripts, agents
+  must update `AGENTS.md` to ensure instructions remain consistent.
 
 ---
 
@@ -262,6 +270,10 @@ Agents should follow this tool-agnostic workflow for any non-trivial changes:
 - **Local Checks**: Execute the project linters (`npx markdownlint-cli2`) and
   run safe manual tests. Confirm all tests pass successfully before declaring
   the task complete.
+- **Agent Instructions Sync**: If changes affect the repository architecture,
+  tech stack, workflows, or scripts, update `AGENTS.md` at the end of the
+  verification phase (rather than during implementation) to ensure instructions
+  remain consistent without introducing multiple small updates.
 
 ---
 

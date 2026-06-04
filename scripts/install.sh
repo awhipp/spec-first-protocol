@@ -205,5 +205,17 @@ for skill_path in "$TEMP_DIR/skills"/*; do
   fi
 done
 
+# Install and configure updater script
+if [ -f "$TEMP_DIR/skills/update.sh" ]; then
+  echo "Installing updater script 'update.sh' to: $TARGET_DIR/update.sh"
+  if ! cp "$TEMP_DIR/skills/update.sh" "$TARGET_DIR/update.sh"; then
+    echo "Error: Failed to copy updater script 'update.sh' to '$TARGET_DIR/update.sh'." >&2
+    exit 2
+  fi
+  chmod +x "$TARGET_DIR/update.sh"
+else
+  echo "Warning: update.sh not found in the release archive." >&2
+fi
+
 echo "Installation completed successfully."
 exit 0

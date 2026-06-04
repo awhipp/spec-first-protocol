@@ -126,6 +126,16 @@ try {
         Write-Host "Installing skill '$skillName' to: $destSkillPath"
         Copy-Item -Path $skill.FullName -Destination $destSkillPath -Recurse -Force -ErrorAction Stop
     }
+
+    # Install and configure updater script
+    $updaterSrc = Join-Path $extractedSkillsDir "update.ps1"
+    if (Test-Path $updaterSrc) {
+        $updaterDest = Join-Path $targetDir "update.ps1"
+        Write-Host "Installing updater script 'update.ps1' to: $updaterDest"
+        Copy-Item -Path $updaterSrc -Destination $updaterDest -Force -ErrorAction Stop
+    } else {
+        Write-Warning "update.ps1 not found in the release archive."
+    }
 } catch {
     Write-Host "Error: File operation failed. Details: $_" -ForegroundColor Red
     exit 2
