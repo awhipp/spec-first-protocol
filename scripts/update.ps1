@@ -124,6 +124,12 @@ try {
     $remoteSkills = Get-ChildItem -Path $extractedSkillsDir -Directory
     foreach ($remoteSkill in $remoteSkills) {
         $skillName = $remoteSkill.Name
+        
+        # Only process skills with sfp- prefix
+        if (-not ($skillName.StartsWith("sfp-"))) {
+            continue
+        }
+        
         $localSkillPath = Join-Path $targetDir $skillName
         
         if (-not (Test-Path $localSkillPath)) {
@@ -171,6 +177,11 @@ try {
         
         # Ignore hidden directories (e.g. starting with .)
         if ($subName.StartsWith(".")) {
+            continue
+        }
+        
+        # Only process skills with sfp- prefix
+        if (-not ($subName.StartsWith("sfp-"))) {
             continue
         }
         

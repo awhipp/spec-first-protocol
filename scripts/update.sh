@@ -176,6 +176,12 @@ fi
 for remote_skill_path in "$TEMP_DIR/skills"/*; do
   if [ -d "$remote_skill_path" ]; then
     skill_name=$(basename "$remote_skill_path")
+    
+    # Only process skills with sfp- prefix
+    if [[ "$skill_name" != sfp-* ]]; then
+      continue
+    fi
+    
     local_skill_path="$TARGET_DIR/$skill_name"
     
     if [ ! -d "$local_skill_path" ]; then
@@ -241,6 +247,11 @@ for local_sub in "$TARGET_DIR"/*; do
     
     # Ignore hidden directories (e.g. starting with .)
     if [[ "$sub_name" == .* ]]; then
+      continue
+    fi
+    
+    # Only process skills with sfp- prefix
+    if [[ "$sub_name" != sfp-* ]]; then
       continue
     fi
     

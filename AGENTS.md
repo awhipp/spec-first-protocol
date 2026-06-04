@@ -13,7 +13,9 @@ center for SFP skills and hosts the protocol's onboarding website.
 ### Tech Stack
 
 - **Agent Skills**: Markdown (`SKILL.md`) utilizing standard Anthropic skill
-  manifest structures and YAML frontmatter.
+  manifest structures and YAML frontmatter. All core Spec-First Protocol skills
+  must be prepended/prefixed with `sfp-` (e.g., `sfp-discover`). Custom or
+  third-party skills must not use the `sfp-` prefix.
 - **Installer & Updater Scripts**: Shell scripting (`install.sh` and `update.sh`
   for macOS/Linux, and `install.ps1` and `update.ps1` for Windows PowerShell).
 - **Onboarding App & Tooling**: Static client-side JS (`docs/app.js`), CSS, and
@@ -178,6 +180,15 @@ constraints:
 - YAML description: Must be $\le$ 200 characters for reliable routing across
   agents.
 - Reference documents: Must be $\le$ 300 lines (approximately 6 KB) per file.
+
+### Skill Naming Conventions
+
+- Core Spec-First Protocol skills must be prepended/prefixed with `sfp-`
+  (e.g., `sfp-discover`).
+- Custom or local user-created skills must not start with the `sfp-` prefix.
+  This distinction prevents namespace conflicts and ensures that updater scripts
+  (`update.sh` and `update.ps1`) do not attempt to modify or delete custom
+  local skills.
 
 ### Communication Style
 
