@@ -21,14 +21,54 @@ requirements.
 
 ## Initialization
 
-Before beginning the interview, ensure the `.sfp/` working directory exists
-in the project root. Create it if it does not already exist.
+**Resume Detection** runs at the very start of initialization. The execution
+order must be: **Resume Detection → Triage → First Turn**.
 
-Once the project slug and date are established (see First Turn), create a
+1. **Association Check & Confirmation**: If the incoming request appears related
+   to an existing `.sfp/` item, present it and ask the owner to confirm the
+   association before resuming.
+2. **Detection Matrix & Strategy**: Check the `.sfp/` directory state:
+   - **No `.sfp/` directory exists**: Proceed normally: create `.sfp/`, then
+     run triage → first turn.
+   - **`.sfp/<slug>/discovery_notes.md` exists with no `_SPEC_DRAFT.md` in root**:
+     Ask: "Found in-progress discovery notes for `<SLUG>`. Would you like to
+     resume this discovery or start fresh?" If resuming, use a **gap-based
+     continuation strategy**: compare existing notes against compilation
+     readiness criteria to identify gaps, and ask questions to resolve them. Do
+     not try to reconstruct prior conversation. If starting fresh, proceed to
+     triage → first turn.
+   - **`.sfp/<slug>/` AND a corresponding `_SPEC_DRAFT.md` exist**: Inform the
+     owner that a draft specification already exists and suggest invoking the
+     audit or refine skill.
+   - **Multiple `.sfp/<slug>/` subdirectories exist**: List existing slugs and
+     states, asking the owner which to resume, or whether to start a new
+     discovery.
+
+Once the project slug and date are established, create a
 spec-specific subdirectory: `.sfp/YYYY-MM-DD_<SLUG>/`. All working files for
 this specification are stored in this subdirectory. The `.sfp/` directory
 holds working files for all in-progress specifications and is cleaned up
 when specifications are finalized.
+
+## Request Triage
+
+Assess whether the user's request warrants a full specification cycle before proceeding to the First Turn.
+
+1. **Low complexity (skip spec)**: The request is informational, a localized
+   tweak, simple troubleshooting, or a clarification. Provide a direct answer.
+   State your reasoning and offer an explicit override option (e.g., "If you'd
+   like a full specification instead, let me know and I'll begin the discovery
+   interview."). If the owner overrides, proceed to First Turn.
+2. **High complexity (proceed with spec)**: The request involves multiple
+   components, new architecture, has unclear scope, or explicitly requests a
+   specification. Proceed directly to First Turn. No triage announcement is
+   needed.
+3. **Uncertain**: Ask 1–2 targeted clarifying questions to determine complexity,
+   then resolve to one of the paths above.
+
+**Triage Guardrail**: When in doubt, err toward proceeding with the
+specification. Use this as a tiebreaker *after* clarifying questions if
+complexity remains unclear; it must not bypass clarification.
 
 ## First Turn
 
@@ -63,18 +103,27 @@ For each turn after the first:
    the ambiguities, contradictions, undefined edge cases, or missing
    constraints?
 3. **Ask targeted questions.** Formulate questions that drive toward resolving
-   the identified gaps. Ask as many questions as needed
-   (fewer when things are clear, more when they are vague).
-   Every question should be specific and
-   actionable, never broad or open-ended.
+   the identified gaps. Group questions into logical batches of **3–5 questions** per turn.
+   Prioritize the **highest-impact gaps** first (those resolving the most ambiguity or unblocking downstream decisions).
+   When fewer than 3 gaps remain, ask all remaining questions in a single turn.
+   Every question should be specific and actionable, never broad or open-ended.
 
 ## When to Move to Compilation
 
-When the scope is sufficiently clear, meaning the core entities, workflows,
-constraints, and boundaries are defined, and the remaining open questions are
-minor, proceed to the **Compilation Gate** below.
+Move to the **Compilation Gate** when **all** of the following compilation
+readiness criteria are satisfied based on the current understanding:
 
-You do not need to resolve every question. Open questions can be carried
+1. **Entities identified**: All primary entities, artifacts, or components have
+   been named and described.
+2. **At least one workflow defined**: At least one end-to-end workflow, process,
+   or sequence has been fully articulated (entry conditions, steps, exit
+   conditions).
+3. **System boundaries established**: The scope of what is included and
+   explicitly excluded has been stated.
+4. **No blocker-level ambiguities remain**: No unresolved questions exist that
+   would prevent a coherent specification from being compiled.
+
+You do not need to resolve every minor question. Minor open questions can be carried
 forward into the specification and flagged for later resolution.
 
 ## Compilation Gate
@@ -158,6 +207,13 @@ always creates a new specification file.
 - **Domain neutrality.** Do not assume the specification is for software
   unless the project owner says so. Do not default to technical jargon (APIs,
   schemas, endpoints) unless the domain calls for it.
+- **Progress Acknowledgment.** After the owner responds, briefly acknowledge
+  what was decided or clarified before asking the next set of questions.
+  Keep acknowledgments to a single concise sentence. Do not restate the owner's full response.
+- **Elaboration Prompting.** If the owner's response is too brief or vague to produce
+  a specific, actionable requirement, ask for elaboration. Frame the follow-up around
+  what is missing (e.g., "Can you clarify what happens when X fails?"). Accept the
+  owner's response if they decline to elaborate further.
 
 ## Output: Discovery Notes
 

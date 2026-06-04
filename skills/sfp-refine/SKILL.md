@@ -50,18 +50,27 @@ Load the Audit Report and sort findings by severity:
 
 ### Step 2: Present One Finding at a Time
 
-For each finding:
+Findings may be **batched together** if they reference the **same specification
+section** or arise from the **same underlying requirement** in the Discovery
+Notes. Thematic batching is not permitted. Present related findings as a group,
+explain the shared context once, and ask the owner to resolve each finding in
+the batch. Unrelated findings must be presented separately.
 
-1. **State the finding** clearly, referencing its ID (e.g., "Blocker B-1",
-   "Warning W-2").
+For each finding (or batch):
+
+1. **State the finding** clearly, referencing its ID (e.g., "Blocker B-1", "Warning W-2") and severity.
 2. **Reference the relevant spec section** so the owner has context.
-3. **Explain why it matters**: what breaks, what is ambiguous, or what risk
-   it introduces.
-4. **Ask the owner for a resolution decision.** Present the specific
-   conflict or gap and ask the owner to make a call.
+3. **Explain why it matters**: what breaks, what is ambiguous, or what risk it
+   introduces.
+4. **Propose resolution options**: Propose logical and realistic resolution
+   options based on available context. Options should be concrete and actionable
+   (e.g., "Option A: ... Option B: ..."). When the finding is too ambiguous to
+   propose options, present the issue and ask an open-ended resolution question.
+5. **Ask the owner for a resolution decision.** The owner may select a proposed
+   option or provide a different resolution.
 
-Wait for the owner's response before moving to the next finding. Do not
-batch multiple unrelated findings into a single turn.
+Wait for the owner's response before moving to the next finding or batch. Do
+not batch multiple unrelated findings into a single turn.
 
 ### Step 3: Record Decisions
 
@@ -164,6 +173,13 @@ After the owner approves recompilation:
 - **Audit traceability.** Reference specific audit findings (e.g., "Blocker
   B-1", "Warning W-2") when discussing issues so that the conversation
   remains traceable to the Audit Report.
+- **Progress Acknowledgment.** After the owner resolves a finding, briefly acknowledge
+  the decision before presenting the next finding or batch. Keep acknowledgments to a
+  single concise sentence. Do not restate the owner's full response.
+- **Elaboration Prompting.** If the owner provides a resolution that is too brief or
+  vague to update the Discovery Notes with a clear decision, ask for elaboration.
+  Frame the follow-up around what is needed for a concrete update. Accept the owner's
+  response if they decline to elaborate further.
 
 ## Output
 
