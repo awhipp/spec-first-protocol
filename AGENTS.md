@@ -51,7 +51,6 @@ pointing back to `AGENTS.md`:
 - **Symlink Entrypoints**:
   - `.cursorrules` (Cursor editor agent) -> `AGENTS.md`
   - `CLAUDE.md` (Claude CLI tool) -> `AGENTS.md`
-  - `.clinerules` (Cline/Roo-Cline editor agent) -> `AGENTS.md`
   - `.github/copilot-instructions.md` (Copilot instructions) -> `../AGENTS.md`
 
 ---
@@ -98,7 +97,6 @@ commands:
   ```powershell
   New-Item -ItemType SymbolicLink -Path ".cursorrules" -Value "AGENTS.md"
   New-Item -ItemType SymbolicLink -Path "CLAUDE.md" -Value "AGENTS.md"
-  New-Item -ItemType SymbolicLink -Path ".clinerules" -Value "AGENTS.md"
   New-Item -ItemType SymbolicLink -Path ".github\copilot-instructions.md" -Value "..\AGENTS.md"
   ```
 
@@ -107,7 +105,6 @@ commands:
   ```text
   mklink .cursorrules AGENTS.md
   mklink CLAUDE.md AGENTS.md
-  mklink .clinerules AGENTS.md
   mklink .github\copilot-instructions.md ..\AGENTS.md
   ```
 
