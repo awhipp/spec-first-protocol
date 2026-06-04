@@ -37,29 +37,49 @@ integrity and surface problems.
    [Audit Report Format Template](#audit-report-format-template) below.
 2. Compare the specification against the Discovery Notes and conversation
    context.
-3. For each section of the specification:
-   - Verify internal consistency by checking if sections contradict each other.
-   - Verify completeness to ensure all locked requirements from the
-   Discovery Notes are represented.
-   - Verify accuracy to ensure the specification reflects
-   the project owner's intent.
-   - Identify risks such as gaps in failure handling, undefined edge cases,
-   or missing constraints.
-4. Classify each finding by severity.
-5. Output the structured **Audit Report** to
+3. Approach the specification with a **fresh expert perspective**, as if
+   encountering the requirements for the first time. For each section of the
+   specification, verify against this minimum checklist:
+   - **Workflows**: Every workflow has defined entry conditions, step sequences,
+     exit conditions, and error/exception paths.
+   - **Entities**: Every entity has defined attributes, relationships, and
+     lifecycle states (where applicable).
+   - **Constraints**: Every stated constraint has a clear enforcement mechanism
+     or verification method described.
+   - **Boundaries**: Inclusions and exclusions are explicit and do not
+     contradict each other.
+4. Perform **traceable completeness verification**:
+   - Enumerate each locked requirement from the Discovery Notes.
+   - For each requirement, identify the corresponding specification section(s).
+   - Any requirement that does not map to a specification section is a
+     **Blocker** finding (critical missing capability).
+   - Any requirement that maps to a section but is only partially represented
+     is a **Warning** finding.
+5. Classify each remaining finding by severity.
+6. Output the structured **Audit Report** to
    `.sfp/YYYY-MM-DD_<SLUG>/audit_report.md`.
 
 ## Severity Classification
 
 Every finding must be classified into one of the following:
 
-- **Blocker**: Direct logical contradictions, critical missing capabilities,
-  or violations of stated constraints. These prevent the spec from being
-  finalized.
-- **Warning**: Unhandled edge cases, incomplete sections, ambiguous
-  definitions, or risks that should be resolved before sign-off.
-- **Suggestion**: Improvements, structural enhancements, or best practices
-  that would strengthen the specification but are not blocking.
+- **Blocker**: A finding that makes the specification internally inconsistent,
+  incomplete against stated requirements, or unimplementable. Discriminator:
+  if this issue is not resolved, the specification cannot be correctly executed.
+  Examples: logical contradiction between sections, requirement with no
+  representation in spec, critical workflow with no defined error handling/exit
+  condition, constraint with no enforcement mechanism.
+- **Warning**: A finding that introduces ambiguity, leaves an edge case
+  unhandled, or weakens the specification's clarity, but does not make it
+  internally inconsistent. Discriminator: the specification could be executed,
+  but the executor would need to make assumptions. Examples: plausible edge
+  case not addressed, ambiguous definition supporting multiple interpretations,
+  section internally consistent but underspecified.
+- **Suggestion**: A finding that represents an improvement opportunity but does
+  not affect the specification's correctness or executability. Discriminator:
+  the specification is correct and clear without this change, but would be
+  stronger with it. Examples: structural reorganization, additional
+  example/clarification, adopting a best practice.
 
 ## Finalization Gate
 
@@ -172,6 +192,12 @@ Improvements, structural enhancements, or best practices that would
 strengthen the specification but are not blocking.
 
 - *None* (or list findings)
+
+## Completeness Checklist
+
+| Discovery Notes Requirement | Spec Section(s) | Status |
+| :--- | :--- | :--- |
+| [Brief description of requirement] | [Mapped section(s)] | [✅ Fully represented / ⚠️ Partial / ❌ Missing] |
 
 ## Gate Status
 

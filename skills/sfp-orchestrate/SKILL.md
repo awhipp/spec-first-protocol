@@ -36,8 +36,10 @@ between each invocation.
 
 ## Pipeline Overview
 
-The protocol follows a structured loop across four sequential phases:
+The protocol follows a structured loop across sequential phases:
 
+0. **Phase 0: Request Triage** – Assess the complexity of the request to
+   determine if a full specification is warranted before beginning discovery.
 1. **Phase 1: Discovery** – Conduct a structured interview to extract
 requirements and compile the initial specification draft.
 2. **Phase 2: Audit** – Perform an adversarial review of the specification
@@ -51,12 +53,28 @@ suffix and cleaning up the working directory.
 
 ## Execution Instructions
 
+### Phase 0: Request Triage
+
+Read and follow the Request Triage instructions defined in the
+[Spec Discover skill](../sfp-discover/SKILL.md) by cross-reference. Assess the
+user's request against the triage criteria:
+
+- **Low complexity + owner accepts → Pipeline complete.** The request was
+  answered directly. Do not proceed to discovery.
+- **Low complexity + owner overrides → Proceed to Phase 1.** The owner wants a
+  full specification.
+- **High complexity → Proceed to Phase 1.** Normal protocol flow begins.
+
+---
+
 ### Phase 1: Discovery
 
 Read and follow the instructions in the
 [Spec Discover skill](../sfp-discover/SKILL.md).
 
-Execute the full discovery process: initialization, structured interview,
+Execute the full discovery process. Note that **Resume Detection** is handled
+natively by the discover skill's initialization phase; no additional
+orchestrator logic is needed. Follow initialization, structured interview,
 Discovery Notes, compilation gate, and specification compilation.
 
 **Phase exit condition:** The project owner has approved compilation and
