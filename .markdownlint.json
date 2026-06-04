@@ -17,7 +17,9 @@
             "json",
             "markdown",
             "mermaid",
-            "text"
+            "text",
+            "yaml",
+            "diff"
         ],
         "language_only": true
     },
