@@ -117,6 +117,11 @@ specification.
   sign-off. Never produce an empty report.
 - **Domain neutrality.** Evaluate the specification on its own terms. Do not
   inject domain assumptions that the project owner has not stated.
+- **Downstream Execution Boundary.** Once the specification is final and
+  locked, the protocol is complete. You must NOT automatically proceed to
+  creating implementation plans, task lists, or executing code modifications
+  to satisfy the spec deliverables. You must announce completion and stop,
+  leaving downstream execution to a separate, explicit user request.
 
 ## Suggested Next Skill
 

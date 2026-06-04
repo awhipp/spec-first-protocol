@@ -147,3 +147,7 @@ skill must be followed exactly as written.
   details, or inconsistencies), recommend to the project owner that they
   continue with the individual skills in separate sessions, using the
   `.sfp/` working files as the handoff mechanism.
+- **Downstream Execution Boundary.** Once the specification is final and
+  locked, the pipeline is complete. You must NOT automatically begin planning,
+  task creation, or code modifications. You must announce completion and stop,
+  prompting the user for next steps or waiting for their explicit instruction.
