@@ -1,5 +1,17 @@
 # Changelog
 
+## [1.4.0](https://github.com/awhipp/spec-first-protocol/compare/v1.3.0...v1.4.0) (2026-06-04)
+
+
+### Features
+
+* implement update skills flow ([2a520cc](https://github.com/awhipp/spec-first-protocol/commit/2a520cc543e68c0f30b959f3a2e7dbb59fa8cddf))
+* implement update skills flow ([dfe6b59](https://github.com/awhipp/spec-first-protocol/commit/dfe6b599db5ddf309a4c8ebc823d928692cabb2b))
+* introduce global AI agent orchestration rules and project doc standards ([0e6e412](https://github.com/awhipp/spec-first-protocol/commit/0e6e4125ff41e472de129494ade6e64f1731d261))
+* introduce global AI agent orchestration rules and project documentation standards ([1c502fb](https://github.com/awhipp/spec-first-protocol/commit/1c502fb6bf8acfc861b61e67b7157a1ee8632e98))
+* **skills:** add request triage, resume detection, and verification guardrails ([f4c5fd5](https://github.com/awhipp/spec-first-protocol/commit/f4c5fd573a64e6d4e46d257efa17527aa5ec7da5))
+* **skills:** add request triage, resume detection, and verification guardrails ([395dc37](https://github.com/awhipp/spec-first-protocol/commit/395dc376d70a853adf45adc1158962eafda46ead))
+
 ## [1.3.0](https://github.com/awhipp/spec-first-protocol/compare/v1.2.0...v1.3.0) (2026-06-04)
 
 
