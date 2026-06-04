@@ -1,0 +1,12 @@
+{
+  "config": {
+    "extends": ".markdownlint.json"
+  },
+  "ignores": [
+    "CLAUDE.md",
+    ".github/copilot-instructions.md",
+    "CHANGELOG.md",
+    "examples/**",
+    "docs/data/**"
+  ]
+}
