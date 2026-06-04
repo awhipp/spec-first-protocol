@@ -6,7 +6,7 @@
         "style": "backtick"
     },
     "emphasis-style": {
-        "style": "asterisk"
+        "style": "consistent"
     },
     "fenced-code-language": {
         "allowed_languages": [
@@ -17,7 +17,9 @@
             "json",
             "markdown",
             "mermaid",
-            "text"
+            "text",
+            "yaml",
+            "diff"
         ],
         "language_only": true
     },
@@ -28,6 +30,7 @@
         "style": "---"
     },
     "line-length": {
+        "line_length": 120,
         "strict": true,
         "code_blocks": false,
         "tables": false
