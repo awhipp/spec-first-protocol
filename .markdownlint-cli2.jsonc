@@ -9,6 +9,8 @@
     "examples/**",
     "docs/data/**",
     "**_SPEC**.md",
-    ".sfp/**"
+    ".sfp/**",
+    "**/node_modules/**",
+    "**/dist/**"
   ]
 }

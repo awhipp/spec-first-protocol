@@ -18,3 +18,5 @@ ehthumbs.db
 
 # Node (if tooling is added later)
 node_modules/
+docs/dist/
+docs/node_modules/
