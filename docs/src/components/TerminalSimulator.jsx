@@ -77,6 +77,7 @@ export default function TerminalSimulator() {
 
   // The currently typing string (for the command or the input lines)
   const [typedText, setTypedText] = useState('');
+  const [renderPhase, setRenderPhase] = useState('command');
 
   const timeoutRef = useRef(null);
   const stateRef = useRef({
@@ -103,102 +104,107 @@ export default function TerminalSimulator() {
   }, [visibleLines, typedText]);
 
   useEffect(() => {
-    if (isPlaying) {
-      runPlayback();
-    } else {
+    if (!isPlaying) {
       clearTimeout(timeoutRef.current);
-    }
-    return () => clearTimeout(timeoutRef.current);
-  }, [isPlaying]);
-
-  const runPlayback = () => {
-    const s = stateRef.current;
-    if (!s.isPlaying) return;
-
-    const currentStep = SCRIPT_DATA[s.stepIndex];
-    if (!currentStep) {
-      setIsPlaying(false);
       return;
     }
 
-    if (s.phase === 'command') {
-      const targetText = currentStep.command;
-      if (s.charIndex < targetText.length) {
-        setTypedText(targetText.slice(0, s.charIndex + 1));
-        s.charIndex++;
-        // Typewriter speed
-        timeoutRef.current = setTimeout(runPlayback, Math.random() * 50 + 50);
-      } else {
-        // Command finished typing
-        timeoutRef.current = setTimeout(() => {
-          setVisibleLines(prev => [...prev, { text: `$ ${targetText}`, type: 'command' }]);
-          setTypedText('');
-          s.phase = 'output';
-          s.lineIndex = 0;
-          s.charIndex = 0;
-          runPlayback();
-        }, 400); // pause before execution
-      }
-    } else if (s.phase === 'output') {
-      if (s.lineIndex < currentStep.outputLines.length) {
-        const line = currentStep.outputLines[s.lineIndex];
+    const runPlayback = () => {
+      const s = stateRef.current;
+      if (!s.isPlaying) return;
 
-        if (line.type === 'input') {
-          // type it out
-          if (s.charIndex < line.text.length) {
-            setTypedText(line.text.slice(0, s.charIndex + 1));
-            s.charIndex++;
-            timeoutRef.current = setTimeout(runPlayback, Math.random() * 40 + 30);
+      const currentStep = SCRIPT_DATA[s.stepIndex];
+      if (!currentStep) {
+        setIsPlaying(false);
+        return;
+      }
+
+      if (s.phase === 'command') {
+        const targetText = currentStep.command;
+        if (s.charIndex < targetText.length) {
+          setTypedText(targetText.slice(0, s.charIndex + 1));
+          s.charIndex++;
+          // Typewriter speed
+          timeoutRef.current = setTimeout(runPlayback, Math.random() * 50 + 50);
+        } else {
+          // Command finished typing
+          timeoutRef.current = setTimeout(() => {
+            setVisibleLines(prev => [...prev, { text: `$ ${targetText}`, type: 'command' }]);
+            setTypedText('');
+            s.phase = 'output';
+            setRenderPhase('output');
+            s.lineIndex = 0;
+            s.charIndex = 0;
+            runPlayback();
+          }, 400); // pause before execution
+        }
+      } else if (s.phase === 'output') {
+        if (s.lineIndex < currentStep.outputLines.length) {
+          const line = currentStep.outputLines[s.lineIndex];
+
+          if (line.type === 'input') {
+            // type it out
+            if (s.charIndex < line.text.length) {
+              setTypedText(line.text.slice(0, s.charIndex + 1));
+              s.charIndex++;
+              timeoutRef.current = setTimeout(runPlayback, Math.random() * 40 + 30);
+            } else {
+              // done typing input
+              timeoutRef.current = setTimeout(() => {
+                setVisibleLines(prev => [...prev, { ...line }]);
+                setTypedText('');
+                s.lineIndex++;
+                s.charIndex = 0;
+                runPlayback();
+              }, line.delay || 500);
+            }
           } else {
-            // done typing input
-            timeoutRef.current = setTimeout(() => {
-              setVisibleLines(prev => [...prev, { ...line }]);
-              setTypedText('');
-              s.lineIndex++;
-              s.charIndex = 0;
-              runPlayback();
-            }, line.delay || 500);
+            // just display it at once
+            setVisibleLines(prev => [...prev, { ...line }]);
+            s.lineIndex++;
+            timeoutRef.current = setTimeout(runPlayback, line.delay || 500);
           }
         } else {
-          // just display it at once
-          setVisibleLines(prev => [...prev, { ...line }]);
-          s.lineIndex++;
-          timeoutRef.current = setTimeout(runPlayback, line.delay || 500);
+          // Step finished
+          timeoutRef.current = setTimeout(() => {
+            handleNextAction();
+          }, 1500); // 1.5 second pause before automatically continuing
         }
-      } else {
-        // Step finished
-        timeoutRef.current = setTimeout(() => {
-          handleNextAction();
-        }, 1500); // 1.5 second pause before automatically continuing
       }
-    }
-  };
+    };
 
-  const handleNextAction = () => {
-    const s = stateRef.current;
-    const nextStepIndex = s.stepIndex + 1;
-    if (nextStepIndex >= SCRIPT_DATA.length) {
-      // Reset
-      setCurrentStepIndex(0);
-      setVisibleLines([]);
-      setTypedText('');
-      setIsPlaying(false);
-      s.stepIndex = 0;
-      s.lineIndex = -1;
-      s.charIndex = 0;
-      s.phase = 'command';
-      s.isPlaying = false;
-    } else {
-      // Add visual compilation gap
-      setVisibleLines(prev => [...prev, { text: '---', type: 'divider' }]);
-      setCurrentStepIndex(nextStepIndex);
-      s.stepIndex = nextStepIndex;
-      s.phase = 'command';
-      s.charIndex = 0;
-      s.lineIndex = -1;
-      runPlayback();
-    }
-  };
+    const handleNextAction = () => {
+      const s = stateRef.current;
+      const nextStepIndex = s.stepIndex + 1;
+      if (nextStepIndex >= SCRIPT_DATA.length) {
+        // Reset
+        setCurrentStepIndex(0);
+        setVisibleLines([]);
+        setTypedText('');
+        setIsPlaying(false);
+        s.stepIndex = 0;
+        s.lineIndex = -1;
+        s.charIndex = 0;
+        s.phase = 'command';
+        setRenderPhase('command');
+        s.isPlaying = false;
+      } else {
+        // Add visual compilation gap
+        setVisibleLines(prev => [...prev, { text: '---', type: 'divider' }]);
+        setCurrentStepIndex(nextStepIndex);
+        s.stepIndex = nextStepIndex;
+        s.phase = 'command';
+        setRenderPhase('command');
+        s.charIndex = 0;
+        s.lineIndex = -1;
+        runPlayback();
+      }
+    };
+
+    runPlayback();
+
+    return () => clearTimeout(timeoutRef.current);
+  }, [isPlaying]);
 
   const togglePlay = () => {
     setIsPlaying(!isPlaying);
@@ -210,6 +216,7 @@ export default function TerminalSimulator() {
     setCurrentStepIndex(0);
     setVisibleLines([]);
     setTypedText('');
+    setRenderPhase('command');
     stateRef.current = { stepIndex: 0, lineIndex: -1, charIndex: 0, phase: 'command', isPlaying: false };
   };
 
@@ -254,7 +261,7 @@ export default function TerminalSimulator() {
           ))}
 
           {/* Current typing line */}
-          {isPlaying && stateRef.current.phase === 'command' && (
+          {isPlaying && renderPhase === 'command' && (
             <div className="text-slate-100">
               <span className="text-accent-hover font-bold mr-2">$</span>
               {typedText}
@@ -263,7 +270,7 @@ export default function TerminalSimulator() {
           )}
 
           {/* Current typing input */}
-          {isPlaying && stateRef.current.phase === 'output' && typedText && (
+          {isPlaying && renderPhase === 'output' && typedText && (
             <div className="text-green-300">
               {typedText}
               <span className="animate-pulse bg-green-300 w-2 h-4 inline-block align-middle ml-1"></span>

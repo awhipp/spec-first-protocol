@@ -20,9 +20,26 @@ export default function SpecExplorer({ title, description, badge, filePaths, cat
 
   useEffect(() => {
     if (isExpanded) {
+      const fetchSpec = async () => {
+        setIsLoading(true);
+        setError(null);
+        try {
+          const res = await fetch(localSpecPath);
+          if (!res.ok) {
+            throw new Error(`Failed to load: ${res.status} ${res.statusText}`);
+          }
+          const text = await res.text();
+          setMarkdownContent(text);
+        } catch (err) {
+          console.error(`Spec-First Protocol Spec Explorer Error [${activeFilePath}]:`, err);
+          setError(err.message);
+        } finally {
+          setIsLoading(false);
+        }
+      };
       fetchSpec();
     }
-  }, [isExpanded, activeFilePath]);
+  }, [isExpanded, activeFilePath, localSpecPath]);
 
   useEffect(() => {
     // Re-highlight if content changes
@@ -50,30 +67,12 @@ export default function SpecExplorer({ title, description, badge, filePaths, cat
     }
   }, [markdownContent, isLoading, error]);
 
-  const fetchSpec = async () => {
-    setIsLoading(true);
-    setError(null);
-    try {
-      // In dev mode, we serve the data from docs/data due to our build-docs.js predev hook
-      const res = await fetch(localSpecPath);
-      if (!res.ok) {
-        throw new Error(`Failed to load: ${res.status} ${res.statusText}`);
-      }
-      const text = await res.text();
-      setMarkdownContent(text);
-    } catch (err) {
-      console.error(`Spec-First Protocol Spec Explorer Error [${activeFilePath}]:`, err);
-      setError(err.message);
-    } finally {
-      setIsLoading(false);
-    }
-  };
 
   const getHtmlContent = () => {
     if (error) return null;
     try {
       return { __html: marked.parse(markdownContent) };
-    } catch (e) {
+    } catch {
       // Fallback
       return { __html: `<pre><code class="language-markdown">${markdownContent}</code></pre>` };
     }
@@ -83,6 +82,7 @@ export default function SpecExplorer({ title, description, badge, filePaths, cat
     <div className={`mt-6 ${category === 'non-software' ? 'mb-10' : ''}`}>
       {/* Meta Header */}
       <div className="bg-bg-primary border border-border-primary rounded-t-xl p-5 border-b-0">
+        <h4 className="text-[1.2rem] font-header font-bold text-text-primary mt-0 mb-4">{title}</h4>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div>
             <span className="text-xs font-bold uppercase tracking-wider text-text-secondary block mb-1">Vague Starting Prompt</span>
