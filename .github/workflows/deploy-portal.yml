@@ -40,7 +40,7 @@ jobs:
         run: |
           npm run lint
           # Run markdownlint on all markdown files from the project root
-          npx markdownlint-cli2 "../**/*.md"
+          cd .. && npx markdownlint-cli2 "**/*.md"
 
       - name: Run Tests
         run: npm run test
