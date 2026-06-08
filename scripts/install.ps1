@@ -6,7 +6,7 @@ param (
 
     [Parameter(Mandatory=$false)]
     [Alias("r")]
-    [string]$repo = "awhipp/spec-first-protocol",
+    [string]$repo = $(if ($env:SFP_REPO) { $env:SFP_REPO } else { "awhipp/spec-first-protocol" }),
 
     [Parameter(Mandatory=$false)]
     [Alias("y")]
@@ -77,6 +77,7 @@ $tempDir = Join-Path $env:TEMP "skills-dir-$guid"
 
 # Download skills.zip
 $downloadUrl = "https://github.com/$repo/releases/latest/download/skills.zip"
+$checksumUrl = "https://github.com/$repo/releases/latest/download/skills.zip.sha256"
 try {
     Write-Host "Downloading skills from $downloadUrl..."
     Invoke-WebRequest -Uri $downloadUrl -OutFile $tempZip -UseBasicParsing -ErrorAction Stop
@@ -85,6 +86,31 @@ try {
     if (Test-Path $tempZip) { Remove-Item -Path $tempZip -Force }
     exit 3
 }
+
+# Download and verify checksum (guards against corrupted or truncated downloads)
+$tempSha = Join-Path $env:TEMP "skills-$guid.sha256"
+try {
+    Write-Host "Downloading checksum from $checksumUrl..."
+    Invoke-WebRequest -Uri $checksumUrl -OutFile $tempSha -UseBasicParsing -ErrorAction Stop
+} catch {
+    Write-Host "Error: Failed to download checksum from $checksumUrl. Details: $_" -ForegroundColor Red
+    if (Test-Path $tempZip) { Remove-Item -Path $tempZip -Force }
+    if (Test-Path $tempSha) { Remove-Item -Path $tempSha -Force }
+    exit 3
+}
+
+$expectedHash = ((Get-Content $tempSha -Raw).Trim() -split '\s+')[0]
+$actualHash = (Get-FileHash -Path $tempZip -Algorithm SHA256).Hash
+if ($expectedHash.ToUpper() -ne $actualHash.ToUpper()) {
+    Write-Host "Error: Checksum verification failed." -ForegroundColor Red
+    Write-Host "  Expected: $expectedHash" -ForegroundColor Red
+    Write-Host "  Actual:   $actualHash" -ForegroundColor Red
+    if (Test-Path $tempZip) { Remove-Item -Path $tempZip -Force }
+    if (Test-Path $tempSha) { Remove-Item -Path $tempSha -Force }
+    exit 3
+}
+Write-Host "Checksum verified."
+if (Test-Path $tempSha) { Remove-Item -Path $tempSha -Force }
 
 # Extract and install
 try {

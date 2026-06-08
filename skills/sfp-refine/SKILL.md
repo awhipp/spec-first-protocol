@@ -192,6 +192,10 @@ Your outputs are:
 2. **Updated Specification File** in the project root (retaining the
    `_SPEC_DRAFT.md` suffix), recompiled from the updated Discovery Notes
    after owner approval.
+3. **Updated Status File** at `.sfp/YYYY-MM-DD_<SLUG>/status.md`: set `phase`
+   to `refine` and update `last_updated` to the current ISO-8601 timestamp.
+   If `status.md` does not exist, create it with `iteration: 1` and
+   `max_iterations: 5`.
 
 ## Suggested Next Skill
 

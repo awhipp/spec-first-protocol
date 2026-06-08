@@ -1,0 +1,170 @@
+name: Validate Scripts
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'scripts/**'
+  pull_request:
+    paths:
+      - 'scripts/**'
+  workflow_dispatch:
+
+jobs:
+  validate-install:
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+        integration: [claude, antigravity, cursor, windsurf, none]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@93cb6efe18208431cddfb8368fd83d5badbf9bfd
+
+      - name: Prepare fixture directory
+        shell: bash
+        run: mkdir -p "$RUNNER_TEMP/fixture"
+
+      # -- Install (Unix) --
+      - name: Run install.sh
+        if: runner.os != 'Windows'
+        shell: bash
+        env:
+          BASE_DIR: ${{ runner.temp }}/fixture
+        run: bash scripts/install.sh -i ${{ matrix.integration }} -y
+
+      - name: Verify install (Unix)
+        if: runner.os != 'Windows'
+        shell: bash
+        run: |
+          case "${{ matrix.integration }}" in
+            claude)       base="${{ runner.temp }}/fixture/.claude/skills" ;;
+            antigravity)  base="${{ runner.temp }}/fixture/.agents/skills" ;;
+            cursor)       base="${{ runner.temp }}/fixture/.cursor/skills" ;;
+            windsurf)     base="${{ runner.temp }}/fixture/.windsurf/skills" ;;
+            none)         base="${{ runner.temp }}/fixture/skills" ;;
+          esac
+          for skill_dir in "$base"/sfp-*; do
+            if [ ! -d "$skill_dir" ]; then
+              echo "Error: Expected skill directory not found: $skill_dir"
+              exit 1
+            fi
+            if [ ! -f "$skill_dir/SKILL.md" ]; then
+              echo "Error: SKILL.md missing in $skill_dir"
+              exit 1
+            fi
+          done
+          echo "Install verification passed."
+
+      # -- Install (Windows) --
+      - name: Run install.ps1
+        if: runner.os == 'Windows'
+        shell: pwsh
+        working-directory: ${{ runner.temp }}/fixture
+        run: |
+          & "$env:GITHUB_WORKSPACE/scripts/install.ps1" -i ${{ matrix.integration }} -y
+
+      - name: Verify install (Windows)
+        if: runner.os == 'Windows'
+        shell: pwsh
+        run: |
+          $integrationMap = @{
+            "claude"       = ".claude\skills"
+            "antigravity"  = ".agents\skills"
+            "cursor"       = ".cursor\skills"
+            "windsurf"     = ".windsurf\skills"
+            "none"         = "skills"
+          }
+          $base = Join-Path "${{ runner.temp }}/fixture" $integrationMap["${{ matrix.integration }}"]
+          $skills = Get-ChildItem -Path $base -Directory -Filter "sfp-*"
+          if ($skills.Count -eq 0) {
+            Write-Error "No sfp-* skill directories found in $base"
+            exit 1
+          }
+          foreach ($skill in $skills) {
+            $skillMd = Join-Path $skill.FullName "SKILL.md"
+            if (-not (Test-Path $skillMd)) {
+              Write-Error "SKILL.md missing in $($skill.FullName)"
+              exit 1
+            }
+          }
+          Write-Host "Install verification passed."
+
+      # -- Update (Unix) --
+      - name: Run update.sh
+        if: runner.os != 'Windows'
+        shell: bash
+        run: |
+          case "${{ matrix.integration }}" in
+            claude)       base="${{ runner.temp }}/fixture/.claude/skills" ;;
+            antigravity)  base="${{ runner.temp }}/fixture/.agents/skills" ;;
+            cursor)       base="${{ runner.temp }}/fixture/.cursor/skills" ;;
+            windsurf)     base="${{ runner.temp }}/fixture/.windsurf/skills" ;;
+            none)         base="${{ runner.temp }}/fixture/skills" ;;
+          esac
+          bash "$base/update.sh" -y
+
+      - name: Verify update (Unix)
+        if: runner.os != 'Windows'
+        shell: bash
+        run: |
+          case "${{ matrix.integration }}" in
+            claude)       base="${{ runner.temp }}/fixture/.claude/skills" ;;
+            antigravity)  base="${{ runner.temp }}/fixture/.agents/skills" ;;
+            cursor)       base="${{ runner.temp }}/fixture/.cursor/skills" ;;
+            windsurf)     base="${{ runner.temp }}/fixture/.windsurf/skills" ;;
+            none)         base="${{ runner.temp }}/fixture/skills" ;;
+          esac
+          for skill_dir in "$base"/sfp-*; do
+            if [ ! -d "$skill_dir" ]; then
+              echo "Error: Expected skill directory not found after update: $skill_dir"
+              exit 1
+            fi
+            if [ ! -f "$skill_dir/SKILL.md" ]; then
+              echo "Error: SKILL.md missing in $skill_dir after update"
+              exit 1
+            fi
+          done
+          echo "Update verification passed."
+
+      # -- Update (Windows) --
+      - name: Run update.ps1
+        if: runner.os == 'Windows'
+        shell: pwsh
+        run: |
+          $integrationMap = @{
+            "claude"       = ".claude\skills"
+            "antigravity"  = ".agents\skills"
+            "cursor"       = ".cursor\skills"
+            "windsurf"     = ".windsurf\skills"
+            "none"         = "skills"
+          }
+          $base = Join-Path "${{ runner.temp }}/fixture" $integrationMap["${{ matrix.integration }}"]
+          & "$base/update.ps1" -y
+
+      - name: Verify update (Windows)
+        if: runner.os == 'Windows'
+        shell: pwsh
+        run: |
+          $integrationMap = @{
+            "claude"       = ".claude\skills"
+            "antigravity"  = ".agents\skills"
+            "cursor"       = ".cursor\skills"
+            "windsurf"     = ".windsurf\skills"
+            "none"         = "skills"
+          }
+          $base = Join-Path "${{ runner.temp }}/fixture" $integrationMap["${{ matrix.integration }}"]
+          $skills = Get-ChildItem -Path $base -Directory -Filter "sfp-*"
+          if ($skills.Count -eq 0) {
+            Write-Error "No sfp-* skill directories found in $base after update"
+            exit 1
+          }
+          foreach ($skill in $skills) {
+            $skillMd = Join-Path $skill.FullName "SKILL.md"
+            if (-not (Test-Path $skillMd)) {
+              Write-Error "SKILL.md missing in $($skill.FullName) after update"
+              exit 1
+            }
+          }
+          Write-Host "Update verification passed."

@@ -5,7 +5,7 @@ set -eo pipefail
 
 # Default values
 INTEGRATION="none"
-REPO="awhipp/spec-first-protocol"
+REPO="${SFP_REPO:-awhipp/spec-first-protocol}"
 YES=false
 HELP=false
 
@@ -131,13 +131,42 @@ if ! command -v unzip >/dev/null 2>&1; then
   exit 1
 fi
 
+# Dependency check: sha256 utility is required for integrity verification
+if ! command -v sha256sum >/dev/null 2>&1 && ! command -v shasum >/dev/null 2>&1 && ! command -v openssl >/dev/null 2>&1; then
+  echo "Error: No sha256 utility found (sha256sum, shasum, or openssl are required)." >&2
+  exit 1
+fi
+
+# Helper function to compute SHA-256 hash of a file
+get_sha256() {
+  local file="$1"
+  if command -v sha256sum >/dev/null 2>&1; then
+    sha256sum "$file" | awk '{print $1}'
+  elif command -v shasum >/dev/null 2>&1; then
+    shasum -a 256 "$file" | awk '{print $1}'
+  elif command -v openssl >/dev/null 2>&1; then
+    local hash
+    hash=$(openssl dgst -sha256 -r "$file" 2>/dev/null | awk '{print $1}') || true
+    if [ -z "$hash" ]; then
+      hash=$(openssl dgst -sha256 "$file" | awk -F'= ' '{print $2}')
+    fi
+    echo "$hash"
+  else
+    echo "Error: No sha256 utility found." >&2
+    exit 1
+  fi
+}
+
 # Download skills.zip
 DOWNLOAD_URL="https://github.com/${REPO}/releases/latest/download/skills.zip"
+CHECKSUM_URL="https://github.com/${REPO}/releases/latest/download/skills.zip.sha256"
 TEMP_ZIP=$(mktemp /tmp/skills-XXXXXX.zip)
+TEMP_SHA=$(mktemp /tmp/skills-XXXXXX.sha256)
 
 # Cleanup helper in case of failure or exit
 cleanup() {
   rm -f "$TEMP_ZIP" || true
+  rm -f "$TEMP_SHA" || true
   if [ -n "$TEMP_DIR" ] && [ -d "$TEMP_DIR" ]; then
     rm -rf "$TEMP_DIR" || true
   fi
@@ -150,16 +179,37 @@ if command -v curl >/dev/null 2>&1; then
     echo "Error: Failed to download from $DOWNLOAD_URL" >&2
     exit 3
   fi
+  echo "Downloading checksum from $CHECKSUM_URL..."
+  if ! curl -fsSL -o "$TEMP_SHA" "$CHECKSUM_URL"; then
+    echo "Error: Failed to download checksum from $CHECKSUM_URL" >&2
+    exit 3
+  fi
 elif command -v wget >/dev/null 2>&1; then
   echo "Downloading skills from $DOWNLOAD_URL using wget..."
   if ! wget -q -O "$TEMP_ZIP" "$DOWNLOAD_URL"; then
     echo "Error: Failed to download from $DOWNLOAD_URL" >&2
     exit 3
   fi
+  echo "Downloading checksum from $CHECKSUM_URL..."
+  if ! wget -q -O "$TEMP_SHA" "$CHECKSUM_URL"; then
+    echo "Error: Failed to download checksum from $CHECKSUM_URL" >&2
+    exit 3
+  fi
 else
   echo "Error: Neither curl nor wget was found. Please install curl or wget." >&2
   exit 1
 fi
+
+# Verify integrity (guards against corrupted or truncated downloads)
+EXPECTED_HASH=$(awk '{print $1}' "$TEMP_SHA")
+ACTUAL_HASH=$(get_sha256 "$TEMP_ZIP")
+if [ "$EXPECTED_HASH" != "$ACTUAL_HASH" ]; then
+  echo "Error: Checksum verification failed." >&2
+  echo "  Expected: $EXPECTED_HASH" >&2
+  echo "  Actual:   $ACTUAL_HASH" >&2
+  exit 3
+fi
+echo "Checksum verified."
 
 # Extract and install
 TEMP_DIR=$(mktemp -d /tmp/skills-dir-XXXXXX)
