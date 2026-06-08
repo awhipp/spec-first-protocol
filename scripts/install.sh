@@ -8,6 +8,7 @@ INTEGRATION="none"
 REPO="${SFP_REPO:-awhipp/spec-first-protocol}"
 YES=false
 HELP=false
+VERIFY_CHECKSUM=true
 
 # Render help menu
 show_help() {
@@ -181,8 +182,8 @@ if command -v curl >/dev/null 2>&1; then
   fi
   echo "Downloading checksum from $CHECKSUM_URL..."
   if ! curl -fsSL -o "$TEMP_SHA" "$CHECKSUM_URL"; then
-    echo "Error: Failed to download checksum from $CHECKSUM_URL" >&2
-    exit 3
+    echo "Warning: Failed to download checksum from $CHECKSUM_URL. Skipping integrity verification." >&2
+    VERIFY_CHECKSUM=false
   fi
 elif command -v wget >/dev/null 2>&1; then
   echo "Downloading skills from $DOWNLOAD_URL using wget..."
@@ -192,8 +193,8 @@ elif command -v wget >/dev/null 2>&1; then
   fi
   echo "Downloading checksum from $CHECKSUM_URL..."
   if ! wget -q -O "$TEMP_SHA" "$CHECKSUM_URL"; then
-    echo "Error: Failed to download checksum from $CHECKSUM_URL" >&2
-    exit 3
+    echo "Warning: Failed to download checksum from $CHECKSUM_URL. Skipping integrity verification." >&2
+    VERIFY_CHECKSUM=false
   fi
 else
   echo "Error: Neither curl nor wget was found. Please install curl or wget." >&2
@@ -201,15 +202,17 @@ else
 fi
 
 # Verify integrity (guards against corrupted or truncated downloads)
-EXPECTED_HASH=$(awk '{print $1}' "$TEMP_SHA")
-ACTUAL_HASH=$(get_sha256 "$TEMP_ZIP")
-if [ "$EXPECTED_HASH" != "$ACTUAL_HASH" ]; then
-  echo "Error: Checksum verification failed." >&2
-  echo "  Expected: $EXPECTED_HASH" >&2
-  echo "  Actual:   $ACTUAL_HASH" >&2
-  exit 3
+if [ "$VERIFY_CHECKSUM" = true ]; then
+  EXPECTED_HASH=$(awk '{print $1}' "$TEMP_SHA")
+  ACTUAL_HASH=$(get_sha256 "$TEMP_ZIP")
+  if [ "$EXPECTED_HASH" != "$ACTUAL_HASH" ]; then
+    echo "Error: Checksum verification failed." >&2
+    echo "  Expected: $EXPECTED_HASH" >&2
+    echo "  Actual:   $ACTUAL_HASH" >&2
+    exit 3
+  fi
+  echo "Checksum verified."
 fi
-echo "Checksum verified."
 
 # Extract and install
 TEMP_DIR=$(mktemp -d /tmp/skills-dir-XXXXXX)
