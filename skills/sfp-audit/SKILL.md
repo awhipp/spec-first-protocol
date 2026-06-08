@@ -58,6 +58,10 @@ integrity and surface problems.
 5. Classify each remaining finding by severity.
 6. Output the structured **Audit Report** to
    `.sfp/YYYY-MM-DD_<SLUG>/audit_report.md`.
+7. Update `.sfp/YYYY-MM-DD_<SLUG>/status.md`: set `phase` to `audit`,
+   increment `iteration` (if this is not the first audit pass), and update
+   `last_updated` to the current ISO-8601 timestamp. If `status.md` does not
+   exist, create it with `iteration: 1` and `max_iterations: 5`.
 
 ## Severity Classification
 

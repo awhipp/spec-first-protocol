@@ -94,15 +94,41 @@ Read and follow the instructions in the
 
 Execute the full audit process: load the specification and Discovery
 Notes, perform the adversarial review, classify findings, and produce the
-Audit Report.
+Audit Report. Update `.sfp/YYYY-MM-DD_<SLUG>/status.md` with `phase: audit`
+and the current timestamp. Increment the `iteration` counter if this is not
+the first audit pass.
 
 **Phase exit conditions:**
 
 - **Clean audit (zero blockers) + owner approves →** Proceed to Phase 4
   (Lock). The audit skill handles finalization, immutability, and
   cleanup.
-- **Findings exist →** Announce to the project owner that the protocol
-  is moving to the refinement phase. Then proceed to Phase 3.
+- **Findings exist →** Check the convergence contract (below) before
+  proceeding to Phase 3.
+
+### Convergence Contract
+
+The orchestrator enforces iteration-bounded loop control to prevent
+unproductive cycling. Read `iteration` and `max_iterations` from
+`.sfp/YYYY-MM-DD_<SLUG>/status.md` (default `max_iterations` is **5** if
+not set).
+
+```text
+WHILE latest audit has blockers AND iteration < max_iterations:
+  run Phase 3 (refine) → run Phase 2 (audit) → increment iteration
+IF iteration >= max_iterations:
+  pause, inform owner that cycling may be unproductive,
+  suggest options: continue, halt, or re-discover problematic areas
+IF zero blockers:
+  request explicit owner approval → proceed to Phase 4 (lock)
+```
+
+After each audit-refine cycle, write the updated `iteration` count and
+`last_updated` timestamp back to `status.md`. This ensures the iteration
+state survives context clears.
+
+If the owner chooses to continue past `max_iterations`, reset the counter
+or increase `max_iterations` in `status.md` per the owner's preference.
 
 ---
 
@@ -113,7 +139,8 @@ Read and follow the instructions in the
 
 Execute the full refinement process: prioritize findings, walk through
 each one with the project owner, record decisions, handle scope
-expansion, and recompile the specification.
+expansion, and recompile the specification. Update `status.md` with
+`phase: refine` and the current timestamp.
 
 **Phase exit condition:** The updated specification has been recompiled
 and written.

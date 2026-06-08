@@ -6,7 +6,7 @@ const STEPS_DATA = {
     stepNum: 'Step 1',
     title: 'discover',
     desc: 'Conducts an interactive, requirements-gathering interview to map out core boundaries. Compiles validated notes into a structured specification draft.',
-    output: '.sfp/YYYY-MM-DD_<SLUG>/discovery_notes.md, YYYY-MM-DD_<SLUG>_SPEC_DRAFT.md',
+    output: '.sfp/YYYY-MM-DD_<SLUG>/discovery_notes.md, status.md, YYYY-MM-DD_<SLUG>_SPEC_DRAFT.md',
     gate: 'Explicit project owner approval of initial scope and boundaries.'
   },
   audit: {

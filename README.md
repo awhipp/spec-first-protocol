@@ -200,7 +200,8 @@ At runtime, the protocol creates a `.sfp/` working directory in the project root
 .sfp/                                   # Created by discover
 └── YYYY-MM-DD_<SLUG>/                  # One subdirectory per spec
     ├── discovery_notes.md              # Running requirements summary
-    └── audit_report.md                 # Findings from the most recent audit
+    ├── audit_report.md                 # Findings from the most recent audit
+    └── status.md                       # Pipeline iteration state
 ```
 
 Draft specifications are written to the project root using the `YYYY-MM-DD_<SLUG>_SPEC_DRAFT.md` naming convention. The
@@ -211,6 +212,20 @@ Draft specifications are written to the project root using the `YYYY-MM-DD_<SLUG
 ## Installation
 
 Install the protocol's skills using the automated bootstrap commands or manually copy/symlink them into your project.
+
+### Environment Variable Override
+
+Set the `SFP_REPO` environment variable to override the default repository for forks or mirrors:
+
+```bash
+export SFP_REPO=myorg/sfp-fork
+```
+
+```powershell
+$env:SFP_REPO = "myorg/sfp-fork"
+```
+
+The `-r` CLI flag takes precedence if both are set.
 
 ### Automated Installation
 

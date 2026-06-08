@@ -1,7 +1,7 @@
 param (
     [Parameter(Mandatory=$false)]
     [Alias("r")]
-    [string]$Repo = "awhipp/spec-first-protocol",
+    [string]$Repo = $(if ($env:SFP_REPO) { $env:SFP_REPO } else { "awhipp/spec-first-protocol" }),
 
     [Parameter(Mandatory=$false)]
     [Alias("y")]

@@ -37,8 +37,12 @@ jobs:
         run: zip -r skills.zip skills
         if: ${{ steps.release.outputs.release_created }}
 
-      - name: Upload Release Asset
-        run: gh release upload "${{ steps.release.outputs.tag_name }}" skills.zip --clobber
+      - name: Generate checksum
+        run: sha256sum skills.zip > skills.zip.sha256
+        if: ${{ steps.release.outputs.release_created }}
+
+      - name: Upload Release Assets
+        run: gh release upload "${{ steps.release.outputs.tag_name }}" skills.zip skills.zip.sha256 --clobber
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         if: ${{ steps.release.outputs.release_created }}

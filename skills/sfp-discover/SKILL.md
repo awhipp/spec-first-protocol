@@ -50,6 +50,25 @@ this specification are stored in this subdirectory. The `.sfp/` directory
 holds working files for all in-progress specifications and is cleaned up
 when specifications are finalized.
 
+After creating the subdirectory, create an initial
+`.sfp/YYYY-MM-DD_<SLUG>/status.md` file with the following YAML frontmatter:
+
+```markdown
+---
+phase: discover
+iteration: 1
+max_iterations: 5
+last_updated: <current ISO-8601 timestamp>
+---
+```
+
+The `status.md` file tracks pipeline iteration state. The `phase` field is
+informational; agents must treat artifact existence (Discovery Notes, Audit
+Report, `_SPEC_DRAFT.md`) as the primary state signal. The `iteration`
+counter tracks audit-refine cycles and is used by the orchestrator's
+convergence contract. The `max_iterations` field is configurable by the
+project owner.
+
 ## Request Triage
 
 Assess whether the user's request warrants a full specification cycle before proceeding to the First Turn.

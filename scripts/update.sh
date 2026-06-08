@@ -4,7 +4,7 @@
 set -eo pipefail
 
 # Default values
-REPO="awhipp/spec-first-protocol"
+REPO="${SFP_REPO:-awhipp/spec-first-protocol}"
 YES=false
 HELP=false
 
