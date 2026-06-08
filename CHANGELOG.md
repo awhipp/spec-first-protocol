@@ -1,5 +1,23 @@
 # Changelog
 
+## [1.5.0](https://github.com/awhipp/spec-first-protocol/compare/v1.4.1...v1.5.0) (2026-06-08)
+
+
+### Features
+
+* adds eslint functionality to docs/ ([8cad8a1](https://github.com/awhipp/spec-first-protocol/commit/8cad8a17828894ff9649eaad7de3a357e82bd42f))
+* initialize documentation portal with a React and Vite project ([aae5fbe](https://github.com/awhipp/spec-first-protocol/commit/aae5fbe3e9433abb6731b51e7b31c4ad1bd0bd72))
+* initialize documentation portal with React and Vite project structure ([fbb6aef](https://github.com/awhipp/spec-first-protocol/commit/fbb6aef9afaaed9f0b7c560032e61efb22d9365f))
+* **scripts,skills:** add installer integrity checks, repo override, and orchestration convergence ([1b98bdc](https://github.com/awhipp/spec-first-protocol/commit/1b98bdc5b957d0bb5fa8dec1657151e5ca1602ed))
+* **scripts,skills:** add installer integrity checks, repo override, and orchestration convergence ([bca4ed6](https://github.com/awhipp/spec-first-protocol/commit/bca4ed6c9fe4bf6a873e72ead660918d4955855c))
+
+
+### Bug Fixes
+
+* added verify checksum functionality to install. ([65535f7](https://github.com/awhipp/spec-first-protocol/commit/65535f722765fdcf93f7ff064269982ecc680aca))
+* base url for react/vite ([8407a53](https://github.com/awhipp/spec-first-protocol/commit/8407a53b27d9bcca05068632783ffa1f9695424e))
+* linter to use markdownlint config ([7baf243](https://github.com/awhipp/spec-first-protocol/commit/7baf2437f29b188e9f2c7af155254c1045c7cc2f))
+
 ## [1.4.1](https://github.com/awhipp/spec-first-protocol/compare/v1.4.0...v1.4.1) (2026-06-04)
 
 
