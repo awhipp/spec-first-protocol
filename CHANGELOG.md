@@ -1,5 +1,18 @@
 # Changelog
 
+## [1.6.0](https://github.com/awhipp/spec-first-protocol/compare/v1.5.0...v1.6.0) (2026-06-10)
+
+
+### Features
+
+* **skills:** introduce dynamic domain personas and templates ([8294262](https://github.com/awhipp/spec-first-protocol/commit/829426278ec0ba1764a99d49907cea927917fb8c))
+* **skills:** introduce dynamic domain personas and templates ([18f8e42](https://github.com/awhipp/spec-first-protocol/commit/18f8e42459c1eb74c08e71e6a72c64228fe26ae3))
+
+
+### Bug Fixes
+
+* address base_url issue with SpecExplorer component ([5be87d1](https://github.com/awhipp/spec-first-protocol/commit/5be87d1fd3114f124159e8ef3ede5236fbad51e6))
+
 ## [1.5.0](https://github.com/awhipp/spec-first-protocol/compare/v1.4.1...v1.5.0) (2026-06-08)
 
 
