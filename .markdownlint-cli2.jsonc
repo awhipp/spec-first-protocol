@@ -7,7 +7,7 @@
     ".github/copilot-instructions.md",
     "CHANGELOG.md",
     "examples/**",
-    "docs/data/**",
+    "docs/public/data/**",
     "**_SPEC**.md",
     ".sfp/**",
     "**/node_modules/**",

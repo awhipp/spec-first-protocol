@@ -33,7 +33,8 @@ spec-first-protocol/
 │   ├── release-skills.yml      # Release-please + skills.zip packaging
 │   └── validate-scripts.yml    # Cross-platform installer/updater tests
 ├── docs/                       # Onboarding & marketing portal (Vite + React)
-│   ├── data/                   # Example specifications displayed on site
+│   ├── public/                 # Static assets directory served directly
+│   │   └── data/               # Example specifications displayed on site
 │   ├── src/                    # React source code
 │   │   ├── App.jsx             # Main application component
 │   │   ├── components/         # Reusable UI components
@@ -172,7 +173,7 @@ constraints:
 - **Ignored Files**: The `markdownlint-cli2` configuration ignores transient,
   generated, and reference paths: `CLAUDE.md`,
   `.github/copilot-instructions.md`, `CHANGELOG.md`, `examples/**`,
-  `docs/data/**`, `**_SPEC**.md`, `.sfp/**`, `**/node_modules/**`, and
+  `docs/public/data/**`, `**_SPEC**.md`, `.sfp/**`, `**/node_modules/**`, and
   `**/dist/**`.
 - **Local Verification Command**: Run the following command to lint Markdown
   files locally:
@@ -264,7 +265,7 @@ constraints:
 ### System Boundaries & Modification Constraints
 
 - **Frozen Specs**: The examples under `examples/` and static reference spec
-  files inside `docs/data/` are frozen references. Do not modify them unless
+  files inside `docs/public/data/` are frozen references. Do not modify them unless
   explicitly asked.
 - **Skill-Frontend Sync**: If changes are made to core SFP skills in `skills/`
   that affect their default paths, parameters, or configurations, those changes

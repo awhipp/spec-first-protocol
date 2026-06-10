@@ -15,7 +15,7 @@ export default function SpecExplorer({ title, description, badge, filePaths, cat
   const [error, setError] = useState(null);
 
   const activeFilePath = filePaths[activeTab].path;
-  const localSpecPath = `/data/${activeFilePath}`;
+  const localSpecPath = `${import.meta.env.BASE_URL}data/${activeFilePath}`;
   const githubFallbackUrl = `https://github.com/awhipp/spec-first-protocol/blob/main/examples/${activeFilePath}`;
 
   useEffect(() => {

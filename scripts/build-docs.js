@@ -5,7 +5,7 @@ function buildDocs() {
   const rootDir = path.resolve(__dirname, '..');
   const examplesDir = path.join(rootDir, 'examples');
   const readmePath = path.join(rootDir, 'README.md');
-  const destDir = path.join(rootDir, 'docs', 'data');
+  const destDir = path.join(rootDir, 'docs', 'public', 'data');
 
   console.log('Starting documentation synchronization...');
 
@@ -22,7 +22,7 @@ function buildDocs() {
   }
 
   try {
-    // 3. Ensure destination docs/data directory exists
+    // 3. Ensure destination docs/public/data directory exists
     fs.mkdirSync(destDir, { recursive: true });
     console.log(`Destination directory verified: ${destDir}`);
   } catch (err) {
@@ -30,17 +30,17 @@ function buildDocs() {
     process.exit(1);
   }
 
-  // 4. Copy README.md to docs/data/README.md
+  // 4. Copy README.md to docs/public/data/README.md
   try {
     const destReadme = path.join(destDir, 'README.md');
     fs.copyFileSync(readmePath, destReadme);
-    console.log(`Successfully copied: README.md -> docs/data/README.md`);
+    console.log(`Successfully copied: README.md -> docs/public/data/README.md`);
   } catch (err) {
     console.error(`Error: Failed to copy README.md. Details: ${err.message}`);
     process.exit(1);
   }
 
-  // 5. Copy all files and subdirectories from examples/ to docs/data/
+  // 5. Copy all files and subdirectories from examples/ to docs/public/data/
   try {
     const files = fs.readdirSync(examplesDir);
     let copyCount = 0;
@@ -52,11 +52,11 @@ function buildDocs() {
       
       if (stat.isFile()) {
         fs.copyFileSync(srcPath, destPath);
-        console.log(`Successfully copied file: examples/${file} -> docs/data/${file}`);
+        console.log(`Successfully copied file: examples/${file} -> docs/public/data/${file}`);
         copyCount++;
       } else if (stat.isDirectory()) {
         fs.cpSync(srcPath, destPath, { recursive: true });
-        console.log(`Successfully copied directory: examples/${file}/ -> docs/data/${file}/`);
+        console.log(`Successfully copied directory: examples/${file}/ -> docs/public/data/${file}/`);
         copyCount++;
       }
     }
