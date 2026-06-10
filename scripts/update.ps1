@@ -136,36 +136,77 @@ try {
             Write-Host "Installing new skill '$skillName'..."
             Copy-Item -Path $remoteSkill.FullName -Destination $localSkillPath -Recurse -Force -ErrorAction Stop
         } else {
-            # Compare local and remote skill contents recursively
-            $different = $false
-            
-            $remoteRelPaths = Get-RelativeFiles $remoteSkill.FullName
-            $localRelPaths = Get-RelativeFiles $localSkillPath
-            
-            if ($remoteRelPaths.Count -ne $localRelPaths.Count) {
-                $different = $true
-            } else {
+            if ($skillName -eq "sfp-personas") {
+                # File-by-file synchronization for sfp-personas
+                $remoteRelPaths = Get-RelativeFiles $remoteSkill.FullName
                 foreach ($relPath in $remoteRelPaths) {
                     $localFile = Join-Path $localSkillPath $relPath
-                    if (-not (Test-Path $localFile)) {
-                        $different = $true
-                        break
-                    }
-                    
                     $remoteFile = Join-Path $remoteSkill.FullName $relPath
-                    $remoteHash = Get-FileSha256 $remoteFile
-                    $localHash = Get-FileSha256 $localFile
-                    if ($remoteHash -ne $localHash) {
-                        $different = $true
-                        break
+                    
+                    if (-not (Test-Path $localFile)) {
+                        $parentDir = Split-Path $localFile -Parent
+                        if (-not (Test-Path $parentDir)) {
+                            New-Item -ItemType Directory -Path $parentDir -Force | Out-Null
+                        }
+                        Copy-Item -Path $remoteFile -Destination $localFile -Force -ErrorAction Stop
+                    } else {
+                        $remoteHash = Get-FileSha256 $remoteFile
+                        $localHash = Get-FileSha256 $localFile
+                        if ($remoteHash -ne $localHash) {
+                            $confirm = $false
+                            if ($Yes) {
+                                $confirm = $true
+                            } else {
+                                if ($env:CI -or -not [Environment]::UserInteractive) {
+                                    [Console]::Error.WriteLine("Error: Non-interactive environment detected and no -y/--yes flag was provided to overwrite '$relPath'.")
+                                    exit 1
+                                }
+                                $response = Read-Host "Remote persona '$relPath' has updates. Overwrite your local modifications? (y/N)"
+                                if ($response -match '^[yY]$') {
+                                    $confirm = $true
+                                }
+                            }
+                            if ($confirm) {
+                                Copy-Item -Path $remoteFile -Destination $localFile -Force -ErrorAction Stop
+                                Write-Host "Updated '$relPath'."
+                            } else {
+                                Write-Host "Skipped updating '$relPath'."
+                            }
+                        }
                     }
                 }
-            }
-            
-            if ($different) {
-                Write-Host "Updating skill '$skillName'..."
-                Remove-Item -Path $localSkillPath -Recurse -Force -ErrorAction Stop
-                Copy-Item -Path $remoteSkill.FullName -Destination $localSkillPath -Recurse -Force -ErrorAction Stop
+            } else {
+                # Compare local and remote skill contents recursively
+                $different = $false
+                
+                $remoteRelPaths = Get-RelativeFiles $remoteSkill.FullName
+                $localRelPaths = Get-RelativeFiles $localSkillPath
+                
+                if ($remoteRelPaths.Count -ne $localRelPaths.Count) {
+                    $different = $true
+                } else {
+                    foreach ($relPath in $remoteRelPaths) {
+                        $localFile = Join-Path $localSkillPath $relPath
+                        if (-not (Test-Path $localFile)) {
+                            $different = $true
+                            break
+                        }
+                        
+                        $remoteFile = Join-Path $remoteSkill.FullName $relPath
+                        $remoteHash = Get-FileSha256 $remoteFile
+                        $localHash = Get-FileSha256 $localFile
+                        if ($remoteHash -ne $localHash) {
+                            $different = $true
+                            break
+                        }
+                    }
+                }
+                
+                if ($different) {
+                    Write-Host "Updating skill '$skillName'..."
+                    Remove-Item -Path $localSkillPath -Recurse -Force -ErrorAction Stop
+                    Copy-Item -Path $remoteSkill.FullName -Destination $localSkillPath -Recurse -Force -ErrorAction Stop
+                }
             }
         }
     }

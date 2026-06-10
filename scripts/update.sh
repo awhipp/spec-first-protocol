@@ -191,49 +191,87 @@ for remote_skill_path in "$TEMP_DIR/skills"/*; do
         exit 2
       fi
     else
-      # Compare local and remote skill contents recursively
-      DIFFERENT=false
-      
-      # We check files in remote vs local
-      while IFS= read -r -d '' r_file_abs; do
-        rel_path="${r_file_abs#$remote_skill_path/}"
-        l_file_abs="$local_skill_path/$rel_path"
-        
-        if [ ! -f "$l_file_abs" ]; then
-          DIFFERENT=true
-          break
-        fi
-        
-        r_hash=$(get_sha256 "$r_file_abs")
-        l_hash=$(get_sha256 "$l_file_abs")
-        if [ "$r_hash" != "$l_hash" ]; then
-          DIFFERENT=true
-          break
-        fi
-      done < <(find "$remote_skill_path" -type f -print0)
-      
-      # We check if local has extra files not in remote
-      if [ "$DIFFERENT" = false ]; then
-        while IFS= read -r -d '' l_file_abs; do
-          rel_path="${l_file_abs#$local_skill_path/}"
-          r_file_abs="$remote_skill_path/$rel_path"
+      if [ "$skill_name" = "sfp-personas" ]; then
+        # File-by-file synchronization for sfp-personas
+        while IFS= read -r -d '' r_file_abs; do
+          rel_path="${r_file_abs#$remote_skill_path/}"
+          l_file_abs="$local_skill_path/$rel_path"
           
-          if [ ! -f "$r_file_abs" ]; then
+          if [ ! -f "$l_file_abs" ]; then
+            mkdir -p "$(dirname "$l_file_abs")"
+            cp "$r_file_abs" "$l_file_abs"
+          else
+            r_hash=$(get_sha256 "$r_file_abs")
+            l_hash=$(get_sha256 "$l_file_abs")
+            if [ "$r_hash" != "$l_hash" ]; then
+              CONFIRM=false
+              if [ "$YES" = true ]; then
+                CONFIRM=true
+              else
+                if [ -n "$CI" ] || [ ! -w /dev/tty ]; then
+                  echo "Error: Non-interactive environment detected and no -y/--yes flag was provided to overwrite '$rel_path'." >&2
+                  exit 1
+                fi
+                echo -n "Remote persona '$rel_path' has updates. Overwrite your local modifications? (y/N): "
+                read -r RESPONSE < /dev/tty
+                if [[ "$RESPONSE" =~ ^[yY]$ ]]; then
+                  CONFIRM=true
+                fi
+              fi
+              if [ "$CONFIRM" = true ]; then
+                cp "$r_file_abs" "$l_file_abs"
+                echo "Updated '$rel_path'."
+              else
+                echo "Skipped updating '$rel_path'."
+              fi
+            fi
+          fi
+        done < <(find "$remote_skill_path" -type f -print0)
+      else
+        # Compare local and remote skill contents recursively
+        DIFFERENT=false
+        
+        # We check files in remote vs local
+        while IFS= read -r -d '' r_file_abs; do
+          rel_path="${r_file_abs#$remote_skill_path/}"
+          l_file_abs="$local_skill_path/$rel_path"
+          
+          if [ ! -f "$l_file_abs" ]; then
             DIFFERENT=true
             break
           fi
-        done < <(find "$local_skill_path" -type f -print0)
-      fi
-      
-      if [ "$DIFFERENT" = true ]; then
-        echo "Updating skill '$skill_name'..."
-        if ! rm -rf "$local_skill_path"; then
-          echo "Error: Failed to remove old skill directory '$local_skill_path'." >&2
-          exit 2
+          
+          r_hash=$(get_sha256 "$r_file_abs")
+          l_hash=$(get_sha256 "$l_file_abs")
+          if [ "$r_hash" != "$l_hash" ]; then
+            DIFFERENT=true
+            break
+          fi
+        done < <(find "$remote_skill_path" -type f -print0)
+        
+        # We check if local has extra files not in remote
+        if [ "$DIFFERENT" = false ]; then
+          while IFS= read -r -d '' l_file_abs; do
+            rel_path="${l_file_abs#$local_skill_path/}"
+            r_file_abs="$remote_skill_path/$rel_path"
+            
+            if [ ! -f "$r_file_abs" ]; then
+              DIFFERENT=true
+              break
+            fi
+          done < <(find "$local_skill_path" -type f -print0)
         fi
-        if ! cp -R "$remote_skill_path" "$local_skill_path"; then
-          echo "Error: Failed to copy updated skill '$skill_name'." >&2
-          exit 2
+        
+        if [ "$DIFFERENT" = true ]; then
+          echo "Updating skill '$skill_name'..."
+          if ! rm -rf "$local_skill_path"; then
+            echo "Error: Failed to remove old skill directory '$local_skill_path'." >&2
+            exit 2
+          fi
+          if ! cp -R "$remote_skill_path" "$local_skill_path"; then
+            echo "Error: Failed to copy updated skill '$skill_name'." >&2
+            exit 2
+          fi
         fi
       fi
     fi

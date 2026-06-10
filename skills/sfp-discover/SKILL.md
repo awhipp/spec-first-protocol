@@ -59,6 +59,7 @@ phase: discover
 iteration: 1
 max_iterations: 5
 last_updated: <current ISO-8601 timestamp>
+persona: <selected-persona-slug> # Only if a persona was selected
 ---
 ```
 
@@ -80,7 +81,7 @@ Assess whether the user's request warrants a full specification cycle before pro
    interview."). If the owner overrides, proceed to First Turn.
 2. **High complexity (proceed with spec)**: The request involves multiple
    components, new architecture, has unclear scope, or explicitly requests a
-   specification. Proceed directly to First Turn. No triage announcement is
+   specification. Proceed directly to Persona Selection. No triage announcement is
    needed.
 3. **Uncertain**: Ask 1–2 targeted clarifying questions to determine complexity,
    then resolve to one of the paths above.
@@ -88,6 +89,27 @@ Assess whether the user's request warrants a full specification cycle before pro
 **Triage Guardrail**: When in doubt, err toward proceeding with the
 specification. Use this as a tiebreaker *after* clarifying questions if
 complexity remains unclear; it must not bypass clarification.
+
+## Persona Selection
+
+Before the First Turn, check if a domain-specific persona is a good fit for the request.
+
+1. **Detection**: Check the colocated `../sfp-personas/` directory for any Markdown
+   persona files (ignoring files prefixed with `_`).
+2. **Intelligent Recommendation**: Parse the YAML metadata (`domain` and `description`)
+   of the available personas and compare them to the user's initial prompt or scope.
+3. **User Prompts**: If a strong similarity match is found, dynamically recommend the
+   most relevant persona (or list matching ones). Ask the user if they would like to use
+   it, choose a different one, or proceed in the default domain-agnostic mode.
+4. **Behavior Adoption**: If a persona is selected (e.g., `stock-trader.md`), read its
+   prompts and specification templates to adjust your discovery interview behavior and
+   schema structure. Ensure you record the persona's base filename (excluding `.md`)
+   as the `persona` slug in the `status.md` initialization.
+   - **Tone & Style**: Adopt the tone and style defined in the Persona. If no Persona is loaded,
+     default to a neutral, professional tone.
+   - **Anti-Patterns**: Strictly adhere to any anti-patterns or exclusions defined in the Persona.
+   - **Knowledge Context**: Use the provided glossary or context to understand domain terminology
+     without asking the user for basic definitions.
 
 ## First Turn
 

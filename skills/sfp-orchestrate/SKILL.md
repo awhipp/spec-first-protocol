@@ -124,8 +124,9 @@ IF zero blockers:
 ```
 
 After each audit-refine cycle, write the updated `iteration` count and
-`last_updated` timestamp back to `status.md`. This ensures the iteration
-state survives context clears.
+`last_updated` timestamp back to `status.md`. Ensure you preserve the `persona` field
+in `status.md` if it exists. This ensures the iteration state and persona context
+survive context clears.
 
 If the owner chooses to continue past `max_iterations`, reset the counter
 or increase `max_iterations` in `status.md` per the owner's preference.
