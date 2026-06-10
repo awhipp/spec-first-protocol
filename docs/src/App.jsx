@@ -29,7 +29,7 @@ export default function App() {
       </header>
 
       <main className="w-full max-w-[1100px] mx-auto px-6 py-[80px] flex flex-col gap-[100px]">
-        
+
         {/* Hero Section */}
         <section className="flex flex-col items-center text-center pt-[50px] pb-[20px]">
           <h1 className="text-[3.5rem] leading-[1.2] font-header font-extrabold tracking-tight max-w-[800px] mb-[18px]">
@@ -58,7 +58,7 @@ export default function App() {
               The Spec-First Protocol (SFP) operates upstream of any execution framework. It acts as an adversarial validation layer, ensuring requirements are captured, audited, and locked before execution begins.
             </p>
           </div>
-          
+
           <div className="w-full flex flex-col items-center mt-8">
             <div className="w-full max-w-4xl">
               <TerminalSimulator />
@@ -86,41 +86,41 @@ export default function App() {
               <tbody className="text-[1rem]">
                 <tr className="border-b border-border-primary">
                   <td className="py-[20px] px-[24px] border-r border-border-primary bg-red-50/20">
-                    <strong className="inline-block text-[1.05rem] mb-1 text-text-primary">Invisible Scope Creep</strong><br/>
+                    <strong className="inline-block text-[1.05rem] mb-1 text-text-primary">Invisible Scope Creep</strong><br />
                     <span className="text-text-secondary">Starting execution without a base specification causes silent requirement expansion and makes change tracking impossible.</span>
                   </td>
                   <td className="py-[20px] px-[24px] bg-green-50/25">
-                    <strong className="inline-block text-[1.05rem] mb-1 text-success-primary">Structured Interview</strong><br/>
+                    <strong className="inline-block text-[1.05rem] mb-1 text-success-primary">Structured Interview</strong><br />
                     <span className="text-text-secondary">The discover skill captures and boundaries requirements before execution begins, forcing alignment on scope boundaries.</span>
                   </td>
                 </tr>
                 <tr className="border-b border-border-primary">
                   <td className="py-[20px] px-[24px] border-r border-border-primary bg-red-50/20">
-                    <strong className="inline-block text-[1.05rem] mb-1 text-text-primary">Compounding Rework</strong><br/>
+                    <strong className="inline-block text-[1.05rem] mb-1 text-text-primary">Compounding Rework</strong><br />
                     <span className="text-text-secondary">Starting execution with undefined requirements forces costly rework, structural breakages, and endless stop-and-ask cycles.</span>
                   </td>
                   <td className="py-[20px] px-[24px] bg-green-50/25">
-                    <strong className="inline-block text-[1.05rem] mb-1 text-success-primary">Adversarial Audit</strong><br/>
+                    <strong className="inline-block text-[1.05rem] mb-1 text-success-primary">Adversarial Audit</strong><br />
                     <span className="text-text-secondary">The audit skill reviews specifications for gaps and contradictions before execution starts, catching issues early.</span>
                   </td>
                 </tr>
                 <tr className="border-b border-border-primary">
                   <td className="py-[20px] px-[24px] border-r border-border-primary bg-red-50/20">
-                    <strong className="inline-block text-[1.05rem] mb-1 text-text-primary">Drift From Intent</strong><br/>
+                    <strong className="inline-block text-[1.05rem] mb-1 text-text-primary">Drift From Intent</strong><br />
                     <span className="text-text-secondary">Executing from fragmented chat threads forces agents to guess, producing deliverables that miss the project owner's real needs.</span>
                   </td>
                   <td className="py-[20px] px-[24px] bg-green-50/25">
-                    <strong className="inline-block text-[1.05rem] mb-1 text-success-primary">Zero Placeholder Invariant</strong><br/>
+                    <strong className="inline-block text-[1.05rem] mb-1 text-success-primary">Zero Placeholder Invariant</strong><br />
                     <span className="text-text-secondary">Guarantees that every section is either fully written or omitted. No stubs, TODOs, or empty headings survive.</span>
                   </td>
                 </tr>
                 <tr>
                   <td className="py-[20px] px-[24px] border-r border-border-primary bg-red-50/20">
-                    <strong className="inline-block text-[1.05rem] mb-1 text-text-primary">AI Context Drift</strong><br/>
+                    <strong className="inline-block text-[1.05rem] mb-1 text-text-primary">AI Context Drift</strong><br />
                     <span className="text-text-secondary">Feeding entire raw chat histories to execution agents wastes token budgets and amplifies hallucination risk with every turn.</span>
                   </td>
                   <td className="py-[20px] px-[24px] bg-green-50/25">
-                    <strong className="inline-block text-[1.05rem] mb-1 text-success-primary">Decoupled Lifecycle</strong><br/>
+                    <strong className="inline-block text-[1.05rem] mb-1 text-success-primary">Decoupled Lifecycle</strong><br />
                     <span className="text-text-secondary">Locks a dense, structured specification. Downstream executors get exactly what they need, minimizing token bloat.</span>
                   </td>
                 </tr>
@@ -155,10 +155,10 @@ export default function App() {
             <h2 className="text-[2.25rem] font-header font-extrabold mb-[8px] text-text-primary tracking-tight">Spec Explorer</h2>
             <p className="text-[1.1rem] text-text-secondary">Browse locked protocol artifacts. Inspect SFP's own implementation specifications.</p>
           </div>
-          
+
           <h3 className="text-[1.5rem] font-header font-extrabold text-text-primary mt-2">Software Engineering</h3>
-          
-          <SpecExplorer 
+
+          <SpecExplorer
             title="Skill Distribution"
             description="I need a way to distribute and install these agentic skills with one click."
             badge="Dependency-free installer scripts (install.sh / install.ps1) and release packaging workflows that distribute SFP skills to local project roots or user global directories."
@@ -167,7 +167,7 @@ export default function App() {
             ]}
           />
 
-          <SpecExplorer 
+          <SpecExplorer
             title="SFP UI"
             description="I need a flashy, easy-to-update static marketing website under /docs to showcase Spec-First Protocol."
             badge="A responsive single-page marketing site under docs/ (React SPA) demonstrating SFP concepts, setup guides, and standard reference guides."
@@ -176,9 +176,13 @@ export default function App() {
             ]}
           />
 
+          <span id="not-just-for-engineers"></span>
+
           <div className="mt-12 mb-6">
-            <h3 className="text-[2rem] font-header font-extrabold text-text-primary flex items-center gap-2">Domain Expertise & Personas</h3>
+            <h3 className="text-[1.5rem] font-header font-extrabold text-text-primary mt-2">Domain Expertise & Personas</h3>
             <p className="text-text-secondary mt-2 text-[1.1rem] leading-[1.6]">
+              ⚠️ <strong>Not just for engineers.</strong>
+              <br /><br />
               SFP is fundamentally domain-agnostic. By using <strong>Personas</strong>, SFP adopts domain-specific expertise, targeted discovery prompts, and specialized auditing rules without coupling the core skills to any single domain.
             </p>
           </div>
@@ -227,7 +231,7 @@ export default function App() {
             </table>
           </div>
 
-          <SpecExplorer 
+          <SpecExplorer
             title="Travel Advisor: Disney Vacation"
             description="I am looking to plan out my perfect 4 day vacation to Walt Disney World Florida with my family of 4."
             badge="A locked specification output directly by the Travel Advisor persona detailing park itineraries, budgeting constraints, logistical checklists, and packing lists."
