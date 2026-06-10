@@ -30,14 +30,20 @@ integrity and surface problems.
   `.sfp/YYYY-MM-DD_<SLUG>/discovery_notes.md`.
 - **Conversation context**: The full discussion history, to verify that the
   spec faithfully represents the project owner's intent.
+- **Persona Context**: Read `.sfp/YYYY-MM-DD_<SLUG>/status.md`. If the `persona` field
+  is present, load the corresponding Persona file from the colocated `../sfp-personas/`
+  directory (e.g., `../sfp-personas/<slug>.md`). If the file is missing or malformed,
+  halt execution and report the error to the user immediately.
 
 ## Audit Process
 
 1. Load the audit report format from the
    [Audit Report Format Template](#audit-report-format-template) below.
-2. Compare the specification against the Discovery Notes and conversation
-   context.
-3. Approach the specification with a **fresh expert perspective**, as if
+2. If a Persona was loaded, apply the specific auditing rules, edge cases, and
+   verification guidelines defined in the Persona file during your review.
+3. Compare the specification against the Discovery Notes, Persona constraints,
+   and conversation context.
+4. Approach the specification with a **fresh expert perspective**, as if
    encountering the requirements for the first time. For each section of the
    specification, verify against this minimum checklist:
    - **Workflows**: Every workflow has defined entry conditions, step sequences,
@@ -48,17 +54,17 @@ integrity and surface problems.
      or verification method described.
    - **Boundaries**: Inclusions and exclusions are explicit and do not
      contradict each other.
-4. Perform **traceable completeness verification**:
+5. Perform **traceable completeness verification**:
    - Enumerate each locked requirement from the Discovery Notes.
    - For each requirement, identify the corresponding specification section(s).
-   - Any requirement that does not map to a specification section is a
-     **Blocker** finding (critical missing capability).
+   - Any requirement that does not map to a section is a **Blocker** finding
+     (critical missing capability).
    - Any requirement that maps to a section but is only partially represented
      is a **Warning** finding.
-5. Classify each remaining finding by severity.
-6. Output the structured **Audit Report** to
+6. Classify each remaining finding by severity.
+7. Output the structured **Audit Report** to
    `.sfp/YYYY-MM-DD_<SLUG>/audit_report.md`.
-7. Update `.sfp/YYYY-MM-DD_<SLUG>/status.md`: set `phase` to `audit`,
+8. Update `.sfp/YYYY-MM-DD_<SLUG>/status.md`: set `phase` to `audit`,
    increment `iteration` (if this is not the first audit pass), and update
    `last_updated` to the current ISO-8601 timestamp. If `status.md` does not
    exist, create it with `iteration: 1` and `max_iterations: 5`.

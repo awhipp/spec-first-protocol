@@ -30,6 +30,10 @@ established the scope. You are resolving known issues surgically.
 - **Discovery Notes**: The existing validated requirements from prior
   discovery or refinement cycles, located at
   `.sfp/YYYY-MM-DD_<SLUG>/discovery_notes.md`.
+- **Persona Context**: Read `.sfp/YYYY-MM-DD_<SLUG>/status.md`. If the `persona` field
+  is present, load the corresponding Persona file from the colocated `../sfp-personas/`
+  directory (e.g., `../sfp-personas/<slug>.md`). If the file is missing or malformed,
+  halt execution and report the error to the user immediately.
 
 ## Incremental Review Loop
 
@@ -134,6 +138,8 @@ After the owner approves recompilation:
    questions.
 4. Map each extracted element to the appropriate section of the schema.
 5. Adapt the schema to the domain:
+   - If a Persona was loaded, integrate any custom sections and schema structural
+     modifications specified in the Persona file.
    - Add sections that the domain requires.
    - Omit sections that do not apply.
    - Rename section headings to use the project owner's terminology where it
@@ -180,6 +186,11 @@ After the owner approves recompilation:
   vague to update the Discovery Notes with a clear decision, ask for elaboration.
   Frame the follow-up around what is needed for a concrete update. Accept the owner's
   response if they decline to elaborate further.
+- **Tone & Style**: Adopt the tone and style defined in the Persona. If no Persona is loaded,
+  default to a neutral, professional tone.
+- **Anti-Patterns**: Strictly adhere to any anti-patterns or exclusions defined in the Persona.
+- **Knowledge Context**: Use the provided glossary or context to understand domain terminology
+  without asking the user for basic definitions.
 
 ## Output
 

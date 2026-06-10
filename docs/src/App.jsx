@@ -176,17 +176,61 @@ export default function App() {
             ]}
           />
 
-          <div className="mt-8">
-            <h3 className="text-[1.5rem] font-header font-extrabold text-text-primary flex items-center gap-2">⚠️ Not Just For Engineers</h3>
-            <p className="text-text-secondary mt-2 text-[1.05rem] leading-[1.6]">
-              SFP is fundamentally domain-agnostic. It works for planning vacations, designing policies, timing multi-course holiday meals, or writing books just as well as it does for software engineering.
+          <div className="mt-12 mb-6">
+            <h3 className="text-[2rem] font-header font-extrabold text-text-primary flex items-center gap-2">Domain Expertise & Personas</h3>
+            <p className="text-text-secondary mt-2 text-[1.1rem] leading-[1.6]">
+              SFP is fundamentally domain-agnostic. By using <strong>Personas</strong>, SFP adopts domain-specific expertise, targeted discovery prompts, and specialized auditing rules without coupling the core skills to any single domain.
             </p>
           </div>
 
+          <div className="overflow-x-auto border border-border-primary rounded-[10px] bg-bg-primary shadow-sm mb-8">
+            <table className="w-full text-left border-collapse min-w-[700px]">
+              <thead>
+                <tr className="bg-bg-secondary border-b border-border-primary">
+                  <th className="py-[16px] px-[24px] font-header font-bold text-text-primary border-r border-border-primary">Persona</th>
+                  <th className="py-[16px] px-[24px] font-header font-bold text-text-primary border-r border-border-primary">Domain</th>
+                  <th className="py-[16px] px-[24px] font-header font-bold text-text-primary">Specialization</th>
+                </tr>
+              </thead>
+              <tbody className="text-[1rem] text-text-secondary">
+                <tr className="border-b border-border-primary hover:bg-slate-50 transition-colors">
+                  <td className="py-[16px] px-[24px] text-text-primary font-medium border-r border-border-primary">Curriculum Designer</td>
+                  <td className="py-[16px] px-[24px] border-r border-border-primary">Education</td>
+                  <td className="py-[16px] px-[24px]">Learning objectives, assessments, accessibility.</td>
+                </tr>
+                <tr className="border-b border-border-primary hover:bg-slate-50 transition-colors">
+                  <td className="py-[16px] px-[24px] text-text-primary font-medium border-r border-border-primary">Event Planner</td>
+                  <td className="py-[16px] px-[24px] border-r border-border-primary">Event Coordination</td>
+                  <td className="py-[16px] px-[24px]">Vendor coordination, run-of-show, venue capacity.</td>
+                </tr>
+                <tr className="border-b border-border-primary hover:bg-slate-50 transition-colors">
+                  <td className="py-[16px] px-[24px] text-text-primary font-medium border-r border-border-primary">Fitness Coach</td>
+                  <td className="py-[16px] px-[24px] border-r border-border-primary">Health & Fitness</td>
+                  <td className="py-[16px] px-[24px]">Biometrics, macros, progressive overload.</td>
+                </tr>
+                <tr className="border-b border-border-primary hover:bg-slate-50 transition-colors">
+                  <td className="py-[16px] px-[24px] text-text-primary font-medium border-r border-border-primary">RPG Campaign Master</td>
+                  <td className="py-[16px] px-[24px] border-r border-border-primary">Tabletop RPGs</td>
+                  <td className="py-[16px] px-[24px]">Narrative arcs, NPC hooks, milestone leveling.</td>
+                </tr>
+                <tr className="border-b border-border-primary hover:bg-slate-50 transition-colors">
+                  <td className="py-[16px] px-[24px] text-text-primary font-medium border-r border-border-primary">Stock Market Advisor</td>
+                  <td className="py-[16px] px-[24px] border-r border-border-primary">Stock Trading</td>
+                  <td className="py-[16px] px-[24px]">Risk tolerance, asset allocation, sector exclusions.</td>
+                </tr>
+                <tr className="hover:bg-slate-50 transition-colors">
+                  <td className="py-[16px] px-[24px] text-text-primary font-medium border-r border-border-primary">Travel Advisor</td>
+                  <td className="py-[16px] px-[24px] border-r border-border-primary">Travel Planning</td>
+                  <td className="py-[16px] px-[24px]">Logistics, strict budgets, daily itineraries.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
           <SpecExplorer 
-            title="Disney Vacation"
+            title="Travel Advisor: Disney Vacation"
             description="I am looking to plan out my perfect 4 day vacation to Walt Disney World Florida with my family of 4."
-            badge="A locked specification detailing park itineraries, budgeting constraints, logistical checklists, and packing lists."
+            badge="A locked specification output directly by the Travel Advisor persona detailing park itineraries, budgeting constraints, logistical checklists, and packing lists."
             category="non-software"
             filePaths={[
               { label: 'Specification', path: 'non-software/2026-06-02_PERFECT-DISNEY-VACATION_SPEC.md' },

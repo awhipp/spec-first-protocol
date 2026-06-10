@@ -18,21 +18,36 @@ center for SFP skills and hosts the protocol's onboarding website.
   third-party skills must not use the `sfp-` prefix.
 - **Installer & Updater Scripts**: Shell scripting (`install.sh` and `update.sh`
   for macOS/Linux, and `install.ps1` and `update.ps1` for Windows PowerShell).
-- **Onboarding App & Tooling**: Static client-side JS (`docs/app.js`), CSS, and
-  HTML. Node.js is leveraged for documentation builders
-  (`scripts/build-docs.js`) and local Markdown linting tools.
+- **Onboarding App & Tooling**: A Vite + React 19 single-page application
+  (`docs/`) using Tailwind CSS 4 for styling, with Vitest for unit testing,
+  ESLint for linting, and Prettier for formatting. A Node.js build helper
+  (`scripts/build-docs.js`) pre-processes specification data for the portal.
 
 ### Component Map
 
 ```text
 spec-first-protocol/
-├── .github/workflows/          # CI/CD pipelines (linter, releases)
-├── docs/                       # Onboarding & marketing static website
-│   ├── data/                   # Example specifications displayed on site
-│   ├── app.js                  # Client interaction logic for site
-│   └── index.html              # Marketing page
+├── .github/workflows/          # CI/CD pipelines
+│   ├── deploy-portal.yml       # Vite build, test & GitHub Pages deploy
+│   ├── lint.yml                # Markdown linting on push/PR
+│   ├── release-skills.yml      # Release-please + skills.zip packaging
+│   └── validate-scripts.yml    # Cross-platform installer/updater tests
+├── docs/                       # Onboarding & marketing portal (Vite + React)
+│   ├── public/                 # Static assets directory served directly
+│   │   └── data/               # Example specifications displayed on site
+│   ├── src/                    # React source code
+│   │   ├── App.jsx             # Main application component
+│   │   ├── components/         # Reusable UI components
+│   │   ├── index.css           # Global styles (Tailwind)
+│   │   └── main.jsx            # Application entrypoint
+│   ├── index.html              # HTML shell
+│   ├── vite.config.js          # Vite build configuration
+│   ├── eslint.config.js        # ESLint configuration
+│   └── package.json            # Dependencies & scripts
 ├── examples/                   # Reference specifications (frozen)
-├── scripts/                    # Installer, updater & documentation build helper scripts
+│   └── non-software/           # Non-software domain examples
+├── scripts/                    # Installer, updater & build helper scripts
+│   ├── build-docs.js           # Pre-processes spec data for the portal
 │   ├── install.sh              # Unix bootstrap installer script
 │   ├── install.ps1             # Windows bootstrap installer script
 │   ├── update.sh               # Unix updater template
@@ -41,7 +56,8 @@ spec-first-protocol/
     ├── sfp-discover/           # Requirements discovery & compilation
     ├── sfp-audit/              # Adversarial review & finalization gate
     ├── sfp-refine/             # Finding resolution & re-compilation
-    └── sfp-orchestrate/        # Continuous pipeline orchestrator
+    ├── sfp-orchestrate/        # Continuous pipeline orchestrator
+    └── sfp-personas/           # Domain-specific persona configurations
 ```
 
 ---
@@ -154,8 +170,11 @@ constraints:
 ### Markdown Linting
 
 - All Markdown files must comply with the project's `.markdownlint.json` rules.
-- **Ignored Files**: The `markdownlint-cli2` configuration intentionally ignores transient, draft, and reference
-  directories/files (e.g., `.sfp/**` and `**_SPEC**.md`) because they are temporary protocol workspace assets.
+- **Ignored Files**: The `markdownlint-cli2` configuration ignores transient,
+  generated, and reference paths: `CLAUDE.md`,
+  `.github/copilot-instructions.md`, `CHANGELOG.md`, `examples/**`,
+  `docs/public/data/**`, `**_SPEC**.md`, `.sfp/**`, `**/node_modules/**`, and
+  `**/dist/**`.
 - **Local Verification Command**: Run the following command to lint Markdown
   files locally:
 
@@ -180,6 +199,8 @@ constraints:
 - YAML description: Must be $\le$ 200 characters for reliable routing across
   agents.
 - Reference documents: Must be $\le$ 300 lines (approximately 6 KB) per file.
+- Persona files: Must be $\le$ 300 lines per file to remain within
+  supplementary material limits.
 
 ### Skill Naming Conventions
 
@@ -189,6 +210,16 @@ constraints:
   This distinction prevents namespace conflicts and ensures that updater scripts
   (`update.sh` and `update.ps1`) do not attempt to modify or delete custom
   local skills.
+
+### Persona Naming Conventions
+
+- Persona configuration files inside `skills/sfp-personas/` must use
+  lowercase, hyphenated filenames matching the persona slug (e.g.,
+  `travel-advisor.md`).
+- Files prefixed with `_` (e.g., `_TEMPLATE.md`) are excluded from persona
+  detection and serve as scaffolding templates.
+- Each persona file must contain YAML frontmatter with `name`, `domain`,
+  and `description` fields to enable intelligent matching during discovery.
 
 ### Communication Style
 
@@ -234,12 +265,16 @@ constraints:
 ### System Boundaries & Modification Constraints
 
 - **Frozen Specs**: The examples under `examples/` and static reference spec
-  files inside `docs/data/` are frozen references. Do not modify them unless
+  files inside `docs/public/data/` are frozen references. Do not modify them unless
   explicitly asked.
 - **Skill-Frontend Sync**: If changes are made to core SFP skills in `skills/`
   that affect their default paths, parameters, or configurations, those changes
-  must be mirrored in the onboarding website client logic (`docs/app.js`) and
-  the docs builder (`scripts/build-docs.js`).
+  must be mirrored in the onboarding portal source (`docs/src/App.jsx` and
+  `docs/src/components/`) and the docs builder (`scripts/build-docs.js`).
+- **Persona Schema Integrity**: Persona files in `skills/sfp-personas/` must
+  follow the schema defined in `_TEMPLATE.md`. Changes to the persona schema
+  must be reflected in the template, the personas README, and all existing
+  persona files.
 - **Shell Scripting Safe Mode**: When modifying `scripts/install.sh`,
   `scripts/install.ps1`, `scripts/update.sh`, or `scripts/update.ps1`, agents
   must test the scripts using temporary, non-system destination folders.

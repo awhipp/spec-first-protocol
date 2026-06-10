@@ -292,14 +292,28 @@ produced:
 - Robust, dependency-minimal installer scripts (`scripts/install.sh` and `scripts/install.ps1`)
 - A release workflow (`.github/workflows/release-skills.yml`)
 
-### Not Just For Engineers
+### Domain Expertise & Personas
 
-SFP is fundamentally **domain-agnostic**. To see how it applies outside of software engineering, review the locked
-specification for planning a family vacation to Walt Disney World:
+SFP is fundamentally **domain-agnostic**. To enforce specific domain rules without coupling the core
+skills, SFP supports **Personas**.
+
+When SFP starts, the interactive triage dynamically detects the project scope and recommends a
+colocated Persona file from `skills/sfp-personas/`. Once selected, SFP adopts the persona's tone,
+injecting specialized discovery prompts, custom templates, and strict auditing rules (e.g.,
+verifying a budget constraint for travel, or max drawdown for stocks).
+
+| Persona | Domain | Specialization |
+| :--- | :--- | :--- |
+| **Curriculum Designer** | Education | Learning objectives, assessments, accessibility. |
+| **Event Planner** | Event Coordination | Vendor coordination, run-of-show, venue capacity. |
+| **Fitness Coach** | Health & Fitness | Biometrics, macros, progressive overload. |
+| **RPG Campaign Master** | Tabletop RPGs | Narrative arcs, NPC hooks, milestone leveling. |
+| **Stock Market Advisor** | Stock Trading | Risk tolerance, asset allocation, sector exclusions. |
+| **Travel Advisor** | Travel Planning | Logistics, strict budgets, daily itineraries. |
+
+To see how SFP acts as a Travel Advisor, review the locked specification for planning a family
+vacation to Walt Disney World, output directly by the Travel Advisor persona:
 **[Disney Vacation Spec](examples/non-software/2026-06-02_PERFECT-DISNEY-VACATION_SPEC.md)**
-
-This example demonstrates how SFP can extract requirements (budget, family constraints), audit the itinerary for
-logistical gaps, and generate comprehensive non-code artifacts like packing lists and booking checklists.
 
 ---
 
