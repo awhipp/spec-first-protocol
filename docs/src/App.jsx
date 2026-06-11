@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { Terminal, Github } from 'lucide-react';
 import TerminalSimulator from './components/TerminalSimulator';
 import Flowchart from './components/Flowchart';
@@ -5,6 +6,30 @@ import InstallerSelector from './components/InstallerSelector';
 import SpecExplorer from './components/SpecExplorer';
 
 export default function App() {
+  useEffect(() => {
+    const handleHashScroll = () => {
+      const hash = window.location.hash;
+      if (hash) {
+        const id = hash.substring(1); // remove '#'
+        const element = document.getElementById(id);
+        if (element) {
+          element.scrollIntoView({ behavior: 'smooth' });
+        }
+      }
+    };
+
+    // Run on mount with a brief timeout to ensure layout is complete and stable
+    const timer = setTimeout(handleHashScroll, 100);
+
+    // Handle hash changes (e.g., clicking hash links, back/forward browser navigation)
+    window.addEventListener('hashchange', handleHashScroll);
+
+    return () => {
+      clearTimeout(timer);
+      window.removeEventListener('hashchange', handleHashScroll);
+    };
+  }, []);
+
   return (
     <div className="min-h-screen bg-bg-primary text-text-primary font-body antialiased flex flex-col items-center">
       {/* Header */}
@@ -176,14 +201,14 @@ export default function App() {
             ]}
           />
 
-          <span id="not-just-for-engineers"></span>
-
-          <div className="mt-12 mb-6">
+          <div id="not-just-for-engineers" className="mt-12 mb-6 scroll-m-[80px]">
             <h3 className="text-[1.5rem] font-header font-extrabold text-text-primary mt-2">Domain Expertise & Personas</h3>
             <p className="text-text-secondary mt-2 text-[1.1rem] leading-[1.6]">
               ⚠️ <strong>Not just for engineers.</strong>
               <br /><br />
               SFP is fundamentally domain-agnostic. By using <strong>Personas</strong>, SFP adopts domain-specific expertise, targeted discovery prompts, and specialized auditing rules without coupling the core skills to any single domain.
+              <br /><br />
+              You can use the <strong>Spec Personas</strong> skill to interactively build your own custom personas or refine existing ones without manually writing the configuration files.
             </p>
           </div>
 

@@ -152,6 +152,10 @@ specification.
   creating implementation plans, task lists, or executing code modifications
   to satisfy the spec deliverables. You must announce completion and stop,
   leaving downstream execution to a separate, explicit user request.
+- **Succinct Communication & Visual UX.** When interacting with the project owner or presenting the audit status:
+  - Keep paragraphs as brief as needed to convey the information.
+  - Eliminate conversational pleasantries, verbose setups, or repetitive summaries.
+  - Present recommendations and next steps as clear, bulleted items.
 
 ## Suggested Next Skill
 

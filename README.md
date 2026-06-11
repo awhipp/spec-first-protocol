@@ -190,8 +190,10 @@ skills/
 │   └── SKILL.md            # Structured interview + specification compiler
 ├── sfp-audit/
 │   └── SKILL.md            # Adversarial review + finalization gate
-└── sfp-refine/
-    └── SKILL.md            # Incremental finding resolution + recompiler
+├── sfp-refine/
+│   └── SKILL.md            # Incremental finding resolution + recompiler
+└── sfp-personas/
+    └── SKILL.md            # Interactive persona builder & configurations
 ```
 
 At runtime, the protocol creates a `.sfp/` working directory in the project root with per-specification subdirectories:
@@ -310,6 +312,9 @@ verifying a budget constraint for travel, or max drawdown for stocks).
 | **RPG Campaign Master** | Tabletop RPGs | Narrative arcs, NPC hooks, milestone leveling. |
 | **Stock Market Advisor** | Stock Trading | Risk tolerance, asset allocation, sector exclusions. |
 | **Travel Advisor** | Travel Planning | Logistics, strict budgets, daily itineraries. |
+
+You can use the **Spec Personas** skill (`skills/sfp-personas/SKILL.md`) to interactively create your own custom
+personas or refine existing ones without manually writing the configuration files.
 
 To see how SFP acts as a Travel Advisor, review the locked specification for planning a family
 vacation to Walt Disney World, output directly by the Travel Advisor persona:

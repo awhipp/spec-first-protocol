@@ -181,9 +181,9 @@ skill must be followed exactly as written.
 - **No phase skipping.** Every specification must pass through Discovery
   before Audit, and through Audit before Lock. Do not skip phases even
   if the project owner requests it.
-- **Announce transitions.** When moving between phases, explicitly tell
-  the project owner which phase is ending and which is beginning. This
-  maintains orientation in a long conversation.
+- **Announce transitions.** When moving between phases, explicitly tell the project owner which phase is ending and
+  which is beginning. Keep transition announcements brief and visually distinct (e.g.,
+  inside a blockquote or separated by blank lines).
 - **Preserve all skill guardrails.** The individual skills define
   guardrails (No Solutions, Contradiction Blocker, Scope Creep
   Containment, Zero Solution Design, No Silent Passes, etc.). All of
@@ -197,3 +197,5 @@ skill must be followed exactly as written.
   locked, the pipeline is complete. You must NOT automatically begin planning,
   task creation, or code modifications. You must announce completion and stop,
   prompting the user for next steps or waiting for their explicit instruction.
+- **Succinct Communication & Visual UX.** Ensure all orchestrator responses are direct, highly succinct, and free of
+  conversational fluff. Use bullet points and lists to make options or steps easily skimmable.
