@@ -1,5 +1,20 @@
 # Changelog
 
+## [1.7.0](https://github.com/awhipp/spec-first-protocol/compare/v1.6.0...v1.7.0) (2026-06-11)
+
+
+### Features
+
+* adds personas creation/refinement skill ([1fa1ba6](https://github.com/awhipp/spec-first-protocol/commit/1fa1ba6550002aa63e6615aadd60713760a03d61))
+
+
+### Bug Fixes
+
+* add #not-just-for-engineers back ([4bc70c4](https://github.com/awhipp/spec-first-protocol/commit/4bc70c46181154c54758fc64f5deeeb7859d900b))
+* add #not-just-for-engineers back ([92dec78](https://github.com/awhipp/spec-first-protocol/commit/92dec7826c830ab8645457651ecf65ed3250c4a3))
+* Ensuring conversational nature focuses on specific, brevity, and directness ([b600d6c](https://github.com/awhipp/spec-first-protocol/commit/b600d6cb718b53b655d47315893a72a8e59458ee))
+* scroll to hash on page load ([09c725e](https://github.com/awhipp/spec-first-protocol/commit/09c725e79614822faff58dc86c75af89303479ac))
+
 ## [1.6.0](https://github.com/awhipp/spec-first-protocol/compare/v1.5.0...v1.6.0) (2026-06-10)
 
 
