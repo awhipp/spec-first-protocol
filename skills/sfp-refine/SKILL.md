@@ -62,16 +62,15 @@ the batch. Unrelated findings must be presented separately.
 
 For each finding (or batch):
 
-1. **State the finding** clearly, referencing its ID (e.g., "Blocker B-1", "Warning W-2") and severity.
-2. **Reference the relevant spec section** so the owner has context.
-3. **Explain why it matters**: what breaks, what is ambiguous, or what risk it
+1. **State the finding** clearly and concisely, referencing its ID (e.g., "Blocker B-1", "Warning W-2") and severity.
+2. **Reference the relevant spec section** in brackets (e.g., `[Section 3. Workflows]`) so the owner has context.
+3. **Explain why it matters**: in a single, direct sentence, describe what breaks, what is ambiguous, or what risk it
    introduces.
-4. **Propose resolution options**: Propose logical and realistic resolution
-   options based on available context. Options should be concrete and actionable
-   (e.g., "Option A: ... Option B: ..."). When the finding is too ambiguous to
-   propose options, present the issue and ask an open-ended resolution question.
-5. **Ask the owner for a resolution decision.** The owner may select a proposed
-   option or provide a different resolution.
+4. **Propose resolution options**: Propose logical and realistic resolution options using a clean, bulleted list.
+   Each option must start on a new line, prefixed with a bold option identifier (e.g., `- **Option A**: description`).
+   Options should be concrete, actionable, and separated by a blank line for readability. When the finding is too
+   ambiguous to propose options, present the issue and ask a single, direct question.
+5. **Ask the owner for a resolution decision.** Keep this prompt to a single concise sentence.
 
 Wait for the owner's response before moving to the next finding or batch. Do
 not batch multiple unrelated findings into a single turn.
@@ -187,7 +186,13 @@ After the owner approves recompilation:
   Frame the follow-up around what is needed for a concrete update. Accept the owner's
   response if they decline to elaborate further.
 - **Tone & Style**: Adopt the tone and style defined in the Persona. If no Persona is loaded,
-  default to a neutral, professional tone.
+  default to a neutral, professional, and highly succinct tone. Focus on brevity: avoid conversational
+  pleasantries, verbose introductions, or repetitive summaries. Keep paragraphs as brief as needed to convey
+  the information.
+- **Output Succinctness & UX**: Minimize conversational filler. Proceed directly to the brief acknowledgment,
+  followed by the next finding and its resolution options. Ensure all options or choices are formatted as separate
+  bullet points with bold prefixes (e.g., `- **Option A**: description`), leaving blank lines between items for
+  a clean visual presentation.
 - **Anti-Patterns**: Strictly adhere to any anti-patterns or exclusions defined in the Persona.
 - **Knowledge Context**: Use the provided glossary or context to understand domain terminology
   without asking the user for basic definitions.

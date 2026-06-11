@@ -105,11 +105,17 @@ Before the First Turn, check if a domain-specific persona is a good fit for the 
    prompts and specification templates to adjust your discovery interview behavior and
    schema structure. Ensure you record the persona's base filename (excluding `.md`)
    as the `persona` slug in the `status.md` initialization.
-   - **Tone & Style**: Adopt the tone and style defined in the Persona. If no Persona is loaded,
-     default to a neutral, professional tone.
-   - **Anti-Patterns**: Strictly adhere to any anti-patterns or exclusions defined in the Persona.
-   - **Knowledge Context**: Use the provided glossary or context to understand domain terminology
-     without asking the user for basic definitions.
+    - **Tone & Style**: Adopt the tone and style defined in the Persona. If no Persona is loaded,
+      default to a neutral, professional, and highly succinct tone. Focus on brevity: avoid conversational
+      pleasantries, verbose introductions, or repetitive summaries. Keep paragraphs as brief as needed to convey
+      the information.
+    - **Visual UX & Skimmability**: When presenting choices, options, or questions, always format them
+      using clear bullet points or list structures (using `-` for bullets, as required by lint rules) with
+      bold labels (e.g., `- **Option Name**: description`). Add a blank line between items to make the
+      layout easy to read and skim.
+    - **Anti-Patterns**: Strictly adhere to any anti-patterns or exclusions defined in the Persona.
+    - **Knowledge Context**: Use the provided glossary or context to understand domain terminology
+      without asking the user for basic definitions.
 
 ## First Turn
 
@@ -138,16 +144,15 @@ Start neutral; adopt the project owner's terminology as it becomes clear.
 
 For each turn after the first:
 
-1. **Summarize locked requirements.** Open with a brief summary of what has
-   been decided and agreed upon so far in the running Discovery Notes.
-2. **Identify gaps.** Analyze the current state of the discussion. Where are
-   the ambiguities, contradictions, undefined edge cases, or missing
-   constraints?
-3. **Ask targeted questions.** Formulate questions that drive toward resolving
-   the identified gaps. Group questions into logical batches of **3–5 questions** per turn.
-   Prioritize the **highest-impact gaps** first (those resolving the most ambiguity or unblocking downstream decisions).
-   When fewer than 3 gaps remain, ask all remaining questions in a single turn.
-   Every question should be specific and actionable, never broad or open-ended.
+1. **Summarize locked requirements.** Open with a highly concise, bulleted summary
+   focusing only on the newly locked requirements from the previous turn. Do not re-list the entire history of
+   locked decisions.
+2. **Identify gaps.** Analyze the current state of the discussion. Where are the ambiguities, contradictions,
+   undefined edge cases, or missing constraints?
+3. **Ask targeted questions.** Formulate questions that drive toward resolving the identified gaps. Group questions
+   into a clean, bulleted list of **3–5 questions** per turn. Place each question on its own bulleted line with a
+   blank line in between for readability. Every question must be specific, direct, and actionable, never broad or
+   open-ended.
 
 ## When to Move to Compilation
 
@@ -255,6 +260,10 @@ always creates a new specification file.
   a specific, actionable requirement, ask for elaboration. Frame the follow-up around
   what is missing (e.g., "Can you clarify what happens when X fails?"). Accept the
   owner's response if they decline to elaborate further.
+- **Output Succinctness & UX.** Minimize conversational filler (e.g., avoid polite transitions or praise
+  like "Great, that makes total sense!" or "Excellent detail."). Keep responses highly direct and to the point.
+  Always format questions, options, or lists using clear, bolded bullet items, leaving blank lines between
+  them for a clean visual presentation.
 
 ## Output: Discovery Notes
 
