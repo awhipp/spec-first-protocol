@@ -24,3 +24,4 @@ management is not a concern.
 | [SFP-discover/](sfp-discover/SKILL.md) | **Spec Discover**: Conducts a structured discovery interview with the project owner to extract requirements, generating Discovery Notes and compiling them into a draft specification file. |
 | [SFP-audit/](sfp-audit/SKILL.md) | **Spec Audit**: Performs an adversarial review of a draft specification against the validated Discovery Notes to identify contradictions, gaps, and risks, and manages the finalization gate to lock the specification. |
 | [SFP-refine/](sfp-refine/SKILL.md) | **Spec Refine**: Walks through audit findings incrementally with the project owner to resolve issues, records decisions, and recompiles the draft specification. |
+| [SFP-personas/](sfp-personas/SKILL.md) | **Spec Personas**: Guides the user through creating a new custom persona configuration or refining/editing an existing one. |

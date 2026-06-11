@@ -95,7 +95,7 @@ complexity remains unclear; it must not bypass clarification.
 Before the First Turn, check if a domain-specific persona is a good fit for the request.
 
 1. **Detection**: Check the colocated `../sfp-personas/` directory for any Markdown
-   persona files (ignoring files prefixed with `_`).
+   persona files (ignoring `README.md`, `SKILL.md`, and any files prefixed with `_`).
 2. **Intelligent Recommendation**: Parse the YAML metadata (`domain` and `description`)
    of the available personas and compare them to the user's initial prompt or scope.
 3. **User Prompts**: If a strong similarity match is found, dynamically recommend the

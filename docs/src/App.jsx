@@ -207,6 +207,8 @@ export default function App() {
               ⚠️ <strong>Not just for engineers.</strong>
               <br /><br />
               SFP is fundamentally domain-agnostic. By using <strong>Personas</strong>, SFP adopts domain-specific expertise, targeted discovery prompts, and specialized auditing rules without coupling the core skills to any single domain.
+              <br /><br />
+              You can use the <strong>Spec Personas</strong> skill to interactively build your own custom personas or refine existing ones without manually writing the configuration files.
             </p>
           </div>
 

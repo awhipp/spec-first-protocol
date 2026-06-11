@@ -57,7 +57,7 @@ spec-first-protocol/
     ├── sfp-audit/              # Adversarial review & finalization gate
     ├── sfp-refine/             # Finding resolution & re-compilation
     ├── sfp-orchestrate/        # Continuous pipeline orchestrator
-    └── sfp-personas/           # Domain-specific persona configurations
+    └── sfp-personas/           # Persona creation, refinement & domain configurations
 ```
 
 ---
