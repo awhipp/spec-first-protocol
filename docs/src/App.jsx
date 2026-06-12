@@ -186,7 +186,7 @@ export default function App() {
           <SpecExplorer
             title="Skill Distribution"
             description="I need a way to distribute and install these agentic skills with one click."
-            badge="Dependency-free installer scripts (install.sh / install.ps1) and release packaging workflows that distribute SFP skills to local project roots or user global directories."
+            badge="Dynamic npx skills command generation and manual release packaging workflows that distribute SFP skills to local project roots or user global directories."
             filePaths={[
               { label: 'Specification', path: '2026-06-01_SKILL-DISTRIBUTION_SPEC.md' }
             ]}

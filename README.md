@@ -213,65 +213,71 @@ Draft specifications are written to the project root using the `YYYY-MM-DD_<SLUG
 
 ## Installation
 
-Install the protocol's skills using the automated bootstrap commands or manually copy/symlink them into your project.
+Install the protocol's skills using the CLI runner or manually download and extract the pre-packaged release zip file.
 
-### Environment Variable Override
+### CLI Installation (Recommended)
 
-Set the `SFP_REPO` environment variable to override the default repository for forks or mirrors:
-
-```bash
-export SFP_REPO=myorg/sfp-fork
-```
-
-```powershell
-$env:SFP_REPO = "myorg/sfp-fork"
-```
-
-The `-r` CLI flag takes precedence if both are set.
-
-### Automated Installation
-
-Run the appropriate command from your local project root or global config directory (i.e. `~/.claude`). The script
-installs the skills relative to the directory where it is run.
-
-#### macOS / Linux (Bash)
-
-**Default (local directory):**
+Run the following command in your local project root or global config directory. This requires
+[Node.js](https://nodejs.org/) (which includes `npx`). If you do not have Node.js installed,
+please use the [Manual Installation Fallback](#manual-installation-fallback) instead.
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/awhipp/spec-first-protocol/main/scripts/install.sh | bash
+npx skills add awhipp/spec-first-protocol
 ```
 
-**With integration choice** (e.g., install Claude skills in the current folder):
+#### Supported AI Agent Slugs
+
+By default, the CLI auto-detects all supported agents. You can target a specific AI agent
+integration using the `--agent` parameter:
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/awhipp/spec-first-protocol/main/scripts/install.sh | bash -s -- -i claude
+npx skills add awhipp/spec-first-protocol --agent claude-code
 ```
 
-#### Windows (PowerShell)
+Common supported agent slugs:
 
-**Default (local directory):**
+- **Claude Code**: `claude-code`
+- **Cursor**: `cursor`
+- **Windsurf**: `windsurf`
+- **GitHub Copilot**: `github-copilot`
+- **Cline**: `cline`
+- **Roo Code**: `roo`
+- **Aider**: `aider-desk`
+- **Antigravity**: `antigravity`
+- **Antigravity CLI**: `antigravity-cli`
 
-```powershell
-powershell -ExecutionPolicy Bypass -Command "irm https://raw.githubusercontent.com/awhipp/spec-first-protocol/main/scripts/install.ps1 | iex"
+#### Advanced Flags
+
+The runner supports several flags:
+
+- `-g`, `--global` — Installs the skills globally in the user's home folder rather than local project directories.
+- `--copy` — Copies files directly into agent target paths instead of generating symbolic links.
+- `-y`, `--yes` — Bypasses all confirmation prompts (ideal for non-interactive/CI environments).
+
+Example with combined options:
+
+```bash
+npx skills add awhipp/spec-first-protocol --agent cursor --global --copy --yes
 ```
 
-**With integration choice** (e.g., install Claude skills in the current folder):
+### Manual Installation Fallback
 
-```powershell
-powershell -ExecutionPolicy Bypass -Command "& ([scriptblock]::Create((irm https://raw.githubusercontent.com/awhipp/spec-first-protocol/main/scripts/install.ps1))) -i claude"
-```
+If you do not want to use Node.js/`npx`, download the release archive directly:
 
-### Manual Installation
+1. Download the pre-packaged `skills.zip` archive from the latest GitHub Release:
+   [skills.zip](https://github.com/awhipp/spec-first-protocol/releases/latest/download/skills.zip)
+   _(If the direct download fails, browse release assets at the backup_
+   _[GitHub Releases](https://github.com/awhipp/spec-first-protocol/releases) page)._
+2. Extract the zip file locally.
+3. Copy the nested `skills/` directories (`sfp-discover`, `sfp-audit`, `sfp-refine`, `sfp-orchestrate`,
+   `sfp-personas`) directly into your target agent config directory:
 
-Copy or symlink the `skills/` directory into your framework's skills directory:
-
-| Agent / Editor  | Target Directory    | Command                           |
-| :-------------- | :------------------ | :-------------------------------- |
-| **Claude**      | `.claude/skills/`   | `cp -r skills/ .claude/skills/`   |
-| **Antigravity** | `.agents/skills/`   | `cp -r skills/ .agents/skills/`   |
-| **Windsurf**    | `.windsurf/skills/` | `cp -r skills/ .windsurf/skills/` |
-| **Cursor**      | `.cursor/skills/`   | `cp -r skills/ .cursor/skills/`   |
+| Agent / Editor  | Target Directory    |
+| :-------------- | :------------------ |
+| **Claude Code** | `.claude/skills/`   |
+| **Antigravity** | `.agents/skills/`   |
+| **Windsurf**    | `.windsurf/skills/` |
+| **Cursor**      | `.cursor/skills/`   |
 
 ---
 
@@ -291,7 +297,7 @@ implementation spec.
 When passed to another agent to implement, the resulting planning outcome was fully implemented in one shot. This
 produced:
 
-- Robust, dependency-minimal installer scripts (`scripts/install.sh` and `scripts/install.ps1`)
+- CLI integration via Vercel Labs skills runner and dynamic onboarding tools
 - A release workflow (`.github/workflows/release-skills.yml`)
 
 ### Domain Expertise & Personas
