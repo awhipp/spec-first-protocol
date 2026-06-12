@@ -3,6 +3,18 @@
 ## [2.0.0](https://github.com/awhipp/spec-first-protocol/compare/v1.7.0...v2.0.0) (2026-06-12)
 
 
+### ⚠ BREAKING CHANGES
+
+* SFP installation now goes through skills.sh
+
+### Features
+
+* introduce SFP installation through skills.sh ([2524aa1](https://github.com/awhipp/spec-first-protocol/commit/2524aa1e9a7a7e374c29f00b1127bbf656e5feec))
+* introduce SFP installation through skills.sh ([fa7be08](https://github.com/awhipp/spec-first-protocol/commit/fa7be088f3eeabdc252ca3ee8537baf2b76e3061))
+
+## [2.0.0](https://github.com/awhipp/spec-first-protocol/compare/v1.7.0...v2.0.0) (2026-06-12)
+
+
 ### BREAKING CHANGES
 
 * Remove custom installer/updater scripts (`install.sh`, `install.ps1`, `update.sh`, `update.ps1`) in favor of Vercel Labs `skills` package manager CLI (`npx skills`) and manual `skills.zip` download.
