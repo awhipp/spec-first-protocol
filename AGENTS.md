@@ -16,8 +16,9 @@ center for SFP skills and hosts the protocol's onboarding website.
   manifest structures and YAML frontmatter. All core Spec-First Protocol skills
   must be prepended/prefixed with `sfp-` (e.g., `sfp-discover`). Custom or
   third-party skills must not use the `sfp-` prefix.
-- **Installer & Updater Scripts**: Shell scripting (`install.sh` and `update.sh`
-  for macOS/Linux, and `install.ps1` and `update.ps1` for Windows PowerShell).
+- **Distribution Mechanism**: Skills are distributed via the Vercel Labs
+  `skills` package manager using `npx skills` commands, and pre-packaged manual
+  ZIP release archives.
 - **Onboarding App & Tooling**: A Vite + React 19 single-page application
   (`docs/`) using Tailwind CSS 4 for styling, with Vitest for unit testing,
   ESLint for linting, and Prettier for formatting. A Node.js build helper
@@ -30,8 +31,7 @@ spec-first-protocol/
 ├── .github/workflows/          # CI/CD pipelines
 │   ├── deploy-portal.yml       # Vite build, test & GitHub Pages deploy
 │   ├── lint.yml                # Markdown linting on push/PR
-│   ├── release-skills.yml      # Release-please + skills.zip packaging
-│   └── validate-scripts.yml    # Cross-platform installer/updater tests
+│   └── release-skills.yml      # Release-please + skills.zip packaging
 ├── docs/                       # Onboarding & marketing portal (Vite + React)
 │   ├── public/                 # Static assets directory served directly
 │   │   └── data/               # Example specifications displayed on site
@@ -46,12 +46,8 @@ spec-first-protocol/
 │   └── package.json            # Dependencies & scripts
 ├── examples/                   # Reference specifications (frozen)
 │   └── non-software/           # Non-software domain examples
-├── scripts/                    # Installer, updater & build helper scripts
-│   ├── build-docs.js           # Pre-processes spec data for the portal
-│   ├── install.sh              # Unix bootstrap installer script
-│   ├── install.ps1             # Windows bootstrap installer script
-│   ├── update.sh               # Unix updater template
-│   └── update.ps1              # Windows updater template
+├── scripts/                    # Build helper scripts
+│   └── build-docs.js           # Pre-processes spec data for the portal
 └── skills/                     # Core Spec-First Protocol Agent Skills
     ├── sfp-discover/           # Requirements discovery & compilation
     ├── sfp-audit/              # Adversarial review & finalization gate
@@ -275,13 +271,8 @@ constraints:
   follow the schema defined in `_TEMPLATE.md`. Changes to the persona schema
   must be reflected in the template, the personas README, and all existing
   persona files.
-- **Shell Scripting Safe Mode**: When modifying `scripts/install.sh`,
-  `scripts/install.ps1`, `scripts/update.sh`, or `scripts/update.ps1`, agents
-  must test the scripts using temporary, non-system destination folders.
-  Installer and updater actions must not leave side effects or modify
-  configuration files outside designated directories.
 - **Agent Instructions Up-to-date**: If changes are made to the repository
-  architecture, tech stack, workflows, or installer/updater scripts, agents
+  architecture, tech stack, workflows, or CLI runner integration, agents
   must update `AGENTS.md` to ensure instructions remain consistent.
 
 ---
