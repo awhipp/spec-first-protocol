@@ -7,7 +7,6 @@ on:
     paths:
       - 'skills/**'
       - 'CHANGELOG.md'
-      - 'scripts/**'
   workflow_dispatch:
 
 permissions:
@@ -27,11 +26,6 @@ jobs:
         uses: actions/checkout@93cb6efe18208431cddfb8368fd83d5badbf9bfd
         if: ${{ steps.release.outputs.release_created }}
 
-      - name: Copy updater scripts to skills directory
-        run: |
-          cp scripts/update.sh skills/
-          cp scripts/update.ps1 skills/
-        if: ${{ steps.release.outputs.release_created }}
 
       - name: Zip skills directory
         run: zip -r skills.zip skills
