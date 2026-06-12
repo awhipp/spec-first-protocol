@@ -1,5 +1,18 @@
 # Changelog
 
+## [2.0.0](https://github.com/awhipp/spec-first-protocol/compare/v1.7.0...v2.0.0) (2026-06-12)
+
+
+### BREAKING CHANGES
+
+* Remove custom installer/updater scripts (`install.sh`, `install.ps1`, `update.sh`, `update.ps1`) in favor of Vercel Labs `skills` package manager CLI (`npx skills`) and manual `skills.zip` download.
+
+
+### Features
+
+* **cli:** migrate skill distribution to Vercel Labs skills CLI runner
+
+
 ## [1.7.0](https://github.com/awhipp/spec-first-protocol/compare/v1.6.0...v1.7.0) (2026-06-11)
 
 
