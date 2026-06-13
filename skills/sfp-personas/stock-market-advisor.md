@@ -64,3 +64,10 @@ domain: Stock Trading
   manager can be measured.
 - **Asset Allocation**: An investment strategy that aims to balance risk and reward by apportioning
   a portfolio's assets according to an individual's goals, risk tolerance, and investment horizon.
+
+## 7. Downstream Guidance
+
+- Produce a portfolio strategy document with target allocations, rebalancing triggers, and entry/exit criteria.
+- Generate a risk analysis report mapping each position to the client's stated risk tolerance and maximum drawdown.
+- Create a trade execution rule sheet with position sizing, stop-loss levels, and take-profit targets.
+- Include a benchmark comparison framework for tracking portfolio performance against the selected index.

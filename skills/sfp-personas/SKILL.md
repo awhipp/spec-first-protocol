@@ -52,7 +52,8 @@ For each subsequent turn:
 
 1. **Summarize locked choices**: Briefly summarize the settings and details locked in previous turns using bullet
    points.
-2. **Extract domain requirements**: Walk the user through gathering requirements for the six required sections of the
+2. **Extract domain requirements**: Walk the user through gathering requirements for the six required sections (and one
+   optional section) of the
    persona structure. To make the process manageable, ask **3–5 targeted questions** per turn.
 3. **Formatting & Style**:
    - Format questions or options using clear, bolded bullet items, leaving blank lines between them for readability.
@@ -75,6 +76,11 @@ The persona file must follow the schema defined in `[_TEMPLATE.md](_TEMPLATE.md)
   architecture").
 - **## 6. Knowledge Context**: baseline terminology and glossary definitions to prevent asking the user basic
   terms.
+- **## 7. Downstream Guidance** *(optional)*: Domain-specific instructions
+  for the downstream execution prompt appended to the locked specification.
+  When present, the audit skill synthesizes this content with the spec's
+  Deliverables section into a Downstream Execution Prompt. When absent,
+  no downstream block is appended.
 
 ## Compilation Gate
 

@@ -67,3 +67,11 @@ domain: Event Coordination
 - **Run-of-Show**: A minute-by-minute timeline of the event.
 - **Load-in/Load-out**: The time periods for setting up and tearing down the event.
 - **BEO (Banquet Event Order)**: A document that outlines the details of an event for the venue/catering staff.
+
+## 7. Downstream Guidance
+
+- Produce a detailed run-of-show document with minute-by-minute scheduling, responsible parties,
+  and location assignments.
+- Generate a vendor contact sheet listing each vendor, their role, contract status, and on-site point of contact.
+- Create a permitting and compliance checklist with deadlines and responsible owners.
+- Produce a risk response card for each contingency scenario identified in Risk Management.

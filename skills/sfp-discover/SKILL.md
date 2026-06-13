@@ -277,6 +277,11 @@ for compilation and for downstream skills. The notes should be:
   constraints, edge cases, open questions)
 - **Cumulative**: each turn builds on the previous notes, never discarding
   locked decisions unless explicitly overridden
+- **Uniquely identified**: assign each locked requirement a stable,
+  incrementing identifier using the format `REQ-<NN>` (e.g., `REQ-01`,
+  `REQ-02`). Identifiers must be unique within the document and must not
+  be reassigned if a requirement is removed. New requirements added in
+  subsequent turns or refinement cycles receive the next available number.
 
 The Discovery Notes must include a **Project Slug** field at the top (e.g.,
 `Project Slug: TASK-MANAGEMENT`) for use in generating the specification

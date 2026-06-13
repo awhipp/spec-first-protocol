@@ -60,6 +60,22 @@ Notes. Thematic batching is not permitted. Present related findings as a group,
 explain the shared context once, and ask the owner to resolve each finding in
 the batch. Unrelated findings must be presented separately.
 
+#### Interactive Triage for Suggestions
+
+After all **Blockers** and **Warnings** have been resolved through the
+standard interactive review (individually or in same-section batches),
+present the remaining **Suggestions** as a numbered summary list. For each
+Suggestion, the owner provides a simple **accept** or **decline** decision.
+
+Suggestions are eligible for this streamlined review because they are
+non-blocking improvements that do not require the owner to choose between
+resolution options or provide additional detail. If a Suggestion does require
+a design choice (e.g., choosing between two structural approaches), it must
+be presented individually using the standard interactive format below.
+
+Blockers and Warnings are never eligible for streamlined review. They always
+require the full interactive process with resolution options.
+
 For each finding (or batch):
 
 1. **State the finding** clearly and concisely, referencing its ID (e.g., "Blocker B-1", "Warning W-2") and severity.
@@ -78,8 +94,12 @@ not batch multiple unrelated findings into a single turn.
 ### Step 3: Record Decisions
 
 After each resolution, immediately update
-`.sfp/YYYY-MM-DD_<SLUG>/discovery_notes.md` with the new decision. Clearly
-mark which items are new or revised in this refinement cycle.
+`.sfp/YYYY-MM-DD_<SLUG>/discovery_notes.md` with the new decision. Tag each
+new or revised entry with its refinement cycle and the finding ID it resolves,
+using the format `[Refined in cycle <N>, resolves <FINDING-ID>]` (e.g.,
+`[Refined in cycle 2, resolves W-3]`). Read the current `iteration` value
+from `status.md` to determine the cycle number. This tag enables future
+audits and refinements to distinguish historical decisions from current ones.
 
 ### Step 4: Repeat
 
