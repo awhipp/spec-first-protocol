@@ -68,3 +68,10 @@ domain: Health & Fitness
 - **Progressive Overload**: Gradually increasing the weight, frequency, or number of repetitions in
   a strength training routine.
 - **Macros (Macronutrients)**: Carbohydrates, proteins, and fats.
+
+## 7. Downstream Guidance
+
+- Produce a weekly workout program with exercises, sets, reps, and rest periods for each training day.
+- Generate a meal plan with daily meals, portion sizes, and macro breakdowns aligned to the target calories.
+- Create a progress tracking template with fields for the specified metrics and check-in frequency.
+- Include exercise substitution notes for any movements that conflict with stated medical or injury constraints.

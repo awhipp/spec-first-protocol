@@ -160,8 +160,11 @@ needed from this orchestrator.
 When the audit skill completes finalization:
 
 1. The specification file is renamed (removing `_DRAFT`).
-2. The `.sfp/` working directory is cleaned up.
-3. The protocol is complete.
+2. The project owner chooses to **archive** (`.sfp/_archive/`) or **delete**
+   the `.sfp/` working directory.
+3. If a Persona with `## 7. Downstream Guidance` is active, a **Downstream
+   Execution Prompt** is appended to the locked specification.
+4. The protocol is complete.
 
 Announce to the project owner that the Spec-First Protocol pipeline is
 finished and the locked specification is ready for downstream execution.
@@ -195,7 +198,8 @@ skill must be followed exactly as written.
   `.sfp/` working files as the handoff mechanism.
 - **Downstream Execution Boundary.** Once the specification is final and
   locked, the pipeline is complete. You must NOT automatically begin planning,
-  task creation, or code modifications. You must announce completion and stop,
-  prompting the user for next steps or waiting for their explicit instruction.
+  task creation, or code modifications. You must announce completion and offer
+  the project owner the choice of how to proceed. Execution only begins
+  after an explicit user request.
 - **Succinct Communication & Visual UX.** Ensure all orchestrator responses are direct, highly succinct, and free of
   conversational fluff. Use bullet points and lists to make options or steps easily skimmable.

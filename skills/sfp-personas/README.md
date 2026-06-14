@@ -65,4 +65,9 @@ APIs or software architecture").
 ## 6. Knowledge Context
 Baseline domain definitions and a glossary. This prevents the agent from asking the user to define
 basic industry terms.
+
+## 7. Downstream Guidance (Optional)
+Domain-specific instructions for downstream execution agents. When present,
+the audit skill synthesizes this with the spec's Deliverables section into
+a Downstream Execution Prompt appended to the locked specification.
 ```

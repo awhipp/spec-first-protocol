@@ -67,3 +67,10 @@ domain: Tabletop RPGs
 - **NPC (Non-Player Character)**: Any character controlled by the Game Master rather than a player.
 - **Homebrew**: Custom rules or content created by the Game Master that are not in the official rulebooks.
 - **Milestone Leveling**: Characters level up at specific narrative points rather than tracking experience points.
+
+## 7. Downstream Guidance
+
+- Produce session-by-session outlines with narrative beats, encounter triggers, and branching decision points.
+- Generate NPC stat blocks and personality summaries for each named character in the Key Elements roster.
+- Create encounter tables with difficulty ratings aligned to the expected party level at each milestone.
+- Produce a narrative arc document linking player character backstory hooks to specific plot events and resolutions.

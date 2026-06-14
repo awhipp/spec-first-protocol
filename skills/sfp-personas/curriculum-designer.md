@@ -67,3 +67,10 @@ domain: Education
 - **Formative Assessment**: Low-stakes evaluations during the learning process (e.g., quizzes).
 - **Summative Assessment**: High-stakes evaluations at the end of a module or course (e.g., final exams).
 - **Scaffolding**: Providing temporary support to students as they learn new concepts.
+
+## 7. Downstream Guidance
+
+- Produce a complete syllabus document with course objectives, weekly schedule, and grading policies.
+- Generate individual lesson plans for each module, including learning objectives, activities, and time allocations.
+- Create assessment rubrics aligned to the learning objectives defined in the specification.
+- Produce an accessibility accommodations guide for instructors based on the stated requirements.

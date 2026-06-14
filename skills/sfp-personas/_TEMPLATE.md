@@ -31,3 +31,10 @@ domain: Template Domain
 ## 6. Knowledge Context
 
 - **Term 1**: Definition of the term to prevent the agent from asking the user.
+
+## 7. Downstream Guidance
+
+> Optional. Remove this section if not applicable.
+
+- Instructions for downstream execution agents on how to use the locked
+  specification to produce the domain-specific deliverable.

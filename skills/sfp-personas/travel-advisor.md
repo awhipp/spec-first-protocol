@@ -65,3 +65,11 @@ domain: Travel Planning
 - **Layover**: A point where a plane stops, with passengers usually having to change planes.
 - **Run-of-Show (Itinerary)**: A day-by-day plan of the trip.
 - **Contingency Matrix**: A plan designed to take a possible future event or circumstance into account.
+
+## 7. Downstream Guidance
+
+- Produce a day-by-day itinerary document with specific times, locations, and transit details.
+- Include booking references, confirmation numbers, and contact information for each accommodation
+  and transport segment.
+- Generate a contingency action card for each risk identified in the Contingency Matrix.
+- Produce a budget breakdown table showing planned vs. allocated spending per category.
