@@ -14,32 +14,82 @@ const AGENTS = [
   { id: 'antigravity-cli', label: 'Antigravity CLI' }
 ];
 
+const ALL_SKILLS = [
+  { id: 'Spec Discover', label: 'Spec Discover', description: 'Conduct a discovery interview and compile a specification draft' },
+  { id: 'Spec Audit', label: 'Spec Audit', description: 'Perform an adversarial consistency and risk review' },
+  { id: 'Spec Refine', label: 'Spec Refine', description: 'Resolve audit findings and recompile the specification' },
+  { id: 'Spec Orchestrate', label: 'Spec Orchestrate', description: 'Run all discovery, audit, and refinement phases in one session' },
+  { id: 'Spec Personas', label: 'Spec Personas', description: 'Build and refine custom domain-specific agent personas' }
+];
+
 export default function InstallerSelector() {
   const [activeTab, setActiveTab] = useState('cli'); // 'cli' | 'manual'
   const [selectedAgent, setSelectedAgent] = useState('auto');
   const [globalScope, setGlobalScope] = useState(false);
-  const [copyFiles, setCopyFiles] = useState(false);
-  const [nonInteractive, setNonInteractive] = useState(false);
+  const [projectScope, setProjectScope] = useState(false);
+  const [skillMode, setSkillMode] = useState('all'); // 'all' | 'specific'
+  const [selectedSkills, setSelectedSkills] = useState([
+    'Spec Discover',
+    'Spec Audit',
+    'Spec Refine',
+    'Spec Orchestrate',
+    'Spec Personas'
+  ]);
   const [copied, setCopied] = useState(false);
 
+  const handleProjectScopeToggle = () => {
+    const nextProjectScope = !projectScope;
+    setProjectScope(nextProjectScope);
+    if (nextProjectScope) {
+      setGlobalScope(false);
+    }
+  };
+
+  const handleGlobalScopeToggle = () => {
+    const nextGlobalScope = !globalScope;
+    setGlobalScope(nextGlobalScope);
+    if (nextGlobalScope) {
+      setProjectScope(false);
+    }
+  };
+
+  const handleSkillToggle = (skillId) => {
+    if (selectedSkills.includes(skillId)) {
+      setSelectedSkills(selectedSkills.filter(id => id !== skillId));
+    } else {
+      setSelectedSkills([...selectedSkills, skillId]);
+    }
+  };
+
   const getCommand = () => {
+    if (skillMode === 'specific' && selectedSkills.length === 0) {
+      return '# Please select at least one skill to install';
+    }
+
     let cmd = 'npx skills add awhipp/spec-first-protocol';
+    
+    if (skillMode === 'all') {
+      cmd += " --skill '*'";
+    } else {
+      cmd += ` --skill ${selectedSkills.map(s => `"${s}"`).join(' ')}`;
+    }
+
     if (selectedAgent !== 'auto') {
       cmd += ` --agent ${selectedAgent}`;
+    }
+    if (projectScope) {
+      cmd += ' --project';
     }
     if (globalScope) {
       cmd += ' --global';
     }
-    if (copyFiles) {
-      cmd += ' --copy';
-    }
-    if (nonInteractive) {
-      cmd += ' --yes';
-    }
     return cmd;
   };
 
+  const isCommandValid = !(skillMode === 'specific' && selectedSkills.length === 0);
+
   const handleCopy = async () => {
+    if (!isCommandValid) return;
     try {
       await navigator.clipboard.writeText(getCommand());
       setCopied(true);
@@ -100,12 +150,84 @@ export default function InstallerSelector() {
               </select>
             </div>
 
+            {/* Skills Selection */}
+            <div className="flex flex-col md:flex-row md:items-start gap-4 border-t border-border-primary pt-6">
+              <span className="text-sm font-semibold text-text-secondary md:w-[170px] md:pt-1">
+                Skills to Install:
+              </span>
+              <div className="flex flex-col gap-4 flex-1">
+                <div className="flex flex-wrap gap-6">
+                  <label className="flex items-center gap-2 text-sm text-text-primary cursor-pointer font-medium select-none">
+                    <input
+                      type="radio"
+                      name="skill-mode"
+                      checked={skillMode === 'all'}
+                      onChange={() => setSkillMode('all')}
+                      className="accent-accent h-4 w-4 cursor-pointer"
+                    />
+                    <span>All Skills (<code>*</code>)</span>
+                  </label>
+                  <label className="flex items-center gap-2 text-sm text-text-primary cursor-pointer font-medium select-none">
+                    <input
+                      type="radio"
+                      name="skill-mode"
+                      checked={skillMode === 'specific'}
+                      onChange={() => setSkillMode('specific')}
+                      className="accent-accent h-4 w-4 cursor-pointer"
+                    />
+                    <span>Specific Skills</span>
+                  </label>
+                </div>
+                {skillMode === 'specific' && (
+                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 bg-bg-primary border border-border-primary p-4 rounded-lg animate-in fade-in slide-in-from-top-2 duration-200">
+                    {ALL_SKILLS.map((skill) => (
+                      <label key={skill.id} className="flex items-center gap-2.5 text-xs text-text-secondary hover:text-text-primary cursor-pointer transition-colors font-medium select-none">
+                        <input
+                          type="checkbox"
+                          checked={selectedSkills.includes(skill.id)}
+                          onChange={() => handleSkillToggle(skill.id)}
+                          className="accent-accent h-4 w-4 rounded cursor-pointer"
+                        />
+                        <span className="flex flex-col">
+                          <span className="font-bold text-text-primary">{skill.label}</span>
+                          <span className="text-[10px] text-text-muted">{skill.description}</span>
+                        </span>
+                      </label>
+                    ))}
+                  </div>
+                )}
+              </div>
+            </div>
+
             {/* Flags / Options Switches */}
             <div className="flex flex-col md:flex-row md:items-start gap-4 border-t border-border-primary pt-6">
               <span className="text-sm font-semibold text-text-secondary md:w-[170px] md:pt-1">
                 Configure Options:
               </span>
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 flex-1">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 flex-1">
+                {/* Project Switch */}
+                <div className="flex items-center justify-between p-3.5 bg-bg-primary rounded-lg border border-border-primary shadow-2xs">
+                  <div className="flex flex-col pr-3">
+                    <span className="text-xs font-bold text-text-primary">Project Scope</span>
+                    <span className="text-[11px] text-text-muted">Install in local project folder</span>
+                  </div>
+                  <button
+                    type="button"
+                    onClick={handleProjectScopeToggle}
+                    className={`relative inline-flex h-6 w-11 shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none
+                      ${projectScope ? 'bg-accent' : 'bg-slate-200'}
+                    `}
+                    aria-checked={projectScope}
+                    role="switch"
+                  >
+                    <span
+                      className={`pointer-events-none inline-block h-5 w-5 transform rounded-full bg-white shadow-sm ring-0 transition duration-200 ease-in-out
+                        ${projectScope ? 'translate-x-5' : 'translate-x-0'}
+                      `}
+                    />
+                  </button>
+                </div>
+
                 {/* Global Switch */}
                 <div className="flex items-center justify-between p-3.5 bg-bg-primary rounded-lg border border-border-primary shadow-2xs">
                   <div className="flex flex-col pr-3">
@@ -114,7 +236,7 @@ export default function InstallerSelector() {
                   </div>
                   <button
                     type="button"
-                    onClick={() => setGlobalScope(!globalScope)}
+                    onClick={handleGlobalScopeToggle}
                     className={`relative inline-flex h-6 w-11 shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none
                       ${globalScope ? 'bg-accent' : 'bg-slate-200'}
                     `}
@@ -124,52 +246,6 @@ export default function InstallerSelector() {
                     <span
                       className={`pointer-events-none inline-block h-5 w-5 transform rounded-full bg-white shadow-sm ring-0 transition duration-200 ease-in-out
                         ${globalScope ? 'translate-x-5' : 'translate-x-0'}
-                      `}
-                    />
-                  </button>
-                </div>
-
-                {/* Copy Switch */}
-                <div className="flex items-center justify-between p-3.5 bg-bg-primary rounded-lg border border-border-primary shadow-2xs">
-                  <div className="flex flex-col pr-3">
-                    <span className="text-xs font-bold text-text-primary">Copy Files</span>
-                    <span className="text-[11px] text-text-muted">Copy instead of symlinking</span>
-                  </div>
-                  <button
-                    type="button"
-                    onClick={() => setCopyFiles(!copyFiles)}
-                    className={`relative inline-flex h-6 w-11 shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none
-                      ${copyFiles ? 'bg-accent' : 'bg-slate-200'}
-                    `}
-                    aria-checked={copyFiles}
-                    role="switch"
-                  >
-                    <span
-                      className={`pointer-events-none inline-block h-5 w-5 transform rounded-full bg-white shadow-sm ring-0 transition duration-200 ease-in-out
-                        ${copyFiles ? 'translate-x-5' : 'translate-x-0'}
-                      `}
-                    />
-                  </button>
-                </div>
-
-                {/* Non-Interactive Switch */}
-                <div className="flex items-center justify-between p-3.5 bg-bg-primary rounded-lg border border-border-primary shadow-2xs">
-                  <div className="flex flex-col pr-3">
-                    <span className="text-xs font-bold text-text-primary">Non-Interactive (CI)</span>
-                    <span className="text-[11px] text-text-muted">Bypass confirmation prompts</span>
-                  </div>
-                  <button
-                    type="button"
-                    onClick={() => setNonInteractive(!nonInteractive)}
-                    className={`relative inline-flex h-6 w-11 shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none
-                      ${nonInteractive ? 'bg-accent' : 'bg-slate-200'}
-                    `}
-                    aria-checked={nonInteractive}
-                    role="switch"
-                  >
-                    <span
-                      className={`pointer-events-none inline-block h-5 w-5 transform rounded-full bg-white shadow-sm ring-0 transition duration-200 ease-in-out
-                        ${nonInteractive ? 'translate-x-5' : 'translate-x-0'}
                       `}
                     />
                   </button>
@@ -184,7 +260,8 @@ export default function InstallerSelector() {
               <span className="font-mono text-xs text-slate-300 font-bold">terminal</span>
               <button
                 onClick={handleCopy}
-                className="flex items-center gap-1.5 text-slate-400 hover:text-slate-100 transition-colors bg-transparent border-none cursor-pointer focus:outline-none"
+                disabled={!isCommandValid}
+                className="flex items-center gap-1.5 text-slate-400 hover:text-slate-100 transition-colors bg-transparent border-none cursor-pointer focus:outline-none disabled:opacity-50 disabled:cursor-not-allowed"
                 aria-label="Copy command"
               >
                 {copied ? (

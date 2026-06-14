@@ -222,7 +222,7 @@ Run the following command in your local project root or global config directory.
 please use the [Manual Installation Fallback](#manual-installation-fallback) instead.
 
 ```bash
-npx skills add awhipp/spec-first-protocol
+npx skills add awhipp/spec-first-protocol --skill '*'
 ```
 
 #### Supported AI Agent Slugs
@@ -231,33 +231,21 @@ By default, the CLI auto-detects all supported agents. You can target a specific
 integration using the `--agent` parameter:
 
 ```bash
-npx skills add awhipp/spec-first-protocol --agent claude-code
+npx skills add awhipp/spec-first-protocol --skill '*' --agent claude-code
 ```
-
-Common supported agent slugs:
-
-- **Claude Code**: `claude-code`
-- **Cursor**: `cursor`
-- **Windsurf**: `windsurf`
-- **GitHub Copilot**: `github-copilot`
-- **Cline**: `cline`
-- **Roo Code**: `roo`
-- **Aider**: `aider-desk`
-- **Antigravity**: `antigravity`
-- **Antigravity CLI**: `antigravity-cli`
 
 #### Advanced Flags
 
 The runner supports several flags:
 
 - `-g`, `--global` — Installs the skills globally in the user's home folder rather than local project directories.
-- `--copy` — Copies files directly into agent target paths instead of generating symbolic links.
+- `-p`, `--project` — Installs the skills in the current project directory (local scope) instead of global user folders.
 - `-y`, `--yes` — Bypasses all confirmation prompts (ideal for non-interactive/CI environments).
 
 Example with combined options:
 
 ```bash
-npx skills add awhipp/spec-first-protocol --agent cursor --global --copy --yes
+npx skills add awhipp/spec-first-protocol --skill '*' --agent cursor --global --yes
 ```
 
 ### Manual Installation Fallback

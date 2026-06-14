@@ -12,6 +12,7 @@ ehthumbs.db
 .idea/
 .agents/
 .claude/
+skills-lock.json
 
 # SFP working directory
 .sfp/
