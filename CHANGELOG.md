@@ -1,5 +1,19 @@
 # Changelog
 
+## [2.1.0](https://github.com/awhipp/spec-first-protocol/compare/v2.0.0...v2.1.0) (2026-06-14)
+
+
+### Features
+
+* adding firm requirements, archival, and downstream handoff ([39dc09f](https://github.com/awhipp/spec-first-protocol/commit/39dc09fef875a219443776028cb05217c118689a))
+* ground SFP in research ([879615c](https://github.com/awhipp/spec-first-protocol/commit/879615c9cd3c817ff0bf9c8ca8f58ae074ddedbd))
+* **skills:** harden REQ-ID preservation, downstream synthesis, and execution boundaries ([1b63bc9](https://github.com/awhipp/spec-first-protocol/commit/1b63bc997a1bd582d99a2cf34e60420667755371))
+
+
+### Bug Fixes
+
+* address CVE issue with vite and esbuild ([3d1d79f](https://github.com/awhipp/spec-first-protocol/commit/3d1d79f9e898ccb415108e66b2f48bd5e15084cf))
+
 ## [2.0.0](https://github.com/awhipp/spec-first-protocol/compare/v1.7.0...v2.0.0) (2026-06-12)
 
 
