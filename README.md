@@ -41,13 +41,14 @@ Writing a specification is valuable, but sitting in front of a blank document an
 requirement, edge case, and constraint is a different skill from understanding what you want. SFP separates these
 concerns:
 
-| Capability                             | What SFP Provides                                                                                                                                                                                     |
-| :------------------------------------- | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **Structured extraction**              | The discover skill asks the right questions in the right order, systematically surfacing requirements that a blank page would leave buried.                                                           |
-| **Adversarial verification**           | The audit skill reviews the compiled specification for contradictions, gaps, and undefined behavior, catching issues that the author's own blind spots would miss.                                    |
-| **Zero Placeholder Guarantee**         | Every section is either fully populated from validated requirements or omitted entirely. No stubs, TODOs, or "TBD" sections survive the pipeline.                                                     |
-| **Domain-agnostic adaptability**       | The same protocol works whether specifying a software system, a documentation structure, a business process, or a policy. Skills adapt their language and structure to the domain as context emerges. |
-| **Separation of design and execution** | The specification is locked before any execution begins, establishing a clear boundary between deciding _what_ to build and _building_ it.                                                            |
+| Capability                             | What SFP Provides                                                                                                                                                                                       |
+| :------------------------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| **Structured extraction**              | The discover skill asks the right questions in the right order, systematically surfacing requirements that a blank page would leave buried.                                                             |
+| **Adversarial verification**           | The audit skill reviews the compiled specification for contradictions, gaps, and undefined behavior, catching issues that the author's own blind spots would miss.                                      |
+| **Zero Placeholder Guarantee**         | Every section is either fully populated from validated requirements or omitted entirely. No stubs, TODOs, or "TBD" sections survive the pipeline.                                                       |
+| **Domain-agnostic adaptability**       | The same protocol works whether specifying a software system, a documentation structure, a business process, or a policy. Skills adapt their language and structure to the domain as context emerges.   |
+| **Separation of design and execution** | The specification is locked before any execution begins, establishing a clear boundary between deciding _what_ to build and _building_ it.                                                              |
+| **Downstream Guidance**                | Appends an actionable, synthesized Downstream Execution Prompt directly to the locked specification, giving downstream AI agents and tools a clear roadmap for execution without manual prompt writing. |
 
 ---
 
@@ -70,12 +71,12 @@ flowchart LR
 
 The protocol implements this funnel using three specialized Agent Skills, culminating in a finalization gate:
 
-| Stage | Skill                        | Input                          | Output                                              | Description                                                                                                                                                                                                                                                                                                                           |
-| :---: | :--------------------------- | :----------------------------- | :-------------------------------------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-|   1   | **Discover**                 | Project owner interview        | Discovery Notes + `YYYY-MM-DD_<SLUG>_SPEC_DRAFT.md` | Conducts a structured interview to extract requirements, goals, constraints, and edge cases. Produces a **project slug** and **Discovery Notes**. When the scope is clear and the owner approves, compiles the notes into a draft specification file.                                                                                 |
-|   2   | **Audit**                    | Draft specification            | Audit Report                                        | Performs an adversarial review to surface contradictions, gaps, and risks. Generates a severity-classified **Audit Report**.                                                                                                                                                                                                          |
-|   3   | **Refine**                   | Audit Report + owner decisions | Updated specification                               | Walks through audit findings **one at a time** with the project owner, resolving each incrementally. Offers an opportunity to expand scope after findings are resolved. After all decisions are made, presents a summary for approval and recompiles the specification from updated Discovery Notes.                                  |
-|   4   | **Lock** (Finalization Gate) | Clean audit + owner approval   | `YYYY-MM-DD_<SLUG>_SPEC.md`                         | Once the audit contains no blockers, all requirements from the Discovery Notes are represented, and the project owner explicitly approves, the specification is locked. The `_DRAFT` suffix is removed from the filename, the `.sfp/` working directory is cleaned up, and the locked specification file remains in the project root. |
+| Stage | Skill                        | Input                          | Output                                              | Description                                                                                                                                                                                                                                                                                                                                                                                                                        |
+| :---: | :--------------------------- | :----------------------------- | :-------------------------------------------------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|   1   | **Discover**                 | Project owner interview        | Discovery Notes + `YYYY-MM-DD_<SLUG>_SPEC_DRAFT.md` | Conducts a structured interview to extract requirements, goals, constraints, and edge cases. Produces a **project slug** and **Discovery Notes**. When the scope is clear and the owner approves, compiles the notes into a draft specification file.                                                                                                                                                                              |
+|   2   | **Audit**                    | Draft specification            | Audit Report                                        | Performs an adversarial review to surface contradictions, gaps, and risks. Generates a severity-classified **Audit Report**.                                                                                                                                                                                                                                                                                                       |
+|   3   | **Refine**                   | Audit Report + owner decisions | Updated specification                               | Walks through audit findings **one at a time** with the project owner, resolving each incrementally. Offers an opportunity to expand scope after findings are resolved. After all decisions are made, presents a summary for approval and recompiles the specification from updated Discovery Notes.                                                                                                                               |
+|   4   | **Lock** (Finalization Gate) | Clean audit + owner approval   | `YYYY-MM-DD_<SLUG>_SPEC.md`                         | Once the audit contains no blockers, all requirements from the Discovery Notes are represented, and the project owner explicitly approves, the specification is locked. The `_DRAFT` suffix is removed from the filename, the `.sfp/` working directory is cleaned up, and a non-normative Downstream Execution Prompt is appended if downstream guidance is available. The locked specification file remains in the project root. |
 
 ### Key Benefits
 
@@ -130,6 +131,9 @@ SFP brings unique, additive value to the SDD lifecycle:
   consumption and downstream hallucination.
 - **Stay Agnostic**: Outputs standard Markdown with no proprietary formatting or CLI dependencies, compatible with any
   downstream tool or agent.
+- **Runnable Downstream Guidance**: Synthesizes the active Persona's rules with the specification's deliverables into
+  an executable Downstream Execution Prompt appended directly to the locked file, eliminating manual prompt-engineering
+  for downstream code-generation loops.
 
 ### Traditional Single-Prompt vs. SFP Pipeline
 
@@ -143,6 +147,20 @@ a structured, iterative pipeline.
 | **Output Guarantees**       | Variable, stubs, and placeholders | Zero placeholder invariant        |
 | **Framework Coupling**      | Tied to specific tool or CLI      | 100% agnostic (standard Markdown) |
 | **Lifecycle Boundary**      | Blurs design and execution        | Hard line at locked specification |
+
+### Why SFP
+
+Most AI development workflows assume you start with a fully formed idea or expect the development agent to gather
+requirements and write code in the same verbose context window. SFP decouples requirements planning from code
+execution:
+
+| Dimension                    | Raw Prompting              | Standard SDD Tools       | Spec-First Protocol (SFP)                                  |
+| :--------------------------- | :------------------------- | :----------------------- | :--------------------------------------------------------- |
+| **Requirements Gathering**   | Single-prompt, ad-hoc      | Automated templates      | **Structured Discovery Funnel**                            |
+| **Verification Gate**        | None (Immediate code-gen)  | Self-verification (Bias) | **Adversarial Audit Gate**                                 |
+| **Output Quality**           | Stubs, placeholders, TODOs | Variable placeholders    | **Zero Placeholder Invariant** (Strict)                    |
+| **Handoff Token Efficiency** | Verbose chat histories     | Large context overhead   | **Attention Dilution Prevention (~85% context reduction)** |
+| **Handoff Usability**        | Manual prompt crafting     | Static file handoff      | **Runnable Downstream Guidance**                           |
 
 ---
 
@@ -298,14 +316,14 @@ colocated Persona file from `skills/sfp-personas/`. Once selected, SFP adopts th
 injecting specialized discovery prompts, custom templates, and strict auditing rules (e.g.,
 verifying a budget constraint for travel, or max drawdown for stocks).
 
-| Persona | Domain | Specialization |
-| :--- | :--- | :--- |
-| **Curriculum Designer** | Education | Learning objectives, assessments, accessibility. |
-| **Event Planner** | Event Coordination | Vendor coordination, run-of-show, venue capacity. |
-| **Fitness Coach** | Health & Fitness | Biometrics, macros, progressive overload. |
-| **RPG Campaign Master** | Tabletop RPGs | Narrative arcs, NPC hooks, milestone leveling. |
-| **Stock Market Advisor** | Stock Trading | Risk tolerance, asset allocation, sector exclusions. |
-| **Travel Advisor** | Travel Planning | Logistics, strict budgets, daily itineraries. |
+| Persona                  | Domain             | Specialization                                       |
+| :----------------------- | :----------------- | :--------------------------------------------------- |
+| **Curriculum Designer**  | Education          | Learning objectives, assessments, accessibility.     |
+| **Event Planner**        | Event Coordination | Vendor coordination, run-of-show, venue capacity.    |
+| **Fitness Coach**        | Health & Fitness   | Biometrics, macros, progressive overload.            |
+| **RPG Campaign Master**  | Tabletop RPGs      | Narrative arcs, NPC hooks, milestone leveling.       |
+| **Stock Market Advisor** | Stock Trading      | Risk tolerance, asset allocation, sector exclusions. |
+| **Travel Advisor**       | Travel Planning    | Logistics, strict budgets, daily itineraries.        |
 
 You can use the **Spec Personas** skill (`skills/sfp-personas/SKILL.md`) to interactively create your own custom
 personas or refine existing ones without manually writing the configuration files.
@@ -332,23 +350,25 @@ Contributors should verify these constraints before submitting changes.
 
 ## Terminology
 
-| Term                           | Definition                                                                                                                                                                                                                                      |
-| :----------------------------- | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **Discovery Notes**            | A running, cumulative summary of locked requirements and open questions, organized by topic. Stored at `.sfp/YYYY-MM-DD_<SLUG>/discovery_notes.md`.                                                                                             |
-| **Specification File**         | The compiled specification document, named `YYYY-MM-DD_<SLUG>_SPEC_DRAFT.md` while in progress and `YYYY-MM-DD_<SLUG>_SPEC.md` when finalized. Written to the project root.                                                                     |
-| **Audit Report**               | A structured report listing findings classified by severity (Blocker, Warning, Suggestion) and the overall gate status. Stored at `.sfp/YYYY-MM-DD_<SLUG>/audit_report.md`.                                                                     |
-| **Project Slug**               | An uppercase, hyphen-separated identifier derived from the project name (e.g., `TASK-MANAGEMENT`), used in the specification filename and `.sfp/` subdirectory name.                                                                            |
-| **`.sfp/` Directory**          | A working directory in the project root containing per-specification subdirectories (`.sfp/YYYY-MM-DD_<SLUG>/`). Each subdirectory holds Discovery Notes and Audit Reports for one specification. Cleaned up when specifications are finalized. |
-| **DRAFT Status**               | The `_DRAFT` suffix in the specification filename indicating the spec is in progress. Removed by the audit skill when the specification is finalized and locked.                                                                                |
-| **Zero Placeholder Invariant** | The requirement that all specification sections must be fully written or omitted entirely. No placeholder text, TODOs, or stubs are permitted.                                                                                                  |
-| **Finalization Gate**          | The checkpoint where the project owner signs off on the audited specification. Requires zero blockers, representation of all requirements from Discovery Notes, and explicit approval.                                                          |
-| **Contradiction Blocker**      | The guardrail that halts the pipeline immediately if a project owner's input contradicts a previously locked requirement.                                                                                                                       |
-| **Scope Creep Containment**    | The practice of identifying and flagging requirements that fall outside defined system boundaries for triaging.                                                                                                                                 |
-| **Zero Solution Design**       | The constraint prohibiting the auditor from designing fixes or proposing implementations; they must only identify what is broken and why.                                                                                                       |
-| **No Silent Passes**           | The requirement that the audit report must explicitly state if the specification is consistent and ready for sign-off, rather than being empty.                                                                                                 |
-| **Context Preservation**       | The rule that the compiler must not alter already locked specification sections unless incoming inputs explicitly override them.                                                                                                                |
-| **Structural Invariance**      | The requirement that the compiler must always output the complete, updated specification, rather than partial snippets or diffs.                                                                                                                |
-| **Compilation Gate**           | The confirmation checkpoint where the project owner approves a summary of requirements or decisions before the specification file is written or rewritten.                                                                                      |
+| Term                            | Definition                                                                                                                                                                                                                                      |
+| :------------------------------ | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Discovery Notes**             | A running, cumulative summary of locked requirements and open questions, organized by topic. Stored at `.sfp/YYYY-MM-DD_<SLUG>/discovery_notes.md`.                                                                                             |
+| **Specification File**          | The compiled specification document, named `YYYY-MM-DD_<SLUG>_SPEC_DRAFT.md` while in progress and `YYYY-MM-DD_<SLUG>_SPEC.md` when finalized. Written to the project root.                                                                     |
+| **Audit Report**                | A structured report listing findings classified by severity (Blocker, Warning, Suggestion) and the overall gate status. Stored at `.sfp/YYYY-MM-DD_<SLUG>/audit_report.md`.                                                                     |
+| **Project Slug**                | An uppercase, hyphen-separated identifier derived from the project name (e.g., `TASK-MANAGEMENT`), used in the specification filename and `.sfp/` subdirectory name.                                                                            |
+| **`.sfp/` Directory**           | A working directory in the project root containing per-specification subdirectories (`.sfp/YYYY-MM-DD_<SLUG>/`). Each subdirectory holds Discovery Notes and Audit Reports for one specification. Cleaned up when specifications are finalized. |
+| **DRAFT Status**                | The `_DRAFT` suffix in the specification filename indicating the spec is in progress. Removed by the audit skill when the specification is finalized and locked.                                                                                |
+| **Zero Placeholder Invariant**  | The requirement that all specification sections must be fully written or omitted entirely. No placeholder text, TODOs, or stubs are permitted.                                                                                                  |
+| **Finalization Gate**           | The checkpoint where the project owner signs off on the audited specification. Requires zero blockers, representation of all requirements from Discovery Notes, and explicit approval.                                                          |
+| **Contradiction Blocker**       | The guardrail that halts the pipeline immediately if a project owner's input contradicts a previously locked requirement.                                                                                                                       |
+| **Scope Creep Containment**     | The practice of identifying and flagging requirements that fall outside defined system boundaries for triaging.                                                                                                                                 |
+| **Zero Solution Design**        | The constraint prohibiting the auditor from designing fixes or proposing implementations; they must only identify what is broken and why.                                                                                                       |
+| **No Silent Passes**            | The requirement that the audit report must explicitly state if the specification is consistent and ready for sign-off, rather than being empty.                                                                                                 |
+| **Context Preservation**        | The rule that the compiler must not alter already locked specification sections unless incoming inputs explicitly override them.                                                                                                                |
+| **Structural Invariance**       | The requirement that the compiler must always output the complete, updated specification, rather than partial snippets or diffs.                                                                                                                |
+| **Compilation Gate**            | The confirmation checkpoint where the project owner approves a summary of requirements or decisions before the specification file is written or rewritten.                                                                                      |
+| **Downstream Execution Prompt** | A non-normative, synthesized Markdown block appended to the locked specification file. It instructs downstream execution agents (like Cursor, Windsurf, or Claude Code) on how to generate the spec deliverables.                               |
+| **Downstream Guidance**         | Domain-specific instructions defined in a Persona configuration that specify how downstream execution agents should implement the locked specification.                                                                                         |
 
 ---
 

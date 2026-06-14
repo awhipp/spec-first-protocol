@@ -12,7 +12,7 @@ Use this timeline to ensure all booking windows and daily tasks are completed on
 
 ## Phase 2: 60 Days Out (April 16, 2026 at 6:00 AM EST)
 
-*Highly recommended to book right at 6:00 AM EST as character dining slots fill instantly.*
+_Highly recommended to book right at 6:00 AM EST as character dining slots fill instantly._
 
 - [ ] **Book Day 1 Dinner**: Garden Grill Restaurant (EPCOT) - character dining.
 - [ ] **Book Day 2 Dinner/Lunch**: The Crystal Palace (Magic Kingdom) - character dining.
@@ -23,25 +23,25 @@ Use this timeline to ensure all booking windows and daily tasks are completed on
 
 ## Phase 3: 7 Days Out (June 8, 2026 at 7:00 AM EST)
 
-*As an on-property resort guest, your window opens 7 days before check-in for the duration of your stay.*
+_As an on-property resort guest, your window opens 7 days before check-in for the duration of your stay._
 
 - [ ] **Purchase Lightning Lane Multi Pass** for all 4 days.
 - [ ] **Pre-Book Day 1 Lightning Lanes** (EPCOT):
-  - [ ] *Remy's Ratatouille Adventure* (Tier 1) - target late afternoon (e.g., 4:30 PM).
-  - [ ] *Spaceship Earth* (Tier 2)
-  - [ ] *The Seas with Nemo & Friends* (Tier 2)
+  - [ ] _Remy's Ratatouille Adventure_ (Tier 1) - target late afternoon (e.g., 4:30 PM).
+  - [ ] _Spaceship Earth_ (Tier 2)
+  - [ ] _The Seas with Nemo & Friends_ (Tier 2)
 - [ ] **Pre-Book Day 2 Lightning Lanes** (Magic Kingdom):
-  - [ ] *Peter Pan's Flight* (Tier 1 or high-priority Tier 2 equivalent depending on 2026 rules - otherwise pick *Jungle Cruise*).
-  - [ ] *Many Adventures of Winnie the Pooh*
-  - [ ] *Buzz Lightyear's Space Ranger Spin*
+  - [ ] _Peter Pan's Flight_ (Tier 1 or high-priority Tier 2 equivalent depending on 2026 rules - otherwise pick _Jungle Cruise_).
+  - [ ] _Many Adventures of Winnie the Pooh_
+  - [ ] _Buzz Lightyear's Space Ranger Spin_
 - [ ] **Pre-Book Day 3 Lightning Lanes**:
-  - [ ] *Slinky Dog Dash* (Tier 1 at Hollywood Studios) - target late afternoon (e.g., 5:00 PM) for the 7yo and adults (use Rider Switch).
-  - [ ] *Toy Story Mania* (Tier 2 at Hollywood Studios)
-  - [ ] *Na'vi River Journey* (Animal Kingdom morning) - *Note: If booking park-to-park, select your morning Animal Kingdom rides first.*
+  - [ ] _Slinky Dog Dash_ (Tier 1 at Hollywood Studios) - target late afternoon (e.g., 5:00 PM) for the 7yo and adults (use Rider Switch).
+  - [ ] _Toy Story Mania_ (Tier 2 at Hollywood Studios)
+  - [ ] _Na'vi River Journey_ (Animal Kingdom morning) - _Note: If booking park-to-park, select your morning Animal Kingdom rides first._
 - [ ] **Pre-Book Day 4 Lightning Lanes** (EPCOT/Magic Kingdom):
-  - [ ] *Frozen Ever After* (Tier 1 at EPCOT) - target morning (e.g., 9:30 AM).
-  - [ ] *Dumbo the Flying Elephant* (Magic Kingdom afternoon)
-  - [ ] *Under the Sea - Journey of the Little Mermaid* (Magic Kingdom afternoon)
+  - [ ] _Frozen Ever After_ (Tier 1 at EPCOT) - target morning (e.g., 9:30 AM).
+  - [ ] _Dumbo the Flying Elephant_ (Magic Kingdom afternoon)
+  - [ ] _Under the Sea - Journey of the Little Mermaid_ (Magic Kingdom afternoon)
 
 ---
 

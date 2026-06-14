@@ -12,22 +12,22 @@ The distribution utility maps specific agentic tool integrations to their respec
 
 ### Target Mapping Table
 
-| Integration ID | Scope | Operating System | Destination Path |
-| :--- | :--- | :--- | :--- |
-| `claude` | `local` | All | `./.claude/skills/` |
-| `claude` | `global` | macOS / Linux | `~/.claude/skills/` |
-| `claude` | `global` | Windows | `$HOME\.claude\skills\` |
-| `antigravity` | `local` | All | `./.agents/skills/` |
-| `antigravity` | `global` | macOS / Linux | `~/.agents/skills/` |
-| `antigravity` | `global` | Windows | `$HOME\.agents\skills\` |
-| `cursor` | `local` | All | `./.cursor/skills/` |
-| `cursor` | `global` | macOS / Linux | `~/.cursor/skills/` |
-| `cursor` | `global` | Windows | `$HOME\.cursor\skills\` |
-| `windsurf` | `local` | All | `./.windsurf/skills/` |
-| `windsurf` | `global` | macOS / Linux | `~/.windsurf/skills/` |
-| `windsurf` | `global` | Windows | `$HOME\.windsurf\skills\` |
-| `none` | `local` | All | `./skills/` |
-| `none` | `global` | All | *Invalid combination (system errors out)* |
+| Integration ID | Scope    | Operating System | Destination Path                          |
+| :------------- | :------- | :--------------- | :---------------------------------------- |
+| `claude`       | `local`  | All              | `./.claude/skills/`                       |
+| `claude`       | `global` | macOS / Linux    | `~/.claude/skills/`                       |
+| `claude`       | `global` | Windows          | `$HOME\.claude\skills\`                   |
+| `antigravity`  | `local`  | All              | `./.agents/skills/`                       |
+| `antigravity`  | `global` | macOS / Linux    | `~/.agents/skills/`                       |
+| `antigravity`  | `global` | Windows          | `$HOME\.agents\skills\`                   |
+| `cursor`       | `local`  | All              | `./.cursor/skills/`                       |
+| `cursor`       | `global` | macOS / Linux    | `~/.cursor/skills/`                       |
+| `cursor`       | `global` | Windows          | `$HOME\.cursor\skills\`                   |
+| `windsurf`     | `local`  | All              | `./.windsurf/skills/`                     |
+| `windsurf`     | `global` | macOS / Linux    | `~/.windsurf/skills/`                     |
+| `windsurf`     | `global` | Windows          | `$HOME\.windsurf\skills\`                 |
+| `none`         | `local`  | All              | `./skills/`                               |
+| `none`         | `global` | All              | _Invalid combination (system errors out)_ |
 
 ---
 
@@ -47,26 +47,26 @@ The distribution utility maps specific agentic tool integrations to their respec
 The user copies a single-line command from the `README.md` and runs it to bootstrap the installation.
 
 - **macOS/Linux (Bash)**:
-  - *Without arguments*:
+  - _Without arguments_:
 
     ```bash
     curl -fsSL https://raw.githubusercontent.com/awhipp/spec-first-protocol/main/scripts/install.sh | bash
     ```
 
-  - *With arguments* (using `bash -s` to forward parameters):
+  - _With arguments_ (using `bash -s` to forward parameters):
 
     ```bash
     curl -fsSL https://raw.githubusercontent.com/awhipp/spec-first-protocol/main/scripts/install.sh | bash -s -- -i claude -s global
     ```
 
 - **Windows (PowerShell)**:
-  - *Without arguments*:
+  - _Without arguments_:
 
     ```powershell
     powershell -ExecutionPolicy Bypass -Command "irm https://raw.githubusercontent.com/awhipp/spec-first-protocol/main/scripts/install.ps1 | iex"
     ```
 
-  - *With arguments* (wrapping download in a scriptblock invocation to forward parameters):
+  - _With arguments_ (wrapping download in a scriptblock invocation to forward parameters):
 
     ```powershell
     powershell -ExecutionPolicy Bypass -Command "& ([scriptblock]::Create((irm https://raw.githubusercontent.com/awhipp/spec-first-protocol/main/scripts/install.ps1))) -i claude -s global"
@@ -83,7 +83,7 @@ Once invoked, the installer script executes the following sequence:
    - Prints the resolved target absolute directory path to the console.
    - If the force flag is active, bypasses confirmation.
    - If interactive, prompts the user: `Do you want to proceed with the installation to this path? (y/N)`.
-     - *Piped Input Handling*: For macOS/Linux (Bash), when standard input is redirected (e.g. during piped execution), the script must explicitly read the user's confirmation input from `/dev/tty` (i.e. `read -p ... < /dev/tty`).
+     - _Piped Input Handling_: For macOS/Linux (Bash), when standard input is redirected (e.g. during piped execution), the script must explicitly read the user's confirmation input from `/dev/tty` (i.e. `read -p ... < /dev/tty`).
    - If the response is not `y` or `Y`, exits without modifications.
 5. **Download and Extract**:
    - Downloads the packaged `skills.zip` asset from GitHub: `https://github.com/<repo-owner-name>/<repo-name>/releases/latest/download/skills.zip`.
@@ -131,7 +131,7 @@ The installer scripts (`install.sh` and `install.ps1`) expose a command-line int
   - For Windows: `Powershell v5.1+`, `Invoke-WebRequest`, and `Expand-Archive`.
     - The PowerShell script must explicitly use the `-Force` parameter with `Expand-Archive` (e.g. `Expand-Archive -Path $tempZip -DestinationPath $tempDir -Force`) to allow successful extraction and overwrite of existing files.
   - For macOS/Linux: `bash`, `curl` or `wget`, and `unzip`. The installer script must use `unzip` to extract the downloaded release zip file. If `unzip` is not installed on the system, the script must fail immediately with a clear error message instructing the user to install it.
-- **Clean Installation Overwrite**: The installation process must perform updates by clearing and overwriting directories on a *per-skill* basis (meaning it only deletes or replaces the subdirectories/files corresponding to the skills in the package being installed, e.g. `skills/audit/`, `skills/discover/`, `skills/refine/`), preserving other custom skills or files in the parent destination `skills/` directory. Any stale files within those specific skill subdirectories must be removed during the update.
+- **Clean Installation Overwrite**: The installation process must perform updates by clearing and overwriting directories on a _per-skill_ basis (meaning it only deletes or replaces the subdirectories/files corresponding to the skills in the package being installed, e.g. `skills/audit/`, `skills/discover/`, `skills/refine/`), preserving other custom skills or files in the parent destination `skills/` directory. Any stale files within those specific skill subdirectories must be removed during the update.
 - **Scope Restriction**: A global scope option is disallowed for the `none` integration. If both `-s global` and `-i none` are provided, the script must immediately abort execution with a diagnostic error code.
 - **Paths with Spaces**: To ensure the installer functions correctly in environments where paths or home directories contain space characters, all path variables and file system references in both the Bash and PowerShell scripts must be enclosed in double quotes (e.g., `"$TARGET_DIR"` and `"$TargetDir"`).
 
