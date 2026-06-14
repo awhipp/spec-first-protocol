@@ -150,6 +150,9 @@ Once the spec is locked:
      with the specification's Deliverables section into a concise
      execution prompt that tells a downstream agent what to produce, in
      what format, and referencing which specification sections to consult.
+   - If the specification does not contain a Deliverables section, synthesize
+     the downstream prompt from the persona's guidance and the specification's
+     Overview and Workflows sections instead.
    - If no Persona is loaded, or the loaded Persona lacks
      `## 7. Downstream Guidance`, skip this step entirely.
 5. The locked specification file remains in the project root as the single
@@ -174,8 +177,15 @@ specification.
   locked, the protocol is complete. You must NOT automatically proceed to
   creating implementation plans, task lists, or executing code modifications
   to satisfy the spec deliverables. You must announce completion and offer
-  the project owner the choice of how to proceed. Execution only begins
-  after an explicit user request.
+  the project owner the choice of how to proceed. Downstream execution
+  (including acting on a Downstream Execution Prompt) only begins after
+  an explicit user request in the current or a subsequent session.
+  **Context guidance**: technical implementation work (code generation,
+  infrastructure setup, build pipelines) should be performed in a **fresh
+  context** to avoid spec-phase assumptions leaking into implementation
+  decisions. Document-oriented deliverables (rewriting the spec as a
+  polished document, generating prose from the spec) may proceed in the
+  same session if the owner prefers.
 - **Succinct Communication & Visual UX.** When interacting with the project owner or presenting the audit status:
   - Keep paragraphs as brief as needed to convey the information.
   - Eliminate conversational pleasantries, verbose setups, or repetitive summaries.

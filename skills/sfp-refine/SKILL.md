@@ -101,11 +101,22 @@ using the format `[Refined in cycle <N>, resolves <FINDING-ID>]` (e.g.,
 from `status.md` to determine the cycle number. This tag enables future
 audits and refinements to distinguish historical decisions from current ones.
 
+When updating an existing requirement, preserve its original `REQ-<NN>`
+identifier. Do not reassign or remove identifiers. If a requirement is
+split into multiple sub-requirements, assign new `REQ-<NN>` identifiers
+to each sub-requirement and note the parent in the tag (e.g.,
+`[Refined in cycle 2, resolves W-3, split from REQ-05]`).
+
 ### Step 4: Repeat
 
 Continue through all blockers, then warnings. For suggestions, present them
 for the owner's consideration but do not block on them. Record whether the
 owner accepts, rejects, or defers each suggestion.
+
+When suggestions are resolved via the streamlined batch review, record
+each accepted suggestion individually in the Discovery Notes with its own
+refinement tag. Do not combine multiple accepted suggestions into a single
+entry.
 
 ## Scope Expansion
 
