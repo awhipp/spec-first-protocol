@@ -1,5 +1,14 @@
 # Changelog
 
+## [2.1.1](https://github.com/awhipp/spec-first-protocol/compare/v2.1.0...v2.1.1) (2026-06-15)
+
+
+### Bug Fixes
+
+* addressing missing favicon and og-image placement ([1320da8](https://github.com/awhipp/spec-first-protocol/commit/1320da8773af47ee63565f01eccfb9e5e004899a))
+* align persona naming, add missing assets, and resolve showcase data gaps ([fce79a0](https://github.com/awhipp/spec-first-protocol/commit/fce79a09210d298b52940acb8d7898cc44f76cc2))
+* align persona naming, add missing assets, and resolve showcase data gaps ([9ce4532](https://github.com/awhipp/spec-first-protocol/commit/9ce453298275d292e3db51cfd644ca28c4755b90))
+
 ## [2.1.0](https://github.com/awhipp/spec-first-protocol/compare/v2.0.0...v2.1.0) (2026-06-14)
 
 
