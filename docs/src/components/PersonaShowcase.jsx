@@ -238,6 +238,12 @@ const PERSONAS = [
         detail:
           "Ensure vendor catering counts align with RSVPs and target guest counts.",
       },
+      {
+        rule: "Missing permits",
+        severity: "Warning",
+        detail:
+          "Ensure all necessary permits are explicitly accounted for based on event size and activities.",
+      },
     ],
     downstream: [
       "Generate a minute-by-minute run-of-show timeline for vendors and coordinators.",
@@ -251,7 +257,7 @@ const PERSONAS = [
     name: "Fitness Coach",
     domain: "Health & Fitness",
     description:
-      "Focus on biometric baselines, daily caloric limits, progressive overload schemes, and sleep hygiene.",
+      "Focus on biometric profiling, macro-nutrient breakdowns, progressive overload, and medical constraints.",
     icon: Dumbbell,
     color: "text-indigo-500 bg-indigo-50 border-indigo-100",
     discovery: [

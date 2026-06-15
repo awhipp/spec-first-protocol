@@ -4,7 +4,7 @@ A curated checklist tailored for your 4-day trip in June (hot, humid, and rainy 
 
 ## 1. Park Bag (Carry-On/Essentials)
 
-_These items should be in a lightweight backpack or diaper bag that stays with you at all times._
+*These items should be in a lightweight backpack or diaper bag that stays with you at all times.*
 
 - [ ] **Sun protection**: SPF 50+ sunscreen (spray and face sticks), sunglasses for everyone, wide-brimmed hats.
 - [ ] **Rain gear**: 4 lightweight reusable rain ponchos (buying in parks is expensive) + a plastic rain cover specifically for the stroller.
@@ -18,7 +18,7 @@ _These items should be in a lightweight backpack or diaper bag that stays with y
 
 ## 2. Clothing & Footwear
 
-_June in Orlando is very hot (highs ~90°F) and rain is expected daily._
+*June in Orlando is very hot (highs ~90°F) and rain is expected daily.*
 
 - [ ] **Footwear (Critical)**: 2 pairs of broken-in, comfortable walking shoes for adults and the 7yo (one pair that can dry quickly if it rains, or waterproof sandals like Keens/Teva). Comfortable sandals/shoes for the toddler.
 - [ ] **Outfits**: 5 lightweight, moisture-wicking daily outfits per person (pack extra shirts due to sweat/humidity).
@@ -42,4 +42,4 @@ _June in Orlando is very hot (highs ~90°F) and rain is expected daily._
 - [ ] **Toddler flight activities**: Coloring books, tablet loaded with offline videos, headphones.
 - [ ] **Identification**: Driver's licenses/IDs for adults, flight boarding passes.
 - [ ] **Personal Items**: Hand wipes, tissues, empty water bottles to fill past security.
-- [ ] _Note: You do not need to pack booster seats or toddler car seats, as you are using the rideshare "Car Seat" tier for the airport transfers!_
+- [ ] *Note: You do not need to pack booster seats or toddler car seats, as you are using the rideshare "Car Seat" tier for the airport transfers!*

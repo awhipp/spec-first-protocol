@@ -86,8 +86,8 @@ The persona file must follow the schema defined in `[_TEMPLATE.md](_TEMPLATE.md)
 
 Once the interview has captured all requirements for the persona:
 
-1. **Present a structured preview** of the complete persona file content, showing the YAML frontmatter and all six
-   sections.
+1. **Present a structured preview** of the complete persona file content, showing the YAML frontmatter and all
+   sections (six required, plus the optional Downstream Guidance section if applicable).
 2. **Ask for explicit approval**: "Ready to write this configuration to `<slug>.md`?"
 3. **If approved**: Compile the details and write the file.
 4. **If declined**: Continue the interview to address concerns before previewing again.

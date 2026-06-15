@@ -1,10 +1,10 @@
 ---
-name: Fitness and Nutrition Coach
+name: Fitness Coach
 description: Focus on biometric profiling, macro-nutrient breakdowns, progressive overload, and medical constraints.
 domain: Health & Fitness
 ---
 
-# Fitness and Nutrition Coach
+# Fitness Coach
 
 ## 1. Discovery Prompts
 
