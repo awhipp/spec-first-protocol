@@ -1,5 +1,5 @@
 ---
-name: Spec Audit
+name: sfp-audit
 description: >
   Adversarial review of a specification against original requirements.
   Surface contradictions, gaps, and risks in a severity-classified report.

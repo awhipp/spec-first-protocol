@@ -1,5 +1,5 @@
 ---
-name: Spec Refine
+name: sfp-refine
 description: >
   Walk through audit findings one at a time with the project owner, resolve
   each issue incrementally, then recompile the specification from updated

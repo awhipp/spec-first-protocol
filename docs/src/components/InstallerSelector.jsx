@@ -16,29 +16,29 @@ const AGENTS = [
 
 const ALL_SKILLS = [
   {
-    id: "Spec Discover",
+    id: "sfp-discover",
     label: "Spec Discover",
     description:
       "Conduct a discovery interview and compile a specification draft",
   },
   {
-    id: "Spec Audit",
+    id: "sfp-audit",
     label: "Spec Audit",
     description: "Perform an adversarial consistency and risk review",
   },
   {
-    id: "Spec Refine",
+    id: "sfp-refine",
     label: "Spec Refine",
     description: "Resolve audit findings and recompile the specification",
   },
   {
-    id: "Spec Orchestrate",
+    id: "sfp-orchestrate",
     label: "Spec Orchestrate",
     description:
       "Run all discovery, audit, and refinement phases in one session",
   },
   {
-    id: "Spec Personas",
+    id: "sfp-personas",
     label: "Spec Personas",
     description: "Build and refine custom domain-specific agent personas",
   },
@@ -51,11 +51,11 @@ export default function InstallerSelector() {
   const [projectScope, setProjectScope] = useState(false);
   const [skillMode, setSkillMode] = useState("all"); // 'all' | 'specific'
   const [selectedSkills, setSelectedSkills] = useState([
-    "Spec Discover",
-    "Spec Audit",
-    "Spec Refine",
-    "Spec Orchestrate",
-    "Spec Personas",
+    "sfp-discover",
+    "sfp-audit",
+    "sfp-refine",
+    "sfp-orchestrate",
+    "sfp-personas",
   ]);
   const [copied, setCopied] = useState(false);
 

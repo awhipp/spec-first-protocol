@@ -1,5 +1,5 @@
 ---
-name: Spec Discover
+name: sfp-discover
 description: >
   Conduct a structured discovery interview to extract requirements, then
   compile validated notes into a specification document with owner approval.
