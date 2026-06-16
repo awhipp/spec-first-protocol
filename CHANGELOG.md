@@ -1,5 +1,13 @@
 # Changelog
 
+## [2.1.2](https://github.com/awhipp/spec-first-protocol/compare/v2.1.1...v2.1.2) (2026-06-16)
+
+
+### Bug Fixes
+
+* adding persona file scopes outside of the skill directory to avoid overwrites ([9caaf53](https://github.com/awhipp/spec-first-protocol/commit/9caaf531d90afdf0c9ce8b44a656e15fe529df1f))
+* Addressing naming convention mismatch `Spec*` vs `sfp-*` ([cd10364](https://github.com/awhipp/spec-first-protocol/commit/cd103641be346d363b1be1c32df04d499a712242))
+
 ## [2.1.1](https://github.com/awhipp/spec-first-protocol/compare/v2.1.0...v2.1.1) (2026-06-15)
 
 
