@@ -48,6 +48,7 @@ spec-first-protocol/
 │   └── non-software/           # Non-software domain examples
 ├── scripts/                    # Build helper scripts
 │   └── build-docs.js           # Pre-processes spec data for the portal
+├── specs/                      # Locked, finalized specifications
 └── skills/                     # Core Spec-First Protocol Agent Skills
     ├── sfp-discover/           # Requirements discovery & compilation
     ├── sfp-audit/              # Adversarial review & finalization gate
