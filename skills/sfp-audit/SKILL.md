@@ -1,5 +1,5 @@
 ---
-name: Spec Audit
+name: sfp-audit
 description: >
   Adversarial review of a specification against original requirements.
   Surface contradictions, gaps, and risks in a severity-classified report.
@@ -30,10 +30,15 @@ integrity and surface problems.
   `.sfp/YYYY-MM-DD_<SLUG>/discovery_notes.md`.
 - **Conversation context**: The full discussion history, to verify that the
   spec faithfully represents the project owner's intent.
-- **Persona Context**: Read `.sfp/YYYY-MM-DD_<SLUG>/status.md`. If the `persona` field
-  is present, load the corresponding Persona file from the colocated `../sfp-personas/`
-  directory (e.g., `../sfp-personas/<slug>.md`). If the file is missing or malformed,
-  halt execution and report the error to the user immediately.
+- **Persona Context**: Read `.sfp/YYYY-MM-DD_<SLUG>/status.md`. If the `persona` field is present, load the
+  corresponding Persona file (`<slug>.md`) by checking the following directories and resolving conflicts by
+  loading the first match in priority order:
+  1. **Project-Local**: `.sfp/personas/<slug>.md`
+  2. **User-Global**: `~/.sfp/personas/<slug>.md` (resolving using the home folder path:
+     `%USERPROFILE%\.sfp\personas\<slug>.md` on Windows, `$HOME/.sfp/personas/<slug>.md` on macOS/Linux)
+  3. **Pre-packaged Fallback**: The colocated `../sfp-personas/<slug>.md` directory
+  If the file is missing across all directories or malformed, halt execution and report the error to the user
+  immediately.
 
 ## Audit Process
 

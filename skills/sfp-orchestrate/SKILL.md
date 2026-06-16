@@ -1,5 +1,5 @@
 ---
-name: Spec Orchestrate
+name: sfp-orchestrate
 description: >
   Run the full Spec-First Protocol pipeline in a single session.
   Orchestrates discover, audit, and refine skills without context

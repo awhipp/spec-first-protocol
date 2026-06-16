@@ -1,5 +1,5 @@
 ---
-name: Spec Personas
+name: sfp-personas
 description: >
   Guide the user through creating a new custom domain persona or refining
   an existing one. Extracts requirements and generates/edits the persona file.
@@ -18,12 +18,21 @@ skills.
 
 At the start of execution, identify whether the user intends to create a new persona or refine an existing one.
 
-1. **Directory Inspection**: Check the colocated directory for existing Markdown persona files (ignoring `README.md`,
-   `SKILL.md`, and any files prefixed with `_` or `.`).
+1. **Directory Inspection**: Scan and compile a combined set of all available Markdown persona files (ignoring
+   `README.md`, `SKILL.md`, and files starting with `_` or `.`) across the following directories:
+   - **Project-Local**: `.sfp/personas/` (inside the active project root)
+   - **User-Global**: `~/.sfp/personas/` (resolved based on the user's home folder:
+     `%USERPROFILE%\.sfp\personas\` on Windows, `$HOME/.sfp/personas/` on macOS/Linux)
+   - **Pre-packaged Fallback**: The colocated directory (`../sfp-personas/` or `./` depending on active context)
+   If a filename collision occurs (the same slug exists in multiple scopes), de-conflict by selecting the
+   highest-priority file using the priority order: Project-Local (highest) -> User-Global -> Pre-packaged (lowest).
 2. **Mode Selection**:
-   - **New Persona**: If starting fresh, request the user define a short name, target domain, and slug.
-   - **Refinement**: If refining, list the detected persona names and filenames, and ask the user to select which one
-     to modify or input a path.
+   - **New Persona**: If starting fresh, ask the user whether they want to save the new persona
+     **Project-Locally** (stored in `.sfp/personas/<slug>.md` for version control in this project) or
+     **User-Globally** (stored in `~/.sfp/personas/<slug>.md` for use across all local projects). Then request
+     they define a short name, target domain, and slug.
+   - **Refinement**: If refining, list the combined set of detected persona names, filenames, and their resolved
+     scopes (local, global, or pre-packaged). Ask the user to select which one to modify.
 3. **Slug Guidelines**: The persona slug must be a lowercase, hyphen-separated identifier with no spaces (e.g.,
    `travel-advisor`, `stock-market-advisor`). This slug will define the filename: `<slug>.md`.
 
@@ -99,5 +108,9 @@ Once the interview has captured all requirements for the persona:
   agnostic behaviors.
 - **File Length Constraint**: The completed persona file must be **$\le$ 300 lines** to remain within repository
   limits.
-- **Save Location**: Write the compiled Markdown file to `skills/sfp-personas/<slug>.md`.
+- **Save Location**: Write the compiled Markdown file to the user-selected scope directory path:
+  - Project-local: `.sfp/personas/<slug>.md` (creating the folder if it does not exist)
+  - User-global: `~/.sfp/personas/<slug>.md` (creating the folder if it does not exist)
+  If the user explicitly requests saving directly to the Spec-First Protocol repository (e.g., contributors
+  developing SFP), write to `skills/sfp-personas/<slug>.md`.
 - **References**: Use traditional relative Markdown links when referring to colocated files.

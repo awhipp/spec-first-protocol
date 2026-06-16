@@ -1,5 +1,5 @@
 ---
-name: Spec Refine
+name: sfp-refine
 description: >
   Walk through audit findings one at a time with the project owner, resolve
   each issue incrementally, then recompile the specification from updated
@@ -30,10 +30,15 @@ established the scope. You are resolving known issues surgically.
 - **Discovery Notes**: The existing validated requirements from prior
   discovery or refinement cycles, located at
   `.sfp/YYYY-MM-DD_<SLUG>/discovery_notes.md`.
-- **Persona Context**: Read `.sfp/YYYY-MM-DD_<SLUG>/status.md`. If the `persona` field
-  is present, load the corresponding Persona file from the colocated `../sfp-personas/`
-  directory (e.g., `../sfp-personas/<slug>.md`). If the file is missing or malformed,
-  halt execution and report the error to the user immediately.
+- **Persona Context**: Read `.sfp/YYYY-MM-DD_<SLUG>/status.md`. If the `persona` field is present, load the
+  corresponding Persona file (`<slug>.md`) by checking the following directories and resolving conflicts by
+  loading the first match in priority order:
+  1. **Project-Local**: `.sfp/personas/<slug>.md`
+  2. **User-Global**: `~/.sfp/personas/<slug>.md` (resolving using the home folder path:
+     `%USERPROFILE%\.sfp\personas\<slug>.md` on Windows, `$HOME/.sfp/personas/<slug>.md` on macOS/Linux)
+  3. **Pre-packaged Fallback**: The colocated `../sfp-personas/<slug>.md` directory
+  If the file is missing across all directories or malformed, halt execution and report the error to the user
+  immediately.
 
 ## Incremental Review Loop
 

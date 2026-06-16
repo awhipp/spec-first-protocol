@@ -9,21 +9,32 @@ Travel Planning, RPG Campaigns).
 Personas allow SFP skills to act as specialized domain experts without hard-coding domain knowledge
 into the core agnostic skills.
 
-1. **Dynamic Detection**: When `sfp-discover` or `sfp-orchestrate` runs, it scans this directory for
-   Persona files. By matching your initial request against the `domain` and `description` defined in
-   the Persona metadata, it automatically recommends the best fit.
+1. **Dynamic Detection**: When `sfp-discover` or `sfp-orchestrate` runs, it scans the persona folders (project-local,
+   user-global, and pre-packaged fallback) for Persona files. By matching your initial request against the `domain`
+   and `description` defined in the Persona metadata, it automatically recommends the best fit.
 2. **State Lock**: Once a Persona is selected (or manually chosen), the skill writes the persona's
    slug into the `.sfp/<slug>/status.md` file (e.g., `persona: travel-advisor`).
 3. **Behavior Adoption**: Downstream skills (`sfp-audit`, `sfp-refine`) dynamically read this state
-   lock and apply the instructions defined in that Persona, adapting their interviewing style,
-   enforcing domain-specific rules, and injecting custom templates.
+   lock and load the corresponding persona file from the highest priority scope in which it is found (checking
+   Project-Local first, then User-Global, then Pre-packaged). They apply the instructions defined in that Persona,
+   adapting their interviewing style, enforcing domain-specific rules, and injecting custom templates.
 
 ## Adding Custom Personas
 
-You can add your own custom Personas to this directory. The Spec-First Protocol updater scripts
-are designed to preserve any custom local Personas you create here during synchronization.
+Custom personas can be created and stored in three different scopes:
 
-The easiest way to get started is to duplicate the included template file:
+- **Project-Scoped Custom Personas**: Stored in `.sfp/personas/` in your project root. Safe from upgrades, checkable
+  into Git, and shareable with your team.
+- **User-Global Custom Personas**: Stored in `~/.sfp/personas/` (e.g. `%USERPROFILE%\.sfp\personas\` on Windows
+  or `$HOME/.sfp/personas/` on macOS/Linux). Safe from package upgrades and shared across all your local projects.
+- **Pre-packaged Default Personas**: Stored in the colocated `../sfp-personas/` directory (installed globally or
+  locally by the package manager).
+
+The easiest way to get started is to use the **SFP Personas** skill (`npx skills use sfp-personas`) to
+interactively build or edit a custom persona. The skill will prompt you for the desired scope and compile the
+configuration to `.sfp/personas/<slug>.md` or `~/.sfp/personas/<slug>.md` automatically.
+
+Alternatively, you can duplicate the template file manually:
 `cp _TEMPLATE.md my-custom-persona.md`
 
 A Persona file must be a valid Markdown file containing YAML frontmatter. Ensure the frontmatter

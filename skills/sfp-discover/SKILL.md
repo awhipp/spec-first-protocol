@@ -1,5 +1,5 @@
 ---
-name: Spec Discover
+name: sfp-discover
 description: >
   Conduct a structured discovery interview to extract requirements, then
   compile validated notes into a specification document with owner approval.
@@ -94,17 +94,24 @@ complexity remains unclear; it must not bypass clarification.
 
 Before the First Turn, check if a domain-specific persona is a good fit for the request.
 
-1. **Detection**: Check the colocated `../sfp-personas/` directory for any Markdown
-   persona files (ignoring `README.md`, `SKILL.md`, and any files prefixed with `_`).
-2. **Intelligent Recommendation**: Parse the YAML metadata (`domain` and `description`)
-   of the available personas and compare them to the user's initial prompt or scope.
-3. **User Prompts**: If a strong similarity match is found, dynamically recommend the
-   most relevant persona (or list matching ones). Ask the user if they would like to use
-   it, choose a different one, or proceed in the default domain-agnostic mode.
-4. **Behavior Adoption**: If a persona is selected (e.g., `stock-trader.md`), read its
-   prompts and specification templates to adjust your discovery interview behavior and
-   schema structure. Ensure you record the persona's base filename (excluding `.md`)
-   as the `persona` slug in the `status.md` initialization.
+1. **Detection**: Compile a combined set of all available personas by scanning the following directories:
+   - **Project-Local**: `.sfp/personas/` (inside the active project root)
+   - **User-Global**: `~/.sfp/personas/` (resolved based on the user's home folder:
+     `%USERPROFILE%\.sfp\personas\` on Windows, `$HOME/.sfp/personas/` on macOS/Linux)
+   - **Pre-packaged Fallback**: The colocated `../sfp-personas/` directory (installed folder)
+2. **Intelligent Recommendation**: Parse the YAML metadata (`domain` and `description`) of the available personas
+   across all scanned directories. If a filename/slug collision occurs (i.e. the same persona filename exists in
+   multiple directories), de-conflict by selecting the highest-priority file using the priority order:
+   Project-Local (highest) -> User-Global -> Pre-packaged Fallback (lowest). Compare the unique list to the user's
+   initial prompt or scope.
+3. **User Prompts**: If a strong similarity match is found, dynamically recommend the most relevant persona (or list
+   matching ones). Ask the user if they would like to use it, choose a different one, or proceed in the default
+   domain-agnostic mode.
+4. **Behavior Adoption**: If a persona is selected (e.g., `stock-market-advisor.md`), load and read its contents.
+   If the persona file exists in multiple scopes, resolve the conflict by loading the highest-priority file
+   found in the priority order: Project-Local (highest), then User-Global, and finally Pre-packaged Fallback. Adjust
+   your discovery interview behavior and schema structure accordingly. Ensure you record the persona's base
+   filename (excluding `.md`) as the `persona` slug in the `status.md` initialization.
     - **Tone & Style**: Adopt the tone and style defined in the Persona. If no Persona is loaded,
       default to a neutral, professional, and highly succinct tone. Focus on brevity: avoid conversational
       pleasantries, verbose introductions, or repetitive summaries. Keep paragraphs as brief as needed to convey
