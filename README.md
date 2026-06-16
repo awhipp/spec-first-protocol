@@ -71,12 +71,12 @@ flowchart LR
 
 The protocol implements this funnel using three specialized Agent Skills, culminating in a finalization gate:
 
-| Stage | Skill                        | Input                          | Output                                              | Description                                                                                                                                                                                                                                                                                                                                                                                                                        |
-| :---: | :--------------------------- | :----------------------------- | :-------------------------------------------------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-|   1   | **Discover**                 | Project owner interview        | Discovery Notes + `YYYY-MM-DD_<SLUG>_SPEC_DRAFT.md` | Conducts a structured interview to extract requirements, goals, constraints, and edge cases. Produces a **project slug** and **Discovery Notes**. When the scope is clear and the owner approves, compiles the notes into a draft specification file.                                                                                                                                                                              |
-|   2   | **Audit**                    | Draft specification            | Audit Report                                        | Performs an adversarial review to surface contradictions, gaps, and risks. Generates a severity-classified **Audit Report**.                                                                                                                                                                                                                                                                                                       |
-|   3   | **Refine**                   | Audit Report + owner decisions | Updated specification                               | Walks through audit findings **one at a time** with the project owner, resolving each incrementally. Offers an opportunity to expand scope after findings are resolved. After all decisions are made, presents a summary for approval and recompiles the specification from updated Discovery Notes.                                                                                                                               |
-|   4   | **Lock** (Finalization Gate) | Clean audit + owner approval   | `YYYY-MM-DD_<SLUG>_SPEC.md`                         | Once the audit contains no blockers, all requirements from the Discovery Notes are represented, and the project owner explicitly approves, the specification is locked. The `_DRAFT` suffix is removed from the filename, the `.sfp/` working directory is cleaned up, and a non-normative Downstream Execution Prompt is appended if downstream guidance is available. The locked specification file remains in the project root. |
+| Stage | Skill                        | Input                          | Output                                                       | Description                                                                                                                                                                                                                                                                                                                                                                                                 |
+| :---: | :--------------------------- | :----------------------------- | :----------------------------------------------------------- | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 1     | **Discover**                 | Project owner interview        | Discovery Notes + `.sfp/.../YYYY-MM-DD_<SLUG>_SPEC_DRAFT.md` | Conducts a structured interview to extract requirements, goals, constraints, and edge cases. Produces a **project slug** and **Discovery Notes**. When the scope is clear and the owner approves, compiles the notes into a draft specification file inside the spec-specific `.sfp/` subdirectory.                                                                                                         |
+| 2     | **Audit**                    | Draft specification            | Audit Report                                                 | Performs an adversarial review to surface contradictions, gaps, and risks. Generates a severity-classified **Audit Report**.                                                                                                                                                                                                                                                                                |
+| 3     | **Refine**                   | Audit Report + owner decisions | Updated specification                                        | Walks through audit findings **one at a time** with the project owner, resolving each incrementally. Offers an opportunity to expand scope after findings are resolved. After all decisions are made, presents a summary for approval and recompiles the specification from updated Discovery Notes.                                                                                                        |
+| 4     | **Lock** (Finalization Gate) | Clean audit + owner approval   | `specs/YYYY-MM-DD_<SLUG>_SPEC.md`                            | Once the audit contains no blockers, all requirements from the Discovery Notes are represented, and the project owner explicitly approves, the specification is locked. The `_DRAFT` suffix is removed, the specification is moved to the `specs/` directory, the `.sfp/` working directory is cleaned up, and a non-normative Downstream Execution Prompt is appended if downstream guidance is available. |
 
 ### Key Benefits
 
@@ -175,7 +175,8 @@ specifications or constrained context windows.
 
 1. **Initialize** — Invoke the **Spec Discover** skill to start a new specification. This creates the `.sfp/` working
    directory and a spec-specific subdirectory, then begins the structured interview. When the scope is clear, discover
-   compiles the specification with your approval, producing a `_SPEC_DRAFT.md` file.
+   compiles the specification with your approval, producing a `YYYY-MM-DD_<SLUG>_SPEC_DRAFT.md` file inside the
+   `.sfp/` subdirectory.
 2. **Audit** — Clear your context, then invoke the **Spec Audit** skill to review the draft specification for
    contradictions, gaps, and risks. The audit produces a full report.
 3. **Refine** — If issues are found, clear your context and invoke the **Spec Refine** skill. It walks through each
@@ -183,8 +184,8 @@ specifications or constrained context windows.
    your approval.
 4. **Iterate** — Continue the audit → refine cycle (clearing context between each) until the specification is clean and
    approved.
-5. **Finalize** — When the audit passes and you approve, the specification is locked, the `_DRAFT` suffix is removed
-   from the filename, and the `.sfp/` subdirectory is cleaned up.
+5. **Finalize** — When the audit passes and you approve, the specification is locked, the `_DRAFT` suffix is removed,
+   the file is moved to the `specs/` directory, and the `.sfp/` subdirectory is cleaned up.
 
 ### Single-Context Mode
 
@@ -221,11 +222,18 @@ At runtime, the protocol creates a `.sfp/` working directory in the project root
 └── YYYY-MM-DD_<SLUG>/                  # One subdirectory per spec
     ├── discovery_notes.md              # Running requirements summary
     ├── audit_report.md                 # Findings from the most recent audit
+    ├── YYYY-MM-DD_<SLUG>_SPEC_DRAFT.md # Active draft specification
     └── status.md                       # Pipeline iteration state
 ```
 
-Draft specifications are written to the project root using the `YYYY-MM-DD_<SLUG>_SPEC_DRAFT.md` naming convention. The
-`_DRAFT` suffix is removed when the specification is finalized and locked.
+Active specification drafts are stored inside their spec-specific `.sfp/YYYY-MM-DD_<SLUG>/` subdirectory. When
+finalized and locked, the `_DRAFT` suffix is removed, the `.sfp/YYYY-MM-DD_<SLUG>/` directory is archived/deleted,
+and the locked specification file is moved to the visible `specs/` directory in the project root:
+
+```text
+specs/
+└── YYYY-MM-DD_<SLUG>_SPEC.md           # Locked specification
+```
 
 ---
 

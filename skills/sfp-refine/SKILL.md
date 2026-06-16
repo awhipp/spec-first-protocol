@@ -24,8 +24,8 @@ established the scope. You are resolving known issues surgically.
 
 - **Audit Report**: The structured findings from the audit skill, located at
   `.sfp/YYYY-MM-DD_<SLUG>/audit_report.md`, classified by severity.
-- **Specification file**: A draft specification in the project root, named
-  using the `YYYY-MM-DD_<SLUG>_SPEC_DRAFT.md` convention. If multiple draft
+- **Specification file**: A draft specification inside the spec-specific subdirectory, named
+  using the `.sfp/YYYY-MM-DD_<SLUG>/YYYY-MM-DD_<SLUG>_SPEC_DRAFT.md` convention. If multiple draft
   specifications exist, ask the project owner which one to refine.
 - **Discovery Notes**: The existing validated requirements from prior
   discovery or refinement cycles, located at
@@ -179,9 +179,9 @@ After the owner approves recompilation:
    - Omit sections that do not apply.
    - Rename section headings to use the project owner's terminology where it
      improves clarity.
-6. Output the complete, updated specification file to the project root,
-   updating the existing `_SPEC_DRAFT.md` file rather than creating a new
-   one.
+6. Output the complete, updated specification file to the spec-specific
+   subdirectory `.sfp/YYYY-MM-DD_<SLUG>/`, updating the existing
+   `YYYY-MM-DD_<SLUG>_SPEC_DRAFT.md` file rather than creating a new one.
 
 ### Compilation Guardrails
 
@@ -241,9 +241,9 @@ Your outputs are:
    `.sfp/YYYY-MM-DD_<SLUG>/discovery_notes.md`, including all new decisions
    and scope additions made during refinement, organized by topic and clearly
    marked as new or revised.
-2. **Updated Specification File** in the project root (retaining the
-   `_SPEC_DRAFT.md` suffix), recompiled from the updated Discovery Notes
-   after owner approval.
+2. **Updated Specification File** in the spec-specific subdirectory `.sfp/YYYY-MM-DD_<SLUG>/`
+   (retaining the `_SPEC_DRAFT.md` suffix), recompiled from the updated Discovery
+   Notes after owner approval.
 3. **Updated Status File** at `.sfp/YYYY-MM-DD_<SLUG>/status.md`: set `phase`
    to `refine` and update `last_updated` to the current ISO-8601 timestamp.
    If `status.md` does not exist, create it with `iteration: 1` and

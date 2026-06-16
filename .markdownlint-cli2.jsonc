@@ -10,6 +10,7 @@
     "docs/public/data/**",
     "**_SPEC**.md",
     ".sfp/**",
+    "specs/**",
     "**/node_modules/**",
     "**/dist/**"
   ]

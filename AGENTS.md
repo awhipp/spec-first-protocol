@@ -169,7 +169,7 @@ constraints:
 - **Ignored Files**: The `markdownlint-cli2` configuration ignores transient,
   generated, and reference paths: `CLAUDE.md`,
   `.github/copilot-instructions.md`, `CHANGELOG.md`, `examples/**`,
-  `docs/public/data/**`, `**_SPEC**.md`, `.sfp/**`, `**/node_modules/**`, and
+  `docs/public/data/**`, `**_SPEC**.md`, `.sfp/**`, `specs/**`, `**/node_modules/**`, and
   `**/dist/**`.
 - **Local Verification Command**: Run the following command to lint Markdown
   files locally:
