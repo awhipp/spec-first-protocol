@@ -30,14 +30,14 @@ order must be: **Resume Detection → Triage → First Turn**.
 2. **Detection Matrix & Strategy**: Check the `.sfp/` directory state:
    - **No `.sfp/` directory exists**: Proceed normally: create `.sfp/`, then
      run triage → first turn.
-   - **`.sfp/<slug>/discovery_notes.md` exists with no `_SPEC_DRAFT.md` in root**:
+   - **`.sfp/<slug>/discovery_notes.md` exists with no `_SPEC_DRAFT.md` inside `.sfp/<slug>/`**:
      Ask: "Found in-progress discovery notes for `<SLUG>`. Would you like to
      resume this discovery or start fresh?" If resuming, use a **gap-based
      continuation strategy**: compare existing notes against compilation
      readiness criteria to identify gaps, and ask questions to resolve them. Do
      not try to reconstruct prior conversation. If starting fresh, proceed to
      triage → first turn.
-   - **`.sfp/<slug>/` AND a corresponding `_SPEC_DRAFT.md` exist**: Inform the
+   - **`.sfp/<slug>/` AND a corresponding `_SPEC_DRAFT.md` inside it exist**: Inform the
      owner that a draft specification already exists and suggest invoking the
      audit or refine skill.
    - **Multiple `.sfp/<slug>/` subdirectories exist**: List existing slugs and
@@ -210,25 +210,24 @@ After the owner approves compilation:
    - Omit sections that do not apply.
    - Rename section headings to use the project owner's terminology where it
      improves clarity.
-6. Output the complete specification file to the project root.
+6. Output the complete specification file to the spec-specific subdirectory: `.sfp/YYYY-MM-DD_<SLUG>/`.
 
 ### Specification Filename
 
-The specification file is written to the **project root** using the following
+The specification file is written to the **spec-specific subdirectory** `.sfp/YYYY-MM-DD_<SLUG>/` using the following
 naming convention:
 
 ```text
-YYYY-MM-DD_<SLUG>_SPEC_DRAFT.md
+.sfp/YYYY-MM-DD_<SLUG>/YYYY-MM-DD_<SLUG>_SPEC_DRAFT.md
 ```
 
 - **Date**: The date the specification is first drafted (e.g., `2026-05-31`).
 - **Slug**: The uppercase, hyphen-separated project slug recorded in the
   Discovery Notes (e.g., `TASK-MANAGEMENT`).
-- **Example**: `2026-05-31_TASK-MANAGEMENT_SPEC_DRAFT.md`
+- **Example**: `.sfp/2026-05-31_TASK-MANAGEMENT/2026-05-31_TASK-MANAGEMENT_SPEC_DRAFT.md`
 
-The `_DRAFT` suffix indicates the specification is in progress. It is removed
-by the audit skill when the specification is finalized and locked. Discover
-always creates a new specification file.
+The `_DRAFT` suffix indicates the specification is in progress. It is removed by the audit skill and moved to the
+`specs/` directory when the specification is finalized and locked. Discover always creates a new specification file.
 
 ### Compilation Guardrails
 

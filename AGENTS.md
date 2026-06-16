@@ -48,6 +48,7 @@ spec-first-protocol/
 │   └── non-software/           # Non-software domain examples
 ├── scripts/                    # Build helper scripts
 │   └── build-docs.js           # Pre-processes spec data for the portal
+├── specs/                      # Locked, finalized specifications
 └── skills/                     # Core Spec-First Protocol Agent Skills
     ├── sfp-discover/           # Requirements discovery & compilation
     ├── sfp-audit/              # Adversarial review & finalization gate
@@ -169,7 +170,7 @@ constraints:
 - **Ignored Files**: The `markdownlint-cli2` configuration ignores transient,
   generated, and reference paths: `CLAUDE.md`,
   `.github/copilot-instructions.md`, `CHANGELOG.md`, `examples/**`,
-  `docs/public/data/**`, `**_SPEC**.md`, `.sfp/**`, `**/node_modules/**`, and
+  `docs/public/data/**`, `**_SPEC**.md`, `.sfp/**`, `specs/**`, `**/node_modules/**`, and
   `**/dist/**`.
 - **Local Verification Command**: Run the following command to lint Markdown
   files locally:

@@ -22,8 +22,8 @@ integrity and surface problems.
 
 ## Inputs
 
-- **Specification file**: A draft specification in the project root, named
-  using the `YYYY-MM-DD_<SLUG>_SPEC_DRAFT.md` convention. If multiple draft
+- **Specification file**: A draft specification inside the spec-specific subdirectory, named
+  using the `.sfp/YYYY-MM-DD_<SLUG>/YYYY-MM-DD_<SLUG>_SPEC_DRAFT.md` convention. If multiple draft
   specifications exist, ask the project owner which one to audit.
 - **Discovery Notes**: The validated requirements from the discover skill or
   a prior refinement cycle, located at
@@ -130,11 +130,13 @@ Before the specification can be locked:
 
 Once the spec is locked:
 
-1. **Rename the specification file** to remove the `_DRAFT` suffix (e.g.,
-   `2026-05-31_TASK-MANAGEMENT_SPEC_DRAFT.md` becomes
-   `2026-05-31_TASK-MANAGEMENT_SPEC.md`).
-2. **Ask the project owner** whether to archive or delete the working
-   directory:
+1. **Rename and move the specification file** to the `specs/` directory at the project root while removing the
+   `_DRAFT` suffix (e.g., `.sfp/2026-05-31_TASK-MANAGEMENT/2026-05-31_TASK-MANAGEMENT_SPEC_DRAFT.md` is moved/renamed
+   to `specs/2026-05-31_TASK-MANAGEMENT_SPEC.md`). Make sure to check if the `specs/` directory exists and create it
+   first. Be windows empathetic: use cross-platform tools/commands, standard paths, or folder-creation checks that work
+   on both Windows and Unix (e.g. avoiding assumptions of `/` over `\`).
+2. **Ask the project owner** whether to archive or delete the working directory `.sfp/YYYY-MM-DD_<SLUG>/`. Since the
+   specification file is moved to `specs/`, this subdirectory can be safely archived or deleted:
    - **Archive**: Rename `.sfp/YYYY-MM-DD_<SLUG>/` to
      `.sfp/_archive/YYYY-MM-DD_<SLUG>/`. This preserves discovery notes,
      audit reports, and status history for future reference or
@@ -145,7 +147,7 @@ Once the spec is locked:
    archiving, leave the directory in place (it contains only `_archive/`).
 4. **Conditionally append a Downstream Execution Prompt.** If a Persona is
    loaded and contains a `## 7. Downstream Guidance` section, append a
-   non-normative downstream prompt to the locked specification file.
+   non-normative downstream prompt to the locked specification file inside `specs/`.
    Generate it as follows:
    - Demarcate the section with `<!-- SFP:DOWNSTREAM -->` on its own line.
    - Add a heading: `## Downstream Execution Prompt`.
@@ -160,7 +162,7 @@ Once the spec is locked:
      Overview and Workflows sections instead.
    - If no Persona is loaded, or the loaded Persona lacks
      `## 7. Downstream Guidance`, skip this step entirely.
-5. The locked specification file remains in the project root as the single
+5. The locked specification file remains in the `specs/` directory as the single
    deliverable of the protocol.
 
 The specification should not be modified during the downstream execution

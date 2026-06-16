@@ -79,7 +79,7 @@ Discovery Notes, compilation gate, and specification compilation.
 
 **Phase exit condition:** The project owner has approved compilation and
 the draft specification file (`YYYY-MM-DD_<SLUG>_SPEC_DRAFT.md`) has
-been written to the project root.
+been written to the spec-specific subdirectory `.sfp/YYYY-MM-DD_<SLUG>/`.
 
 **Transition:** Announce to the project owner that the discovery phase is
 complete and the protocol is moving to the audit phase. Then proceed
@@ -159,9 +159,9 @@ needed from this orchestrator.
 
 When the audit skill completes finalization:
 
-1. The specification file is renamed (removing `_DRAFT`).
-2. The project owner chooses to **archive** (`.sfp/_archive/`) or **delete**
-   the `.sfp/` working directory.
+1. The specification file is renamed and moved (via `mv`) from the spec-specific subdirectory to the `specs/`
+   directory (removing `_DRAFT`).
+2. The project owner chooses to **archive** or **delete** the `.sfp/YYYY-MM-DD_<SLUG>/` working directory.
 3. If a Persona with `## 7. Downstream Guidance` is active, a **Downstream
    Execution Prompt** is appended to the locked specification.
 4. The protocol is complete.

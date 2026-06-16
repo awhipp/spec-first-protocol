@@ -7,7 +7,7 @@ const STEPS_DATA = {
     title: "discover",
     desc: "Conducts an interactive, requirements-gathering interview to map out core boundaries. Compiles validated notes into a structured specification draft.",
     output:
-      ".sfp/YYYY-MM-DD_<SLUG>/discovery_notes.md, status.md, YYYY-MM-DD_<SLUG>_SPEC_DRAFT.md",
+      ".sfp/YYYY-MM-DD_<SLUG>/{discovery_notes.md, status.md, YYYY-MM-DD_<SLUG>_SPEC_DRAFT.md}",
     gate: "Explicit project owner approval of initial scope and boundaries.",
   },
   audit: {
@@ -28,7 +28,7 @@ const STEPS_DATA = {
     stepNum: "Step 4",
     title: "lock",
     desc: "Finalizes and locks the specification, removing the draft status. Cleans up temporary working notes to leave a clean production-ready asset.",
-    output: "Locked YYYY-MM-DD_<SLUG>_SPEC.md (written to project root)",
+    output: "Locked YYYY-MM-DD_<SLUG>_SPEC.md (moved to specs/ directory)",
     gate: "Explicit owner final sign-off, zero active blockers, and cleanup of the .sfp/ directory.",
   },
 };

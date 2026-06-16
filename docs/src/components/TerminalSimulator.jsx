@@ -161,7 +161,7 @@ const SCRIPT_DATA = [
         type: "success",
       },
       {
-        text: "[SUCCESS] Specification locked: 2026-06-05_CHECKOUT-FLOW_SPEC.md",
+        text: "[SUCCESS] Specification locked: specs/2026-06-05_CHECKOUT-FLOW_SPEC.md",
         delay: 800,
         type: "success",
       },
