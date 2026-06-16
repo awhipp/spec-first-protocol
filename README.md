@@ -311,10 +311,11 @@ produced:
 SFP is fundamentally **domain-agnostic**. To enforce specific domain rules without coupling the core
 skills, SFP supports **Personas**.
 
-When SFP starts, the interactive triage dynamically detects the project scope and recommends a
-colocated Persona file from `skills/sfp-personas/`. Once selected, SFP adopts the persona's tone,
-injecting specialized discovery prompts, custom templates, and strict auditing rules (e.g.,
-verifying a budget constraint for travel, or max drawdown for stocks).
+When SFP starts, the interactive triage dynamically detects the project scope and recommends a Persona configuration
+(loaded from `.sfp/personas/` in the project, `~/.sfp/personas/` in the user's home directory, or the pre-packaged
+`skills/sfp-personas/` fallback). Once selected, SFP adopts the persona's tone, injecting specialized discovery
+prompts, custom templates, and strict auditing rules (e.g., verifying a budget constraint for travel, or max
+drawdown for stocks).
 
 | Persona                  | Domain             | Specialization                                       |
 | :----------------------- | :----------------- | :--------------------------------------------------- |
