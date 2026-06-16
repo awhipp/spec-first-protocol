@@ -1,5 +1,13 @@
 # Changelog
 
+## [2.2.0](https://github.com/awhipp/spec-first-protocol/compare/v2.1.2...v2.2.0) (2026-06-16)
+
+
+### Features
+
+* moving to finalized `/specs` implementation ([e52fbcb](https://github.com/awhipp/spec-first-protocol/commit/e52fbcb1fe23a04f1c725a19cb242466e96441bb))
+* moving to finalized `/specs` implementation ([7b56db4](https://github.com/awhipp/spec-first-protocol/commit/7b56db48c4aec1e2e30849f1b4563acbde10833e))
+
 ## [2.1.2](https://github.com/awhipp/spec-first-protocol/compare/v2.1.1...v2.1.2) (2026-06-16)
 
 
