@@ -242,7 +242,7 @@ export default function ContextAnimation() {
           As conversational chat transcripts grow, important requirements get buried in the middle of the context window.
           This causes LLM recall accuracy to plummet from <strong>61.2%</strong> (~1.5k tokens) down to <strong>50.5%</strong> (~4.4k tokens).
 
-          SFP prevents this attention decay by isolating requirements into a dense specification at the very beginning of a fresh context session, preserving peak recall (<strong>73.4% – 76.8%</strong>). The slider below dynamically models this decay and primacy recovery relative to chat length.
+          SFP prevents this attention decay by isolating requirements into a dense specification at the very beginning of a fresh context session, preserving peak recall (<strong>73.4% – 76.8%</strong>). The slider above dynamically models this decay and primacy recovery relative to chat length.
         </p>
       </div>
     </div>
