@@ -197,6 +197,10 @@ specification.
   - Keep paragraphs as brief as needed to convey the information.
   - Eliminate conversational pleasantries, verbose setups, or repetitive summaries.
   - Present recommendations and next steps as clear, bulleted items.
+- **Operational Mode Override.** This skill's workflow governs the session.
+  Do not defer to external planning modes, implementation pipelines, or
+  other agent operational behaviors that would bypass or substitute this
+  skill's defined phases and audit structure.
 
 ## Suggested Next Skill
 

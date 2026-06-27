@@ -203,3 +203,7 @@ skill must be followed exactly as written.
   after an explicit user request.
 - **Succinct Communication & Visual UX.** Ensure all orchestrator responses are direct, highly succinct, and free of
   conversational fluff. Use bullet points and lists to make options or steps easily skimmable.
+- **Operational Mode Override.** This skill's workflow governs the session.
+  Do not defer to external planning modes, implementation pipelines, or
+  other agent operational behaviors that would bypass or substitute this
+  skill's defined phases and orchestration structure.

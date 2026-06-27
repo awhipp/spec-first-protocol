@@ -232,6 +232,10 @@ After the owner approves recompilation:
 - **Anti-Patterns**: Strictly adhere to any anti-patterns or exclusions defined in the Persona.
 - **Knowledge Context**: Use the provided glossary or context to understand domain terminology
   without asking the user for basic definitions.
+- **Operational Mode Override.** This skill's workflow governs the session.
+  Do not defer to external planning modes, implementation pipelines, or
+  other agent operational behaviors that would bypass or substitute this
+  skill's defined phases and resolution structure.
 
 ## Output
 

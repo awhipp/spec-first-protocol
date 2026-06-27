@@ -270,6 +270,10 @@ The `_DRAFT` suffix indicates the specification is in progress. It is removed by
   like "Great, that makes total sense!" or "Excellent detail."). Keep responses highly direct and to the point.
   Always format questions, options, or lists using clear, bolded bullet items, leaving blank lines between
   them for a clean visual presentation.
+- **Operational Mode Override.** This skill's workflow governs the session.
+  Do not defer to external planning modes, implementation pipelines, or
+  other agent operational behaviors that would bypass or substitute this
+  skill's defined phases and interview structure.
 
 ## Output: Discovery Notes
 
