@@ -4,8 +4,8 @@ import TerminalSimulator from "./components/TerminalSimulator";
 import Flowchart from "./components/Flowchart";
 import InstallerSelector from "./components/InstallerSelector";
 import SpecExplorer from "./components/SpecExplorer";
-import ContextAnimation from "./components/ContextAnimation";
 import PersonaShowcase from "./components/PersonaShowcase";
+import ResearchSection from "./components/ResearchSection";
 
 export default function App() {
   useEffect(() => {
@@ -58,6 +58,12 @@ export default function App() {
               Protocol Flow
             </a>
             <a
+              href="#why-sfp"
+              className="text-[0.9rem] font-medium text-text-secondary hover:text-text-primary transition-colors"
+            >
+              Why SFP
+            </a>
+            <a
               href="#install"
               className="text-[0.9rem] font-medium text-text-secondary hover:text-text-primary transition-colors"
             >
@@ -68,12 +74,6 @@ export default function App() {
               className="text-[0.9rem] font-medium text-text-secondary hover:text-text-primary transition-colors"
             >
               Spec Explorer
-            </a>
-            <a
-              href="#why-sfp"
-              className="text-[0.9rem] font-medium text-text-secondary hover:text-text-primary transition-colors"
-            >
-              Why SFP
             </a>
             <a
               href="#standards"
@@ -103,7 +103,7 @@ export default function App() {
           <p className="text-[1.15rem] text-text-secondary max-w-[700px] mb-4">
             An informal precursor to Specification-Driven Development.
           </p>
-          <p className="font-header text-[1.25rem] italic text-text-secondary max-w-[650px] mb-[32px] leading-relaxed">
+          <p className="font-header text-[1.25rem] italic text-text-secondary max-w-[800px] mb-[32px] leading-relaxed">
             "Starting execution without a specification is the most expensive
             shortcut in any project."
           </p>
@@ -283,36 +283,8 @@ export default function App() {
                     </span>
                   </td>
                 </tr>
-                <tr className="border-t border-border-primary">
-                  <td className="py-[20px] px-[24px] border-r border-border-primary bg-red-50/20">
-                    <strong className="inline-block text-[1.05rem] mb-1 text-text-primary">
-                      Attention Dilution
-                    </strong>
-                    <br />
-                    <span className="text-text-secondary">
-                      As conversation grows, critical rules get "lost in the
-                      middle" of the chat transcript, causing models to ignore
-                      design bounds.
-                    </span>
-                  </td>
-                  <td className="py-[20px] px-[24px] bg-green-50/25">
-                    <strong className="inline-block text-[1.05rem] mb-1 text-success-primary">
-                      Attention Dilution Prevention
-                    </strong>
-                    <br />
-                    <span className="text-text-secondary">
-                      Strips dialogue noise, feeding the agent only a dense spec
-                      and a runnable downstream prompt in a fresh context
-                      session.
-                    </span>
-                  </td>
-                </tr>
               </tbody>
             </table>
-          </div>
-
-          <div className="mt-8">
-            <ContextAnimation />
           </div>
         </section>
 
@@ -328,112 +300,6 @@ export default function App() {
             </p>
           </div>
           <Flowchart />
-        </section>
-
-        {/* Installation */}
-        <section
-          className="flex flex-col gap-[16px] scroll-m-[80px]"
-          id="install"
-        >
-          <div className="max-w-[700px]">
-            <h2 className="text-[2.25rem] font-header font-extrabold mb-[8px] text-text-primary tracking-tight">
-              Installation & Setup
-            </h2>
-            <p className="text-[1.1rem] text-text-secondary">
-              Set up SFP skills in your development environment or AI agent
-              config in seconds.
-            </p>
-          </div>
-          <InstallerSelector />
-        </section>
-
-        {/* Spec Explorer */}
-        <section
-          className="flex flex-col gap-[16px] scroll-m-[80px]"
-          id="explorer"
-        >
-          <div className="max-w-[700px]">
-            <h2 className="text-[2.25rem] font-header font-extrabold mb-[8px] text-text-primary tracking-tight">
-              Spec Explorer
-            </h2>
-            <p className="text-[1.1rem] text-text-secondary">
-              Browse locked protocol artifacts. Inspect SFP's own implementation
-              specifications.
-            </p>
-          </div>
-
-          <h3 className="text-[1.5rem] font-header font-extrabold text-text-primary mt-2">
-            Software Engineering
-          </h3>
-
-          <SpecExplorer
-            title="Skill Distribution"
-            description="I need a way to distribute and install these agentic skills with one click."
-            badge="Dynamic npx skills command generation and manual release packaging workflows that distribute SFP skills to local project roots or user global directories."
-            filePaths={[
-              {
-                label: "Specification",
-                path: "2026-06-01_SKILL-DISTRIBUTION_SPEC.md",
-              },
-            ]}
-          />
-
-          <SpecExplorer
-            title="SFP UI"
-            description="I need a flashy, easy-to-update static marketing website under /docs to showcase Spec-First Protocol."
-            badge="A responsive single-page marketing site under docs/ (React SPA) demonstrating SFP concepts, setup guides, and standard reference guides."
-            filePaths={[
-              { label: "Specification", path: "2026-06-01_SFP-UI_SPEC.md" },
-            ]}
-          />
-
-          <div
-            id="not-just-for-engineers"
-            className="mt-12 mb-6 scroll-m-[80px]"
-          >
-            <h3 className="text-[1.5rem] font-header font-extrabold text-text-primary mt-2">
-              Domain Expertise & Personas
-            </h3>
-            <p className="text-text-secondary mt-2 text-[1.1rem] leading-[1.6] mb-6">
-              ⚠️ <strong>Not just for engineers.</strong>
-              <br />
-              <br />
-              SFP is fundamentally domain-agnostic and comes packaged with
-              several pre-built <strong>Personas</strong>, they are fully
-              extensible and can be easily created, customized, or updated to
-              mold specifications, audit gates, and execution styles to any
-              unique niche or business domain.
-              <br />
-              <br />
-              Below are some pre-packaged personas:
-            </p>
-            <PersonaShowcase />
-          </div>
-
-          <SpecExplorer
-            title="Travel Advisor: Disney Vacation"
-            description="I am looking to plan out my perfect 4 day vacation to Walt Disney World Florida with my family of 4."
-            badge="A locked specification output directly by the Travel Advisor persona detailing park itineraries, budgeting constraints, logistical checklists, and packing lists."
-            category="non-software"
-            filePaths={[
-              {
-                label: "Specification",
-                path: "non-software/2026-06-02_PERFECT-DISNEY-VACATION_SPEC.md",
-              },
-              {
-                label: "Booking Checklist",
-                path: "non-software/Disney_Booking_Checklist.md",
-              },
-              {
-                label: "Packing List",
-                path: "non-software/Disney_Packing_List_Family4.md",
-              },
-              {
-                label: "Discovery Notes",
-                path: "non-software/discovery_notes.md",
-              },
-            ]}
-          />
         </section>
 
         {/* Why SFP Matrix */}
@@ -548,6 +414,122 @@ export default function App() {
               </tbody>
             </table>
           </div>
+
+          <div id="research-backed" className="mt-12 scroll-m-[80px]">
+            <h3 className="text-[1.5rem] font-header font-extrabold text-text-primary mt-2">
+              Research-Backed
+            </h3>
+            <p className="text-text-secondary mt-2 text-[1.1rem] leading-[1.6] mb-6">
+              SFP's core features are designed around empirical research on Large Language Model behavior.
+            </p>
+            <ResearchSection />
+          </div>
+        </section>
+
+        {/* Installation */}
+        <section
+          className="flex flex-col gap-[16px] scroll-m-[80px]"
+          id="install"
+        >
+          <div className="max-w-[700px]">
+            <h2 className="text-[2.25rem] font-header font-extrabold mb-[8px] text-text-primary tracking-tight">
+              Installation & Setup
+            </h2>
+            <p className="text-[1.1rem] text-text-secondary">
+              Set up SFP skills in your development environment or AI agent
+              config in seconds.
+            </p>
+          </div>
+          <InstallerSelector />
+        </section>
+
+        {/* Spec Explorer */}
+        <section
+          className="flex flex-col gap-[16px] scroll-m-[80px]"
+          id="explorer"
+        >
+          <div className="max-w-[700px]">
+            <h2 className="text-[2.25rem] font-header font-extrabold mb-[8px] text-text-primary tracking-tight">
+              Spec Explorer
+            </h2>
+            <p className="text-[1.1rem] text-text-secondary">
+              Browse locked protocol artifacts. Inspect SFP's own implementation
+              specifications.
+            </p>
+          </div>
+
+          <h3 className="text-[1.5rem] font-header font-extrabold text-text-primary mt-2">
+            Software Engineering
+          </h3>
+
+          <SpecExplorer
+            title="Skill Distribution"
+            description="I need a way to distribute and install these agentic skills with one click."
+            badge="Dynamic npx skills command generation and manual release packaging workflows that distribute SFP skills to local project roots or user global directories."
+            filePaths={[
+              {
+                label: "Specification",
+                path: "2026-06-01_SKILL-DISTRIBUTION_SPEC.md",
+              },
+            ]}
+          />
+
+          <SpecExplorer
+            title="SFP UI"
+            description="I need a flashy, easy-to-update static marketing website under /docs to showcase Spec-First Protocol."
+            badge="A responsive single-page marketing site under docs/ (React SPA) demonstrating SFP concepts, setup guides, and standard reference guides."
+            filePaths={[
+              { label: "Specification", path: "2026-06-01_SFP-UI_SPEC.md" },
+            ]}
+          />
+
+          <div
+            id="not-just-for-engineers"
+            className="mt-12 mb-6 scroll-m-[80px]"
+          >
+            <h3 className="text-[1.5rem] font-header font-extrabold text-text-primary mt-2">
+              Domain Expertise & Personas
+            </h3>
+            <p className="text-text-secondary mt-2 text-[1.1rem] leading-[1.6] mb-6">
+              ⚠️ <strong>Not just for engineers.</strong>
+              <br />
+              <br />
+              SFP is fundamentally domain-agnostic and comes packaged with
+              several pre-built <strong>Personas</strong>, they are fully
+              extensible and can be easily created, customized, or updated to
+              mold specifications, audit gates, and execution styles to any
+              unique niche or business domain.
+              <br />
+              <br />
+              Below are some pre-packaged personas:
+            </p>
+            <PersonaShowcase />
+          </div>
+
+          <SpecExplorer
+            title="Travel Advisor: Disney Vacation"
+            description="I am looking to plan out my perfect 4 day vacation to Walt Disney World Florida with my family of 4."
+            badge="A locked specification output directly by the Travel Advisor persona detailing park itineraries, budgeting constraints, logistical checklists, and packing lists."
+            category="non-software"
+            filePaths={[
+              {
+                label: "Specification",
+                path: "non-software/2026-06-02_PERFECT-DISNEY-VACATION_SPEC.md",
+              },
+              {
+                label: "Booking Checklist",
+                path: "non-software/Disney_Booking_Checklist.md",
+              },
+              {
+                label: "Packing List",
+                path: "non-software/Disney_Packing_List_Family4.md",
+              },
+              {
+                label: "Discovery Notes",
+                path: "non-software/discovery_notes.md",
+              },
+            ]}
+          />
         </section>
 
         {/* Reference Standards Table Section */}

@@ -357,6 +357,30 @@ Contributors should verify these constraints before submitting changes.
 
 ---
 
+## Research-Backed
+
+The Spec-First Protocol's core features and lifecycle constraints are designed around empirical research on
+Large Language Model (LLM) behavior.
+
+### 1. Lost in the Middle: How Language Models Use Long Contexts
+
+_Citation: [Liu et al. (2023)](https://cs.stanford.edu/~nfliu/papers/lost-in-the-middle.tacl2023.pdf)_
+
+**Key Findings:**
+LLM retrieval performance degrades significantly when critical details are placed in the middle of long context windows,
+while information at the beginning (primacy) and end (recency) are recalled with high accuracy.
+
+**SFP Implementation:**
+
+- **Context Window Efficiency**: Discovery conversations are compressed into a dense specification, stripping away
+  dialogue noise before handoff.
+- **Primacy-Recency Ordering**: Critical constraints are systematically placed at the start, and failure modes at the
+  very end, to maximize LLM recall accuracy.
+- **Fresh Context Isolation**: Specifications are handed off to downstream agents in fresh sessions, avoiding the severe
+  performance drop-offs of massive chat histories.
+
+---
+
 ## Terminology
 
 | Term                            | Definition                                                                                                                                                                                                                                      |

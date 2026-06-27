@@ -273,4 +273,16 @@ State one of the following:
   approval to lock the specification.
 - **Locked**: Project owner has approved. The specification is final and
   immutable.
+
+## Critical Constraints Summary
+
+A concise recapitulation of the specification's most critical constraints
+and invariants, drawn from the Constraints and Rules section of the
+specification being audited. This summary is positioned at the end of the
+report to exploit recency bias, ensuring downstream agents and reviewers
+retain these critical rules after reading the full report.
+
+- [Constraint 1]
+- [Constraint 2]
+- ...
 ```

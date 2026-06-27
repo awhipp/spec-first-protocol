@@ -13,6 +13,9 @@ domain: Template Domain
 
 ## 2. Specification Template
 
+- **Ordering Principle**: When defining custom sections, we recommend applying primacy-recency positioning. Place
+  critical constraints near the start (primacy zone) and safety rules near the end (recency zone) to optimize
+  LLM recall.
 - **New Section Name**: Describe what should be injected into the final specification schema.
 
 ## 3. Auditing Rules
