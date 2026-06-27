@@ -1,5 +1,17 @@
 # Changelog
 
+## [2.3.0](https://github.com/awhipp/spec-first-protocol/compare/v2.2.0...v2.3.0) (2026-06-27)
+
+
+### Features
+
+* enhance initial research integrations and reorganize layout ([f88c897](https://github.com/awhipp/spec-first-protocol/commit/f88c897dad0a97a081757f9a3533d06b5ad4a702))
+
+
+### Bug Fixes
+
+* add operational planning mode overrides to avoid invoking planning modes by default ([a6d32eb](https://github.com/awhipp/spec-first-protocol/commit/a6d32eb452f59493c30d910a0142c629bf265a1d))
+
 ## [2.2.0](https://github.com/awhipp/spec-first-protocol/compare/v2.1.2...v2.2.0) (2026-06-16)
 
 
