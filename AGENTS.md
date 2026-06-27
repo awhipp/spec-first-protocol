@@ -218,6 +218,19 @@ constraints:
 - Each persona file must contain YAML frontmatter with `name`, `domain`,
   and `description` fields to enable intelligent matching during discovery.
 
+### Skill Invocation Priority
+
+- When a user explicitly invokes an SFP skill (e.g., `/sfp-discover`,
+  `/sfp-audit`, `/sfp-refine`, or `/sfp-orchestrate`), the skill's behavioral protocol
+  governs the entire session. Default agent operational modes (such as
+  planning mode, architect mode, or implementation pipelines) must not
+  override, bypass, or substitute the skill's defined phases, interview
+  structure, triage logic, or guardrails.
+- The skill's workflow is the session contract. Agents must follow the
+  skill's initialization sequence (Resume Detection, Triage, First Turn,
+  etc.) exactly as specified, even if the user's request appears to
+  warrant a different operational approach.
+
 ### Communication Style
 
 - **Documentation and READMEs**: Maintain an informative, concise, and

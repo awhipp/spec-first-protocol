@@ -3,8 +3,6 @@ import {
   AlertTriangle,
   Check,
   Sliders,
-  Sparkles,
-  HelpCircle,
 } from "lucide-react";
 
 export default function ContextAnimation() {
@@ -57,71 +55,10 @@ export default function ContextAnimation() {
 
   return (
     <div className="w-full flex flex-col gap-6 bg-bg-secondary border border-border-primary rounded-2xl p-6 md:p-8 shadow-sm">
-      {/* Header */}
-      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-border-primary pb-5">
-        <div>
-          <h3 className="text-xl font-header font-bold text-text-primary m-0 flex items-center gap-2">
-            <Sparkles size={20} className="text-accent" />
-            Context Savings Example
-          </h3>
-          <p className="text-sm text-text-secondary mt-1.5 m-0">
-            Compare the starting context size of a raw chat history handoff
-            versus SFP's spec-first isolation.
-          </p>
-        </div>
-        <div className="flex items-center gap-3 self-start md:self-auto">
-          <a
-            href="https://cs.stanford.edu/~nfliu/papers/lost-in-the-middle.tacl2023.pdf"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex items-center gap-2 bg-accent/10 hover:bg-accent/20 transition-all px-3 py-2 rounded-lg border border-accent/25 text-[13px] text-accent font-semibold shadow-4xs"
-            title="Read the official Stanford research paper on Lost in the Middle"
-          >
-            <HelpCircle size={16} />
-            <span>Stanford Research Paper</span>
-          </a>
-          <a
-            href="/spec-first-protocol/lost-in-the-middle.pdf"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-[12px] text-text-muted hover:text-text-secondary underline font-semibold transition-colors"
-            title="Local PDF backup of the Stanford paper"
-          >
-            [Backup PDF]
-          </a>
-        </div>
-      </div>
 
-      {/* Research Explanation Section */}
-      <div className="bg-bg-primary border border-border-primary/50 rounded-xl p-4 text-xs text-text-secondary leading-relaxed space-y-2">
-        <p className="m-0 font-medium text-text-primary">
-          The Stanford study{" "}
-          <a
-            href="https://cs.stanford.edu/~nfliu/papers/lost-in-the-middle.tacl2023.pdf"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="underline text-accent hover:text-accent/80 font-bold"
-          >
-            "Lost in the Middle"
-          </a>{" "}
-          demonstrates that LLM retrieval accuracy degrades
-          significantly when key details are placed in the middle of long
-          contexts.
-        </p>
-        <p className="m-0">
-          Without SFP, as chat transcripts grow, details get buried and recall
-          accuracy drops from <strong>61.2%</strong> (~1.5k tokens) to{" "}
-          <strong>53.8%</strong> (~3.0k tokens) and <strong>50.5%</strong>{" "}
-          (~4.4k tokens). SFP prevents this attention decay by isolating
-          requirements into a dense specification at the beginning of a fresh
-          context session, preserving peak recall (
-          <strong>73.4% – 76.8%</strong>). The slider below dynamically models
-          this decay and primacy recovery relative to chat length.
-        </p>
-      </div>
 
       {/* Main Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 my-2">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 my-0">
         {/* Left Column: Without SFP */}
         <div className="flex flex-col bg-bg-primary border border-border-primary hover:border-danger-border/60 rounded-xl p-5 shadow-3xs transition-all">
           <div className="flex items-center justify-between mb-3.5 border-b border-border-primary/40 pb-3">
@@ -297,6 +234,16 @@ export default function ContextAnimation() {
             </span>
           </div>
         </div>
+      </div>
+
+      {/* Explanation Section */}
+      <div className="bg-bg-primary border border-border-primary/50 rounded-xl p-4 text-xs text-text-secondary leading-relaxed space-y-2">
+        <p className="m-0">
+          As conversational chat transcripts grow, important requirements get buried in the middle of the context window.
+          This causes LLM recall accuracy to plummet from <strong>61.2%</strong> (~1.5k tokens) down to <strong>50.5%</strong> (~4.4k tokens).
+
+          SFP prevents this attention decay by isolating requirements into a dense specification at the very beginning of a fresh context session, preserving peak recall (<strong>73.4% – 76.8%</strong>). The slider above dynamically models this decay and primacy recovery relative to chat length.
+        </p>
       </div>
     </div>
   );

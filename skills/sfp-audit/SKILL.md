@@ -197,6 +197,10 @@ specification.
   - Keep paragraphs as brief as needed to convey the information.
   - Eliminate conversational pleasantries, verbose setups, or repetitive summaries.
   - Present recommendations and next steps as clear, bulleted items.
+- **Operational Mode Override.** This skill's workflow governs the session.
+  Do not defer to external planning modes, implementation pipelines, or
+  other agent operational behaviors that would bypass or substitute this
+  skill's defined phases and audit structure.
 
 ## Suggested Next Skill
 
@@ -269,4 +273,16 @@ State one of the following:
   approval to lock the specification.
 - **Locked**: Project owner has approved. The specification is final and
   immutable.
+
+## Critical Constraints Summary
+
+A concise recapitulation of the specification's most critical constraints
+and invariants, drawn from the Constraints and Rules section of the
+specification being audited. This summary is positioned at the end of the
+report to exploit recency bias, ensuring downstream agents and reviewers
+retain these critical rules after reading the full report.
+
+- [Constraint 1]
+- [Constraint 2]
+- ...
 ```

@@ -114,3 +114,7 @@ Once the interview has captured all requirements for the persona:
   If the user explicitly requests saving directly to the Spec-First Protocol repository (e.g., contributors
   developing SFP), write to `skills/sfp-personas/<slug>.md`.
 - **References**: Use traditional relative Markdown links when referring to colocated files.
+- **Operational Mode Override.** This skill's workflow governs the session.
+  Do not defer to external planning modes, implementation pipelines, or
+  other agent operational behaviors that would bypass or substitute this
+  skill's defined phases and compilation structure.

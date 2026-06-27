@@ -232,6 +232,10 @@ After the owner approves recompilation:
 - **Anti-Patterns**: Strictly adhere to any anti-patterns or exclusions defined in the Persona.
 - **Knowledge Context**: Use the provided glossary or context to understand domain terminology
   without asking the user for basic definitions.
+- **Operational Mode Override.** This skill's workflow governs the session.
+  Do not defer to external planning modes, implementation pipelines, or
+  other agent operational behaviors that would bypass or substitute this
+  skill's defined phases and resolution structure.
 
 ## Output
 
@@ -275,17 +279,22 @@ After recompiling the specification, suggest:
 The purpose of this specification, its intended audience, primary
 stakeholders, and high-level scope.
 
-## 2. Domain Model
+## 2. Constraints and Rules
+
+Business rules, invariants, guardrails, validation logic, and
+non-negotiable requirements. Define what must always be true.
+
+## 3. Domain Model
 
 Core entities, their attributes, relationships, and lifecycle states.
 Define the vocabulary of the domain, including the nouns and their connections.
 
-## 3. Workflows and Processes
+## 4. Workflows and Processes
 
 Sequences, state machines, decision logic, and procedural steps. Define
 how entities move through the system or process (the verbs).
 
-## 4. Interfaces and Contracts
+## 5. Interfaces and Contracts
 
 Integration points, handoff protocols, input/output schemas, or API
 contracts. Define how components or parties interact with each other.
@@ -293,23 +302,18 @@ contracts. Define how components or parties interact with each other.
 > Omit this section if the specification does not involve integrations or
 > programmatic interfaces.
 
-## 5. Constraints and Rules
-
-Business rules, invariants, guardrails, validation logic, and
-non-negotiable requirements. Define what must always be true.
-
-## 6. Failure Modes and Edge Cases
-
-Known failure scenarios, expected behavior for each, fallback mechanisms,
-and recovery strategies. Define what happens when things go wrong.
-
-## 7. Non-Functional Requirements
+## 6. Non-Functional Requirements
 
 Performance targets, scalability constraints, compliance requirements,
 availability expectations, and observability needs.
 
 > Omit this section if non-functional requirements are not applicable or
 > have not been discussed.
+
+## 7. Failure Modes and Edge Cases
+
+Known failure scenarios, expected behavior for each, fallback mechanisms,
+and recovery strategies. Define what happens when things go wrong.
 
 ## 8. Deliverables
 
