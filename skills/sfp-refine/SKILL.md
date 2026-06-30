@@ -25,7 +25,8 @@ established the scope. You are resolving known issues surgically.
 - **Audit Report**: The structured findings from the audit skill, located at
   `.sfp/YYYY-MM-DD_<SLUG>/audit_report.md`, classified by severity.
 - **Specification file**: A draft specification inside the spec-specific subdirectory, named
-  using the `.sfp/YYYY-MM-DD_<SLUG>/YYYY-MM-DD_<SLUG>_SPEC_DRAFT.md` convention. If multiple draft
+  using the `.sfp/YYYY-MM-DD_<SLUG>/YYYY-MM-DD_<SLUG>_SPEC_DRAFT.md` convention
+  (explicitly ignore the `.sfp/_archive/` directory). If multiple draft
   specifications exist, ask the project owner which one to refine.
 - **Discovery Notes**: The existing validated requirements from prior
   discovery or refinement cycles, located at

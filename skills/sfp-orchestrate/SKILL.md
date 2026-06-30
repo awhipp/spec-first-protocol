@@ -160,11 +160,12 @@ needed from this orchestrator.
 When the audit skill completes finalization:
 
 1. The specification file is renamed and moved (via `mv`) from the spec-specific subdirectory to the `specs/`
-   directory (removing `_DRAFT`).
-2. The project owner chooses to **archive** or **delete** the `.sfp/YYYY-MM-DD_<SLUG>/` working directory.
-3. If a Persona with `## 7. Downstream Guidance` is active, a **Downstream
+   directory (removing `_DRAFT`). Ensure the original file is removed from the `.sfp/...` working directory.
+2. The status in `.sfp/YYYY-MM-DD_<SLUG>/status.md` is updated to `phase: locked`.
+3. The project owner chooses to **archive** or **delete** the `.sfp/YYYY-MM-DD_<SLUG>/` working directory.
+4. If a Persona with `## 7. Downstream Guidance` is active, a **Downstream
    Execution Prompt** is appended to the locked specification.
-4. The protocol is complete.
+5. The protocol is complete.
 
 Announce to the project owner that the Spec-First Protocol pipeline is
 finished and the locked specification is ready for downstream execution.
