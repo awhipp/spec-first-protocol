@@ -1,5 +1,13 @@
 # Changelog
 
+## [2.3.1](https://github.com/awhipp/spec-first-protocol/compare/v2.3.0...v2.3.1) (2026-06-30)
+
+
+### Bug Fixes
+
+* ensure we are ignoring `.sfp/_archive/` during the loop ([a53fe8b](https://github.com/awhipp/spec-first-protocol/commit/a53fe8baceeb2b7a8237f63413b4eb352752cf91))
+* ensure we are ignoring `.sfp/_archive/` during the loop ([aaec7a9](https://github.com/awhipp/spec-first-protocol/commit/aaec7a9bda23f5af869bf7df242975e79c0a6d21))
+
 ## [2.3.0](https://github.com/awhipp/spec-first-protocol/compare/v2.2.0...v2.3.0) (2026-06-27)
 
 
