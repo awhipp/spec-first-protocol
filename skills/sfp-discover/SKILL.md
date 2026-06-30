@@ -30,17 +30,18 @@ order must be: **Resume Detection → Triage → First Turn**.
 2. **Detection Matrix & Strategy**: Check the `.sfp/` directory state:
    - **No `.sfp/` directory exists**: Proceed normally: create `.sfp/`, then
      run triage → first turn.
-   - **`.sfp/<slug>/discovery_notes.md` exists with no `_SPEC_DRAFT.md` inside `.sfp/<slug>/`**:
+   - **`.sfp/<slug>/discovery_notes.md` exists with no `_SPEC_DRAFT.md` inside
+     `.sfp/<slug>/` (ignoring `.sfp/_archive/`)**:
      Ask: "Found in-progress discovery notes for `<SLUG>`. Would you like to
      resume this discovery or start fresh?" If resuming, use a **gap-based
      continuation strategy**: compare existing notes against compilation
      readiness criteria to identify gaps, and ask questions to resolve them. Do
      not try to reconstruct prior conversation. If starting fresh, proceed to
      triage → first turn.
-   - **`.sfp/<slug>/` AND a corresponding `_SPEC_DRAFT.md` inside it exist**: Inform the
+   - **`.sfp/<slug>/` AND a corresponding `_SPEC_DRAFT.md` inside it exist (ignoring `.sfp/_archive/`)**: Inform the
      owner that a draft specification already exists and suggest invoking the
      audit or refine skill.
-   - **Multiple `.sfp/<slug>/` subdirectories exist**: List existing slugs and
+   - **Multiple `.sfp/<slug>/` subdirectories exist (ignoring `.sfp/_archive/`)**: List existing slugs and
      states, asking the owner which to resume, or whether to start a new
      discovery.
 
