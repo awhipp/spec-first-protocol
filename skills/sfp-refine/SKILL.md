@@ -48,7 +48,12 @@ refinement is needed and suggest proceeding to finalization via the audit
 skill.
 
 Otherwise, walk through findings individually rather than presenting them all
-at once:
+at once. At the start of the first refinement pass, check if the
+`refine_options_pros_cons` boolean field exists in `.sfp/YYYY-MM-DD_<SLUG>/status.md`.
+If it does not exist, ask the project owner: "During this process, if I have
+recommendations would you like them (with pros and cons), or would you prefer
+to evaluate the options directly yourself?" Once the owner responds, record their preference in `status.md`
+under the key `refine_options_pros_cons` (as `true` or `false`) and proceed:
 
 ### Step 1: Prioritize Findings
 
@@ -92,6 +97,19 @@ For each finding (or batch):
    Each option must start on a new line, prefixed with a bold option identifier (e.g., `- **Option A**: description`).
    Options should be concrete, actionable, and separated by a blank line for readability. When the finding is too
    ambiguous to propose options, present the issue and ask a single, direct question.
+   - **Pros, Cons & Recommendation formatting**: If the `refine_options_pros_cons` boolean field is set to `true`
+     in `status.md`, you must also include **Pros** and **Cons** as sub-bullets under each option, and append a
+     **Recommendation** statement indicating which option you recommend and why. Use the following structure:
+
+     - **Option A**: description
+       - **Pros**: pros for option A
+       - **Cons**: cons for option A
+
+     - **Option B**: description
+       - **Pros**: pros for option B
+       - **Cons**: cons for option B
+
+     **Recommendation**: We recommend **Option A** because reasoning.
 5. **Ask the owner for a resolution decision.** Keep this prompt to a single concise sentence.
 
 Wait for the owner's response before moving to the next finding or batch. Do
@@ -252,7 +270,8 @@ Your outputs are:
 3. **Updated Status File** at `.sfp/YYYY-MM-DD_<SLUG>/status.md`: set `phase`
    to `refine` and update `last_updated` to the current ISO-8601 timestamp.
    If `status.md` does not exist, create it with `iteration: 1` and
-   `max_iterations: 5`.
+   `max_iterations: 5`. Ensure you preserve the `persona` field and the
+   `refine_options_pros_cons` boolean field in `status.md` if they exist.
 
 ## Suggested Next Skill
 

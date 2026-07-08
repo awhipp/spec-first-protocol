@@ -72,10 +72,13 @@ user's request against the triage criteria:
 Read and follow the instructions in the
 [Spec Discover skill](../sfp-discover/SKILL.md).
 
-Execute the full discovery process. Note that **Resume Detection** is handled
-natively by the discover skill's initialization phase; no additional
-orchestrator logic is needed. Follow initialization, structured interview,
-Discovery Notes, compilation gate, and specification compilation.
+Execute the full discovery process, including asking the project owner whether
+they would like recommendations (with pros and cons) when resolving audit findings or
+if they prefer to evaluate options directly themselves, recording their preference as
+`refine_options_pros_cons` (a boolean) in `status.md`. Note that
+**Resume Detection** is handled natively by the discover skill's initialization phase;
+no additional orchestrator logic is needed. Follow initialization, structured
+interview, Discovery Notes, compilation gate, and specification compilation.
 
 **Phase exit condition:** The project owner has approved compilation and
 the draft specification file (`YYYY-MM-DD_<SLUG>_SPEC_DRAFT.md`) has
@@ -125,8 +128,8 @@ IF zero blockers:
 
 After each audit-refine cycle, write the updated `iteration` count and
 `last_updated` timestamp back to `status.md`. Ensure you preserve the `persona` field
-in `status.md` if it exists. This ensures the iteration state and persona context
-survive context clears.
+and the `refine_options_pros_cons` boolean field in `status.md` if they exist. This ensures the
+iteration state, persona context, and refinement options configuration survive context clears.
 
 If the owner chooses to continue past `max_iterations`, reset the counter
 or increase `max_iterations` in `status.md` per the owner's preference.
@@ -139,9 +142,11 @@ Read and follow the instructions in the
 [Spec Refine skill](../sfp-refine/SKILL.md).
 
 Execute the full refinement process: prioritize findings, walk through
-each one with the project owner, record decisions, handle scope
-expansion, and recompile the specification. Update `status.md` with
-`phase: refine` and the current timestamp.
+each one with the project owner (utilizing pros, cons, and recommendations if
+`refine_options_pros_cons` is enabled, or prompting for it on the first pass
+if not yet configured), record decisions, handle scope expansion, and
+recompile the specification. Update `status.md` with `phase: refine` and
+the current timestamp.
 
 **Phase exit condition:** The updated specification has been recompiled
 and written.

@@ -61,6 +61,45 @@ const PERSONAS = [
     ],
   },
   {
+    id: "functional-requirements-analyst",
+    name: "Functional Requirements Analyst",
+    domain: "Domain-Agnostic Functional Product Design",
+    description:
+      "Author product requirement documents focusing on what, why, and how while strictly avoiding technical implementation details.",
+    icon: FileText,
+    color: "text-blue-500 bg-blue-50 border-blue-100",
+    discovery: [
+      "Define the core problem being solved and the overall value proposition of the product.",
+      "Describe the primary target audience, user personas, and real-world workflows or stories.",
+      "Prompt for what the product must do (functional requirements) and what is explicitly out of scope.",
+      "Extract physical, spatial, or UX/UI design constraints.",
+      "Do not prompt for technical, mechanical, or software implementation details unless volunteered.",
+    ],
+    auditRules: [
+      {
+        rule: "Logical Contradiction or Ambiguity",
+        severity: "Blocker",
+        detail:
+          "Any logical contradiction or significant ambiguity must raise a Blocker.",
+      },
+      {
+        rule: "Missing Core Context",
+        severity: "Warning",
+        detail:
+          "If core sections like User Personas or Design Constraints lack sufficient context or detail, raise a Warning.",
+      },
+      {
+        rule: "Excessive Implementation Details",
+        severity: "Suggestion",
+        detail:
+          "If low-level technical details are over-specified or distract from functional goals, suggest moving them to non-binding suggestions.",
+      },
+    ],
+    downstream: [
+      "Produce a functional handoff specification designed to guide downstream implementation teams.",
+    ],
+  },
+  {
     id: "stock-market-advisor",
     name: "Stock Market Advisor",
     domain: "Stock Trading",
@@ -406,13 +445,12 @@ export default function PersonaShowcase() {
                     >
                       <span
                         className={`text-[9px] font-bold uppercase px-1.5 py-0.5 rounded shrink-0 mt-0.5 border
-                        ${
-                          rule.severity === "Blocker"
+                        ${rule.severity === "Blocker"
                             ? "bg-danger-bg text-danger-primary border-danger-border"
                             : rule.severity === "Warning"
                               ? "bg-amber-50 text-amber-600 border-amber-200"
                               : "bg-blue-50 text-blue-600 border-blue-200"
-                        }
+                          }
                       `}
                       >
                         {rule.severity}

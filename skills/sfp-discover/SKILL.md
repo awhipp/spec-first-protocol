@@ -61,6 +61,7 @@ iteration: 1
 max_iterations: 5
 last_updated: <current ISO-8601 timestamp>
 persona: <selected-persona-slug> # Only if a persona was selected
+refine_options_pros_cons: <true|false> # Set based on owner preference
 ---
 ```
 
@@ -144,6 +145,9 @@ owner:
    that will be used to generate the specification filename. Record this as
    the **project slug**: an uppercase, hyphen-separated identifier with no
    spaces (e.g., `TASK-MANAGEMENT`, `API-GATEWAY`, `ONBOARDING-FLOW`).
+5. **Should refinement options include pros, cons, and recommendations?** Ask the project owner if they would
+   like recommendations (with pros and cons) when resolving audit findings, or if they prefer to evaluate the
+   options directly themselves. Record this preference as the `refine_options_pros_cons` boolean field in `status.md`.
 
 Adapt your language and line of questioning to the domain as context emerges.
 Start neutral; adopt the project owner's terminology as it becomes clear.
