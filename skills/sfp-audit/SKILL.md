@@ -74,7 +74,9 @@ integrity and surface problems.
 8. Update `.sfp/YYYY-MM-DD_<SLUG>/status.md`: set `phase` to `audit`,
    increment `iteration` (if this is not the first audit pass), and update
    `last_updated` to the current ISO-8601 timestamp. If `status.md` does not
-   exist, create it with `iteration: 1` and `max_iterations: 5`.
+   exist, create it with `iteration: 1` and `max_iterations: 5`. Ensure you
+   preserve the `persona` field and the `refine_options_pros_cons` boolean in
+   `status.md` if they exist.
 
 ## Severity Classification
 
@@ -138,8 +140,9 @@ Once the spec is locked:
    on both Windows and Unix (e.g. avoiding assumptions of `/` over `\`). Ensure the original
    `_SPEC_DRAFT.md` file is removed from the working directory after a successful move.
 2. **Update the status file**: In `.sfp/YYYY-MM-DD_<SLUG>/status.md`, set `phase` to
-   `locked` and update `last_updated` to the current ISO-8601 timestamp. This permanently
-   records the final state.
+   `locked` and update `last_updated` to the current ISO-8601 timestamp. Ensure you
+   preserve the `persona`, `refine_options_pros_cons`, `iteration`, and any other
+   existing fields in `status.md`. This permanently records the final state.
 3. **Ask the project owner** whether to archive or delete the working directory `.sfp/YYYY-MM-DD_<SLUG>/`. Since the
    specification file is moved to `specs/`, this subdirectory can be safely archived or deleted:
    - **Archive**: Rename `.sfp/YYYY-MM-DD_<SLUG>/` to
