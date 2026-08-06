@@ -1,5 +1,13 @@
 # Changelog
 
+## [2.4.0](https://github.com/awhipp/spec-first-protocol/compare/v2.3.1...v2.4.0) (2026-07-08)
+
+
+### Features
+
+* boolean for providing recommendations and pros/cons ([65b1853](https://github.com/awhipp/spec-first-protocol/commit/65b185343e3cb11c78d478c5de4fff7d8bb50907))
+* functional requirements analyst persona definition ([07f251d](https://github.com/awhipp/spec-first-protocol/commit/07f251dc1c41e83f501c4d3ab9a556736148082c))
+
 ## [2.3.1](https://github.com/awhipp/spec-first-protocol/compare/v2.3.0...v2.3.1) (2026-06-30)
 
 
