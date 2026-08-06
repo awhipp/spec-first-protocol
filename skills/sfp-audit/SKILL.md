@@ -1,9 +1,8 @@
 ---
 name: sfp-audit
 description: >
-  Adversarial review of a specification against original requirements.
-  Surface contradictions, gaps, and risks in a severity-classified report.
-  When clean and approved, lock the spec as final.
+  Adversarial spec audit against requirements. Surfaces gaps and locks clean
+  specs. Use when reviewing spec drafts, auditing specs, or locking specs.
 ---
 
 # Spec Audit
