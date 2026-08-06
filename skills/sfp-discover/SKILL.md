@@ -1,9 +1,8 @@
 ---
 name: sfp-discover
 description: >
-  Conduct a structured discovery interview to extract requirements, then
-  compile validated notes into a specification document with owner approval.
-  Produces Discovery Notes and the initial spec file.
+  Extract requirements and compile draft specs via structured interview. Use
+  when user requests spec creation, requirements gathering, or discovery.
 ---
 
 # Spec Discover
@@ -61,7 +60,7 @@ iteration: 1
 max_iterations: 5
 last_updated: <current ISO-8601 timestamp>
 persona: <selected-persona-slug> # Only if a persona was selected
-refine_options_pros_cons: <true|false> # Set based on owner preference
+refine_options_pros_cons: <true|false> # Set based on owner preference (defaults to true if unselected)
 ---
 ```
 
@@ -70,7 +69,9 @@ informational; agents must treat artifact existence (Discovery Notes, Audit
 Report, `_SPEC_DRAFT.md`) as the primary state signal. The `iteration`
 counter tracks audit-refine cycles and is used by the orchestrator's
 convergence contract. The `max_iterations` field is configurable by the
-project owner.
+project owner. If `refine_options_pros_cons` is not yet established during
+initialization, set it to `true` by default and update `status.md` once the
+owner expresses their preference in the First Turn.
 
 ## Request Triage
 

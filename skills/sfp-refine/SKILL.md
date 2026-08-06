@@ -1,9 +1,8 @@
 ---
 name: sfp-refine
 description: >
-  Walk through audit findings one at a time with the project owner, resolve
-  each issue incrementally, then recompile the specification from updated
-  notes after owner approval.
+  Walk through audit findings to resolve issues and recompile draft specs. Use
+  when fixing audit issues, resolving spec gaps, or refining draft specs.
 ---
 
 # Spec Refine
@@ -128,8 +127,8 @@ audits and refinements to distinguish historical decisions from current ones.
 When updating an existing requirement, preserve its original `REQ-<NN>`
 identifier. Do not reassign or remove identifiers. If a requirement is
 split into multiple sub-requirements, assign new `REQ-<NN>` identifiers
-to each sub-requirement and note the parent in the tag (e.g.,
-`[Refined in cycle 2, resolves W-3, split from REQ-05]`).
+from the next available global sequence number to each sub-requirement and
+note the parent in the tag (e.g., `[Refined in cycle 2, resolves W-3, split from REQ-05]`).
 
 ### Step 4: Repeat
 

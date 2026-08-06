@@ -1,8 +1,8 @@
 ---
 name: sfp-personas
 description: >
-  Guide the user through creating a new custom domain persona or refining
-  an existing one. Extracts requirements and generates/edits the persona file.
+  Create or edit custom domain personas for SFP skills. Use when adding domain
+  expertise, setting up personas, or customizing SFP behavior.
 ---
 
 # Spec Personas
